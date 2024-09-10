@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EXP_Controller : MonoBehaviour
@@ -7,6 +8,8 @@ public class EXP_Controller : MonoBehaviour
     // Variables
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    [SerializeField]
+    private Animator playerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +41,13 @@ public class EXP_Controller : MonoBehaviour
         }
 
         rb.velocity = velocity;
+        if (velocity.magnitude > 0)
+        {
+            playerAnimator.SetTrigger("Moving");
+        }
+        else
+        {
+            playerAnimator.SetTrigger("Idle");
+        }
     }
 }
