@@ -21,6 +21,7 @@ public class EXP_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //comment
         Vector2 velocity = Vector2.zero;
 
         if(Input.GetKey(KeyCode.W))
