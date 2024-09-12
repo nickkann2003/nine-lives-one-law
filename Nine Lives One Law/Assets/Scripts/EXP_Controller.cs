@@ -44,11 +44,11 @@ public class EXP_Controller : MonoBehaviour
         rb.velocity = velocity;
         if (velocity.magnitude > 0)
         {
-            playerAnimator.SetTrigger("Moving");
+            playerAnimator.SetBool("Moving", true);
         }
         else
         {
-            playerAnimator.SetTrigger("Idle");
+            playerAnimator.SetBool("Moving", false);
         }
     }
 }
