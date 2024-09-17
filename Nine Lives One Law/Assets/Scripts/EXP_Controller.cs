@@ -10,6 +10,7 @@ public class EXP_Controller : MonoBehaviour
     private BoxCollider2D collider;
     [SerializeField]
     private Animator playerAnimator;
+    public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -26,19 +27,19 @@ public class EXP_Controller : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
-            velocity.y += 1;
+            velocity.y += moveSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            velocity.y -= 1;
+            velocity.y -= moveSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            velocity.x -= 1;
+            velocity.x -= moveSpeed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            velocity.x += 1;
+            velocity.x += moveSpeed;
         }
 
         rb.velocity = velocity;
