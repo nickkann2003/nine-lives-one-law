@@ -6,6 +6,7 @@ public class FollowPlayer : MonoBehaviour
 {
 
     public Transform player;
+    public Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Sets object position to the same as the player's. Further back on the Z-Axis for camera
-        transform.position = player.transform.position + new Vector3(0, 0, -10);
+        //Sets object position to the same as the player's plus the set offset
+        transform.position = player.transform.position + offset;
     }
 }
