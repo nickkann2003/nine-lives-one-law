@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     // Singleton pattern
     public static UIManager instance;
 
-
+    [Header("References")]
     public GameObject StatsMenu;
     public GameObject UpgradesMenu;
     public GameObject StartRunMenu;
@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour
     public GameObject OptionsMenu;
     private float previousTimeScale = 0f;
     private bool options; // Toggle for options, its not a state since it overlays other states
+
+    public Fade fadeRef;
+
+    [Header("Options")]
+    public float transitionTime = 1f;
 
     private UIState currentState;
 
@@ -59,13 +64,20 @@ public class UIManager : MonoBehaviour
     }
 
     // ------------------ Functions -----------------
-    public void OpenMenu(UIState newState)
+    public IEnumerator OpenMenu(UIState newState)
     {
         // Close options if open
         if (options)
         {
             CloseOptions();
         }
+
+        // Start the fade
+        fadeRef.StartFade(transitionTime);
+
+        yield return new WaitForSeconds(transitionTime / 2f);
+
+
 
         // Close previous menu
         switch (currentState)
@@ -114,7 +126,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu(int i)
     {
-        OpenMenu(IntToUIState(i));
+        StartCoroutine(OpenMenu(IntToUIState(i)));
     }
 
     public void OpenOptions()
