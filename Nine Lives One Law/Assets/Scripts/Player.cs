@@ -5,44 +5,58 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    //Variables
+    private Rigidbody2D rb;
+    private BoxCollider2D collider;
+    [SerializeField]
+    private Animator playerAnimator;
     public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //MovePlayer();
+        MovePlayer();
         FaceMouse();
     }
 
-    // Moves the player depending on move speed variable
+    // Moves the player depending on move speed variable, tells animator if moving
     void MovePlayer()
     {
-        Vector3 newPos = transform.position;
+        Vector2 velocity = Vector2.zero;
 
         if (Input.GetKey(KeyCode.W))
         {
-            newPos.y += moveSpeed / 5;
+            velocity.y += moveSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            newPos.y -= moveSpeed / 5;
+            velocity.y -= moveSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            newPos.x -= moveSpeed / 5;
+            velocity.x -= moveSpeed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            newPos.x += moveSpeed / 5;
+            velocity.x += moveSpeed;
         }
 
-        transform.position = newPos;
+        rb.velocity = velocity;
+        if (velocity.magnitude > 0)
+        {
+            playerAnimator.SetBool("Moving", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Moving", false);
+        }
     }
 
     // Makes the player rotation face the mouse
