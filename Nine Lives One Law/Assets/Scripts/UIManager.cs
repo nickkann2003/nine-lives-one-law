@@ -23,6 +23,14 @@ public class UIManager : MonoBehaviour
     public GameObject MainMenu;
     public GameObject GameMenu;
 
+    [Header("UI Objects")]
+    public List<GameObject> StatsObjects = new List<GameObject>();
+    public List<GameObject> UpgradesObjects = new List<GameObject>();
+    public List<GameObject> StartRunObjects = new List<GameObject>();
+    public List<GameObject> MainMenuObjects = new List<GameObject>();
+    public List<GameObject> InGameObjects = new List<GameObject>();
+
+
     public GameObject OptionsMenu;
     private float previousTimeScale = 0f;
     private bool options; // Toggle for options, its not a state since it overlays other states
@@ -84,18 +92,23 @@ public class UIManager : MonoBehaviour
         {
             case UIState.StatsMenu:
                 CloseMenu(StatsMenu);
+                deActivateAll(StatsObjects);
                 break;
             case UIState.UpgradesMenu:
                 CloseMenu(UpgradesMenu);
+                deActivateAll(UpgradesObjects);
                 break;
             case UIState.StartRunMenu:
                 CloseMenu(StartRunMenu);
+                deActivateAll(StartRunObjects);
                 break;
             case UIState.MainMenu:
                 CloseMenu(MainMenu);
+                deActivateAll(MainMenuObjects);
                 break;
             case UIState.GameMenu:
                 CloseMenu(GameMenu);
+                deActivateAll(InGameObjects);
                 break;
         }
 
@@ -107,19 +120,24 @@ public class UIManager : MonoBehaviour
         switch (currentState)
         {
             case UIState.StatsMenu:
-                OpenMenu(StatsMenu);
+                OpenMenu(StatsMenu); 
+                activateAll(StatsObjects);
                 break;
             case UIState.UpgradesMenu:
-                OpenMenu(UpgradesMenu);
+                OpenMenu(UpgradesMenu);                
+                activateAll(UpgradesObjects);
                 break;
             case UIState.StartRunMenu:
-                OpenMenu(StartRunMenu);
+                OpenMenu(StartRunMenu);                
+                activateAll(StartRunObjects);
                 break;
             case UIState.MainMenu:
-                OpenMenu(MainMenu);
+                OpenMenu(MainMenu);                
+                activateAll(MainMenuObjects);
                 break;
             case UIState.GameMenu:
-                OpenMenu(GameMenu);
+                OpenMenu(GameMenu);                
+                activateAll(InGameObjects);
                 break;
         }
     }
@@ -157,5 +175,20 @@ public class UIManager : MonoBehaviour
     private UIState IntToUIState(int i)
     {
         return (UIState)i;
+    }
+
+    private void activateAll(List<GameObject> list)
+    {
+        foreach (GameObject go in list)
+        {
+            go.SetActive(true);
+        }
+    }
+    private void deActivateAll(List<GameObject> list)
+    {
+        foreach (GameObject go in list)
+        {
+            go.SetActive(false);
+        }
     }
 }
