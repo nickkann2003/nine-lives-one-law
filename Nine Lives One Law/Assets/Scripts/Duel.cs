@@ -65,37 +65,67 @@ public class Duel : MonoBehaviour
             case "W":
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
+                    || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             case "A":
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
+                    || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             case "S":
                 if (Input.GetKeyDown(KeyCode.S))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)
+                    || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             case "D":
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S)
+                    || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             case "L":
                 if (Input.GetMouseButtonDown(0))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S)
+                    || Input.GetKeyDown(KeyCode.D) || Input.GetMouseButtonDown(1))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             case "R":
                 if (Input.GetMouseButtonDown(1))
                 {
-                    PressDuelKey();
+                    CorrectDuelKey();
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S)
+                    || Input.GetKeyDown(KeyCode.D) || Input.GetMouseButtonDown(0))
+                {
+                    IncorrectDuelKey();
                 }
                 break;
             default:
@@ -111,7 +141,7 @@ public class Duel : MonoBehaviour
     }
 
     //Updates for if the player pressed the correct key in the duel
-    void PressDuelKey()
+    void CorrectDuelKey()
     {
         currentDuel.RemoveAt(0); //Removes the first input in the list
         keyManager.IncrementKeys();
@@ -125,6 +155,12 @@ public class Duel : MonoBehaviour
         { //If there are more inputs, print the remaining inputs
             PrintDuel();
         }
+    }
+
+    //Updates for if the player pressed the incorrect key in the duel
+    void IncorrectDuelKey()
+    {
+        duelTime -= 1;
     }
 
     //Prints all the inputs in the duel
