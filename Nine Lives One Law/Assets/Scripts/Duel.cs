@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Duel : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class Duel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            startDuel(5,600);
+            startDuel(5,5);
         }
 
         if (duel)
@@ -42,6 +44,7 @@ public class Duel : MonoBehaviour
         }
         duelTime = time;
         duel = true;
+        PrintDuel();
     }
 
     void updateDuel()
@@ -51,27 +54,71 @@ public class Duel : MonoBehaviour
             case "W":
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-
+                    PressDuelKey();
                 }
                 break;
             case "A":
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    PressDuelKey();
+                }
                 break;
             case "S":
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    PressDuelKey();
+                }
                 break;
             case "D":
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    PressDuelKey();
+                }
                 break;
             case "L":
+                if (Input.GetMouseButtonDown(0))
+                {
+                    PressDuelKey();
+                }
                 break;
             case "R":
+                if (Input.GetMouseButtonDown(1))
+                {
+                    PressDuelKey();
+                }
                 break;
             default:
                 break;
         }
-        duelTime -= Time.deltaTime;
-        if (duelTime < 0)
+        duelTime -= 1 * Time.deltaTime;
+        if (duelTime<0)
         {
             Debug.Log("DUEL FAIL");
             duel = false;
         }
+    }
+
+    void PressDuelKey()
+    {
+        currentDuel.RemoveAt(0);
+        if (currentDuel.Count == 0)
+        {
+            duel = false;
+            Debug.Log("WIN!");
+        }
+        else
+        {
+            PrintDuel();
+        }
+    }
+
+    void PrintDuel()
+    {
+        string print = "";
+        for (int i = 0; i < currentDuel.Count; i++)
+        {
+            print+=currentDuel[i];
+        }
+        Debug.Log(print);
     }
 }

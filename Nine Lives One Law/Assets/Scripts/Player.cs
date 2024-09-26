@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     // Makes the player fire a bullet
     void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("Fire!");
+        //Debug.Log("Fire!");
     }
 
     // Enables player controls
