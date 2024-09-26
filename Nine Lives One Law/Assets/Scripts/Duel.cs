@@ -25,30 +25,34 @@ public class Duel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
+        if (Input.GetKeyDown(KeyCode.M) && !duel)
+        { //If M is pressed and there is no duel, start duel
             startDuel(5,5);
         }
 
         if (duel)
-        {
+        { //If there is a duel, update duel
             updateDuel();
         }
     }
 
+    //Starts a duel by making a list of inputs
     void startDuel(int length, float time)
     {
+        currentDuel.Clear();
         for(int i = 0; i < length; i++)
-        {
+        { //Fills list of inputs, WASD, L-Click, R-Click
             currentDuel.Add(duelKeys[Random.Range(0, duelKeys.Length)]);
         }
-        duelTime = time;
+        duelTime = time; //How long the user has for the duel
         duel = true;
-        PrintDuel();
+        PrintDuel(); //Prints full inputs
     }
 
+    //Updates the duel by checking for correct input, lowering duel timer, checks for win or lose
     void updateDuel()
     {
+        //Checks the first input in list, checks if player pressed it
         switch (currentDuel[0])
         {
             case "W":
@@ -92,26 +96,28 @@ public class Duel : MonoBehaviour
         }
         duelTime -= 1 * Time.deltaTime;
         if (duelTime<0)
-        {
+        { //If enough time has passed, duel failed
             Debug.Log("DUEL FAIL");
             duel = false;
         }
     }
 
+    //Updates for if the player pressed the correct key in the duel
     void PressDuelKey()
     {
-        currentDuel.RemoveAt(0);
+        currentDuel.RemoveAt(0); //Removes the first input in the list
         if (currentDuel.Count == 0)
-        {
+        { //If there is 0 inputs left, the player wins and the duel ends
             duel = false;
             Debug.Log("WIN!");
         }
         else
-        {
+        { //If there are more inputs, print the remaining inputs
             PrintDuel();
         }
     }
 
+    //Prints all the inputs in the duel
     void PrintDuel()
     {
         string print = "";
