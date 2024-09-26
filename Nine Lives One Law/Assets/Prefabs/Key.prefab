@@ -304,8 +304,8 @@ MonoBehaviour:
   keyText: {fileID: 3017676395238224285}
   keyHitOverlay: {fileID: 8451372969827067293}
   keyMissOverlay: {fileID: 6380832136305949225}
-  keyStartBackgroundColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 0}
-  keyEndBackgroundColor: {r: 0.3735848, g: 0.3735848, b: 0.3735848, a: 0}
+  keyStartBackgroundColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  keyEndBackgroundColor: {r: 0.6528301, g: 0.6528301, b: 0.6528301, a: 1}
   hit: 0
 --- !u!1 &5182307495263148738
 GameObject:

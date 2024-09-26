@@ -43,9 +43,32 @@ public class DuelKeyManager : MonoBehaviour
 
         for(int i = 0; i < 5; i++)
         {
-            // Temp code, does not account for different amount of anchors, should be adjusted if anchors changes
-            int currentKey = currentIndex + i - 2;
-            keys[currentKey].setKeyPosition(keyPosAnchors[i]);
+            try
+            {
+                // Temp code, does not account for different amount of anchors, should be adjusted if anchors changes
+                int currentKey = currentIndex + i - 2;
+                keys[currentKey].displayKey();
+                keys[currentKey].setKeyPosition(keyPosAnchors[i]);
+            } catch { }
+        }
+    }
+
+    public void SetStartingPositions()
+    {
+        foreach(DuelKey key in keys)
+        {
+            key.hideKey();
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            try
+            {
+                // Temp code, does not account for different amount of anchors, should be adjusted if anchors changes
+                int currentKey = currentIndex + i - 2;
+                keys[currentKey].displayKey();
+                keys[currentKey].setKeyPosition(keyPosAnchors[i]);
+            }
+            catch { }
         }
     }
 
@@ -53,13 +76,27 @@ public class DuelKeyManager : MonoBehaviour
     public void AddKey(char key)
     {
         GameObject k = Instantiate(duelKeyPrefab);
-        keys.Add(k.GetComponent<DuelKey>());
+        k.transform.parent = this.transform;
+        DuelKey kKey = k.GetComponent<DuelKey>();
+        kKey.SetText(key); 
+        keys.Add(kKey);
     }
 
     // Adding a key with a string uses the first char in that string
     public void AddKey(string key)
     {
         AddKey(key.ToCharArray()[0]);
+    }
+
+    public void EndDuel()
+    {
+        foreach(DuelKey key in keys)
+        {
+            Destroy(key);
+        }
+        keys.Clear();
+        gameObject.SetActive(false);
+        currentIndex = 0;
     }
 
     private void OnDrawGizmosSelected()

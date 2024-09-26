@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class Duel : MonoBehaviour
 {
+    public DuelKeyManager keyManager;
 
     private string[] duelKeys;
     private List<string> currentDuel;
@@ -39,13 +40,19 @@ public class Duel : MonoBehaviour
     //Starts a duel by making a list of inputs
     void startDuel(int length, float time)
     {
+        keyManager.gameObject.SetActive(true);
         currentDuel.Clear();
         for(int i = 0; i < length; i++)
         { //Fills list of inputs, WASD, L-Click, R-Click
             currentDuel.Add(duelKeys[Random.Range(0, duelKeys.Length)]);
         }
+        foreach (string s in currentDuel)
+        {
+            keyManager.AddKey(s);
+        }
         duelTime = time; //How long the user has for the duel
         duel = true;
+        keyManager.SetStartingPositions();
         PrintDuel(); //Prints full inputs
     }
 
@@ -99,6 +106,7 @@ public class Duel : MonoBehaviour
         { //If enough time has passed, duel failed
             Debug.Log("DUEL FAIL");
             duel = false;
+            keyManager.EndDuel();
         }
     }
 
@@ -106,9 +114,11 @@ public class Duel : MonoBehaviour
     void PressDuelKey()
     {
         currentDuel.RemoveAt(0); //Removes the first input in the list
+        keyManager.IncrementKeys();
         if (currentDuel.Count == 0)
         { //If there is 0 inputs left, the player wins and the duel ends
             duel = false;
+            keyManager.EndDuel();
             Debug.Log("WIN!");
         }
         else

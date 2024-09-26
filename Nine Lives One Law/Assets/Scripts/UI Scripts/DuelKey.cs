@@ -30,21 +30,21 @@ public class DuelKey : MonoBehaviour
     {
         keyBackground.enabled = false;
         keyText.enabled = false;
-        keyHitOverlay.enabled = false;
-        keyMissOverlay.enabled = false;
+        keyHitOverlay.gameObject.SetActive(false);
+        keyMissOverlay.gameObject.SetActive(false);
     }
 
     public void hitKey()
     {
         hit = true;
-        keyHitOverlay.enabled = true;
+        keyHitOverlay.gameObject.SetActive(true);
         keyBackground.color = keyEndBackgroundColor;
     }
 
     public void missKey()
     {
         hit = true;
-        keyMissOverlay.enabled = true;
+        keyMissOverlay.gameObject.SetActive(true);
         keyBackground.color = keyEndBackgroundColor;
     }
 
@@ -52,15 +52,15 @@ public class DuelKey : MonoBehaviour
     {
         keyBackground.enabled = false;
         keyText.enabled = false;
-        keyHitOverlay.enabled = false;
-        keyMissOverlay.enabled = false;
+        keyHitOverlay.gameObject.SetActive(false);
+        keyMissOverlay.gameObject.SetActive(false);
         keyBackground.color = keyStartBackgroundColor;
         hit = false;
     }
 
     public void setKeyPosition(Vector2 pos)
     {
-        transform.position = pos;
+        GetComponent<RectTransform>().localPosition = pos;
     }
 
     public void SetText(char c)
