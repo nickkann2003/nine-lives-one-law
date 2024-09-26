@@ -15,6 +15,9 @@ public class DuelKey : MonoBehaviour
     public Color keyStartBackgroundColor;
     public Color keyEndBackgroundColor;
 
+    private string text;
+    private char character;
+
     public bool hit;
 
     public void displayKey()
@@ -34,6 +37,15 @@ public class DuelKey : MonoBehaviour
     public void hitKey()
     {
         hit = true;
+        keyHitOverlay.enabled = true;
+        keyBackground.color = keyEndBackgroundColor;
+    }
+
+    public void missKey()
+    {
+        hit = true;
+        keyMissOverlay.enabled = true;
+        keyBackground.color = keyEndBackgroundColor;
     }
 
     public void resetKey()
@@ -44,5 +56,17 @@ public class DuelKey : MonoBehaviour
         keyMissOverlay.enabled = false;
         keyBackground.color = keyStartBackgroundColor;
         hit = false;
+    }
+
+    public void setKeyPosition(Vector2 pos)
+    {
+        transform.position = pos;
+    }
+
+    public void SetText(char c)
+    {
+        this.character = c;
+        text = c.ToString();
+        keyText.text = text;
     }
 }
