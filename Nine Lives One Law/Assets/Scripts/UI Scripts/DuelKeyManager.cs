@@ -92,7 +92,7 @@ public class DuelKeyManager : MonoBehaviour
     {
         foreach(DuelKey key in keys)
         {
-            Destroy(key);
+            Destroy(key.gameObject);
         }
         keys.Clear();
         gameObject.SetActive(false);
