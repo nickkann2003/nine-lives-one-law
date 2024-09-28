@@ -136,6 +136,7 @@ public class Duel : MonoBehaviour
         duelTime -= 1 * Time.deltaTime;
         if (duelTime<0)
         { //If enough time has passed, duel failed
+            duel = false;
             Debug.Log("DUEL FAIL");
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
