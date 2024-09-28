@@ -17,7 +17,8 @@ public class Duel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        duelKeys = new string[]{"W", "A", "S", "D", "L", "R"};
+        //duelKeys = new string[]{"W", "A", "S", "D", "L", "R"};
+        duelKeys = new string[]{"W", "A", "S", "D"};
         currentDuel = new List<string>();
         duel = false;
         duelTime = 0;
@@ -136,7 +137,6 @@ public class Duel : MonoBehaviour
         if (duelTime<0)
         { //If enough time has passed, duel failed
             Debug.Log("DUEL FAIL");
-            duel = false;
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
         }
