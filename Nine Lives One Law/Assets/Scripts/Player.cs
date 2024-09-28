@@ -20,10 +20,32 @@ public class Player : MonoBehaviour
 
     //Variables
     public float moveSpeed;
+    private bool isActive;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+        isActive = false;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Gameplay)
+        {
+            isActive = true;
+            OnEnable();
+        }
+        else
+        {
+            isActive = false;
+            OnDisable();
+        }
     }
 
     // Start is called before the first frame update
@@ -36,8 +58,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        FaceMouse();
+        if (isActive)
+        {
+            MovePlayer();
+            FaceMouse();
+        }
     }
 
     // Moves the player depending on move speed variable, tells animator if moving
@@ -68,7 +93,7 @@ public class Player : MonoBehaviour
     // Makes the player fire a bullet
     void Fire(InputAction.CallbackContext context)
     {
-        //Debug.Log("Fire!");
+       // Debug.Log("Fire!");
     }
 
     // Enables player controls

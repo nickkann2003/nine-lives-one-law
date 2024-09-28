@@ -1148,6 +1148,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125273808}
   m_CullTransparentMesh: 1
+--- !u!1 &172007816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172007818}
+  - component: {fileID: 172007817}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &172007817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172007816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889de7bfffed89d44a4378a8743ae9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+--- !u!4 &172007818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172007816}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046292555, y: -0.05118808, z: 0.01732531}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &187501096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2546,7 @@ GameObject:
   - component: {fileID: 483392036}
   - component: {fileID: 483392035}
   - component: {fileID: 483392034}
+  - component: {fileID: 483392037}
   m_Layer: 5
   m_Name: CatmanCanvas
   m_TagString: Untagged
@@ -2591,6 +2637,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &483392037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483392032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b916704b4383fec429b0f25daddce910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CatMan: {fileID: 1018786973}
 --- !u!1 &487109453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5283,6 +5342,7 @@ GameObject:
   - component: {fileID: 1501067815}
   - component: {fileID: 1501067814}
   - component: {fileID: 1501067813}
+  - component: {fileID: 1501067816}
   m_Layer: 5
   m_Name: DuelCanvas
   m_TagString: Untagged
@@ -5375,6 +5435,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1501067816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501067811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d43efd5743c00d4196c8bd77cb0f03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DuelPanel: {fileID: 249157166}
+  DuelText: {fileID: 2142660237}
 --- !u!1 &1573025162
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,3 +7152,4 @@ SceneRoots:
   - {fileID: 1145710041}
   - {fileID: 115293502}
   - {fileID: 703916363}
+  - {fileID: 172007818}

@@ -29,6 +29,7 @@ public class Duel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M) && !duel)
         { //If M is pressed and there is no duel, start duel
             startDuel(5,5);
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
         }
 
         if (duel)
@@ -137,6 +138,7 @@ public class Duel : MonoBehaviour
             Debug.Log("DUEL FAIL");
             duel = false;
             keyManager.EndDuel();
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
         }
     }
 
@@ -149,7 +151,9 @@ public class Duel : MonoBehaviour
         { //If there is 0 inputs left, the player wins and the duel ends
             duel = false;
             keyManager.EndDuel();
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
+
         }
         else
         { //If there are more inputs, print the remaining inputs

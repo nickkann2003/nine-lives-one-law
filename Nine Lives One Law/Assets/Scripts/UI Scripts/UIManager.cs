@@ -43,16 +43,30 @@ public class UIManager : MonoBehaviour
     private UIState currentState;
 
     // On awake, initialize singleton
+    // Subscribe this menu to the game manager
     private void Awake()
     {
         instance = this;
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    //Remove subscription on destruction to avoid memory leaks
+    void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    //Activate the main menu when the game manager state is set to menu
+    private void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        MainMenu.SetActive(state == GameManager.GameState.Menu);
     }
 
     // On start, enable Main Menu
     private void Start()
     {
         currentState = UIState.MainMenu;
-        MainMenu.SetActive(true);
+        //MainMenu.SetActive(true);
     }
 
     private void Update()
@@ -74,6 +88,7 @@ public class UIManager : MonoBehaviour
     // ------------------ Functions -----------------
     public IEnumerator OpenMenu(UIState newState)
     {
+
         // Close options if open
         if (options)
         {
@@ -145,6 +160,14 @@ public class UIManager : MonoBehaviour
     public void OpenMenu(int i)
     {
         StartCoroutine(OpenMenu(IntToUIState(i)));
+        if (i == 4)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
+        }
+        else if (i == 3)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+        }
     }
 
     public void OpenOptions()
