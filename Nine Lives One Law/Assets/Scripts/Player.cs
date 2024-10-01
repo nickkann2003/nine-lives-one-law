@@ -17,16 +17,25 @@ public class Player : MonoBehaviour
     private InputAction move;
     //private InputAction look;
     private InputAction fire;
+    private bool isActive;
+    private bool isShooting;
+    private float lastShotTime;
+
+    //Game Objects
+    public GameObject bullet;
+    public GameObject bulletList;
 
     //Variables
     public float moveSpeed;
-    private bool isActive;
+    public float shootCooldown;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
         isActive = false;
+        isShooting = false;
+        lastShotTime = -shootCooldown;
     }
 
     private void OnDestroy()
@@ -62,6 +71,7 @@ public class Player : MonoBehaviour
         {
             MovePlayer();
             FaceMouse();
+            Shoot();
         }
     }
 
@@ -90,10 +100,27 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
-    // Makes the player fire a bullet
-    void Fire(InputAction.CallbackContext context)
+    void Shoot()
     {
-       Debug.Log("Fire!");
+        if (isShooting && Time.time - lastShotTime >= shootCooldown)
+        { // Instantiate bullets at the object's position and rotation on left click
+            Vector3 bulletSpawn = transform.position;
+            bulletSpawn += transform.up * 0.8f;
+            Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);
+            // Update last shot time
+            lastShotTime = Time.time;
+        }
+    }
+
+    // Makes the player fire a bullet
+    void StartShooting(InputAction.CallbackContext context)
+    {
+        isShooting = true;
+    }
+
+    void StopShooting(InputAction.CallbackContext context)
+    {
+        isShooting = false;
     }
 
     // Enables player controls
@@ -104,7 +131,8 @@ public class Player : MonoBehaviour
 
         fire = playerControls.Player.Fire;
         fire.Enable();
-        fire.performed += Fire;
+        fire.performed += StartShooting;
+        fire.canceled += StopShooting;
 
         //look = playerControls.Player.Look;
         //look.Enable();
