@@ -17,17 +17,17 @@ public class Player : MonoBehaviour
     private InputAction move;
     //private InputAction look;
     private InputAction fire;
-    private bool isActive;
-    private bool isShooting;
-    private float lastShotTime;
+    private bool isActive; // If player is active
+    private bool isShooting; // If player is shooting
+    private float lastShotTime; // Last time player shot
 
     //Game Objects
-    public GameObject bullet;
-    public GameObject bulletList;
+    public GameObject bullet; // bullet prefab
+    public GameObject bulletList; // object that holds bullets
 
     //Variables
-    public float moveSpeed;
-    public float shootCooldown;
+    public float moveSpeed; // Player speed
+    public float shootCooldown; // How often player can shoot
 
     private void Awake()
     {
@@ -100,24 +100,26 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
+    // Makes the player fire a bullet
     void Shoot()
     {
         if (isShooting && Time.time - lastShotTime >= shootCooldown)
-        { // Instantiate bullets at the object's position and rotation on left click
+        { // Instantiate bullets at the object's position if shooting and enough time since last shot has passed
             Vector3 bulletSpawn = transform.position;
-            bulletSpawn += transform.up * 0.8f;
+            bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
             Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);
             // Update last shot time
             lastShotTime = Time.time;
         }
     }
 
-    // Makes the player fire a bullet
+    // Left click down, activate shooting
     void StartShooting(InputAction.CallbackContext context)
     {
         isShooting = true;
     }
 
+    // Left click up, deactive shooting
     void StopShooting(InputAction.CallbackContext context)
     {
         isShooting = false;
