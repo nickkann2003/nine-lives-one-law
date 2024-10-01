@@ -43,6 +43,8 @@ public class DuelKeyManager : MonoBehaviour
 
         for(int i = 0; i < 5; i++)
         {
+            bool enter = (i == 4);
+            bool exit = (i == 0);
             try
             {
                 // Temp code, does not account for different amount of anchors, should be adjusted if anchors changes

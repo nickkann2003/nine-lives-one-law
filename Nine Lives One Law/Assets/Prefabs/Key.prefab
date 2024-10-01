@@ -219,8 +219,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1509370083516839074}
   - component: {fileID: 8449794623852481190}
-  - component: {fileID: 409550858265582118}
   - component: {fileID: 5678188306583368512}
+  - component: {fileID: 5316286096322432975}
   m_Layer: 5
   m_Name: Key
   m_TagString: Untagged
@@ -240,6 +240,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7274450928145480967}
   - {fileID: 5052071544022944510}
   - {fileID: 2561765394668228514}
   - {fileID: 4184346959203669357}
@@ -258,13 +259,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795926218671950278}
   m_CullTransparentMesh: 1
---- !u!114 &409550858265582118
+--- !u!114 &5678188306583368512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795926218671950278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2699f4d9664b6574fab37c03ecbeb436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyBackground: {fileID: 7744485442202046231}
+  keyText: {fileID: 3017676395238224285}
+  keyHitOverlay: {fileID: 8451372969827067293}
+  keyMissOverlay: {fileID: 6380832136305949225}
+  keyStartBackgroundColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  keyEndBackgroundColor: {r: 0.6528301, g: 0.6528301, b: 0.6528301, a: 1}
+  keyAnimator: {fileID: 5316286096322432975}
+  hit: 0
+--- !u!95 &5316286096322432975
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795926218671950278}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58de5dffe1b148e4d887b7bd7393638d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2856883684081820379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7274450928145480967}
+  - component: {fileID: 6788101389409965976}
+  - component: {fileID: 7744485442202046231}
+  m_Layer: 5
+  m_Name: BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7274450928145480967
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856883684081820379}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1509370083516839074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6788101389409965976
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856883684081820379}
+  m_CullTransparentMesh: 1
+--- !u!114 &7744485442202046231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856883684081820379}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -288,25 +375,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5678188306583368512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795926218671950278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2699f4d9664b6574fab37c03ecbeb436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyBackground: {fileID: 409550858265582118}
-  keyText: {fileID: 3017676395238224285}
-  keyHitOverlay: {fileID: 8451372969827067293}
-  keyMissOverlay: {fileID: 6380832136305949225}
-  keyStartBackgroundColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
-  keyEndBackgroundColor: {r: 0.6528301, g: 0.6528301, b: 0.6528301, a: 1}
-  hit: 0
 --- !u!1 &5182307495263148738
 GameObject:
   m_ObjectHideFlags: 0

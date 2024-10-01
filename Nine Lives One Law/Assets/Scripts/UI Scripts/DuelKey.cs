@@ -15,6 +15,8 @@ public class DuelKey : MonoBehaviour
     public Color keyStartBackgroundColor;
     public Color keyEndBackgroundColor;
 
+    public Animator keyAnimator;
+
     private string text;
     private char character;
 
@@ -58,8 +60,20 @@ public class DuelKey : MonoBehaviour
         hit = false;
     }
 
-    public void setKeyPosition(Vector2 pos)
+    public void setKeyPosition(Vector2 pos, bool enter = false, bool exit = false)
     {
+        if (enter)
+        {
+            keyAnimator.SetTrigger("Enter");
+        }
+        else if (exit)
+        {
+            keyAnimator.SetTrigger("Exit");
+        }
+        else
+        {
+            keyAnimator.SetTrigger("Move");
+        }
         GetComponent<RectTransform>().localPosition = pos;
     }
 
