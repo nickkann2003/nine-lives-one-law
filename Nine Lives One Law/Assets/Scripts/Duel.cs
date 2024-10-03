@@ -9,10 +9,14 @@ public class Duel : MonoBehaviour
     public DuelKeyManager keyManager;
     public float duelTimePowerUp;
 
+    public GameObject duelTimer;
+    public GameObject duelTimerForeground;
+
     private string[] duelKeys;
     private List<string> currentDuel;
     private bool duel;
     private float duelTime;
+    private float maxDuelTime;
 
 
     // Start is called before the first frame update
@@ -42,6 +46,9 @@ public class Duel : MonoBehaviour
         { //If there is a duel, update duel
             updateDuel();
         }
+
+        float scale = duelTime / maxDuelTime;
+        duelTimerForeground.transform.localScale = new Vector3(scale, scale, scale);
     }
 
     //Starts a duel by making a list of inputs
@@ -49,6 +56,7 @@ public class Duel : MonoBehaviour
     {
         keyManager.gameObject.SetActive(true);
         currentDuel.Clear();
+        maxDuelTime = length;
         for(int i = 0; i < length; i++)
         { //Fills list of inputs, WASD, L-Click, R-Click
             currentDuel.Add(duelKeys[Random.Range(0, duelKeys.Length)]);
@@ -61,6 +69,8 @@ public class Duel : MonoBehaviour
         duel = true;
         keyManager.SetStartingPositions();
         PrintDuel(); //Prints full inputs
+
+        duelTimer.SetActive(true);
     }
 
     //Updates the duel by checking for correct input, lowering duel timer, checks for win or lose
@@ -142,6 +152,7 @@ public class Duel : MonoBehaviour
         if (duelTime<0)
         { //If enough time has passed, duel failed
             duel = false;
+            duelTimer.SetActive(false);
             Debug.Log("DUEL FAIL");
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
@@ -159,7 +170,7 @@ public class Duel : MonoBehaviour
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
-
+            duelTimer.SetActive(false);
         }
         else
         { //If there are more inputs, print the remaining inputs
