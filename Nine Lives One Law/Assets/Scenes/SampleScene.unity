@@ -901,6 +901,8 @@ MonoBehaviour:
   bulletList: {fileID: 574515085}
   moveSpeed: 2
   shootCooldown: 0.5
+  rollTime: 0
+  rollSpeed: 0
 --- !u!114 &120893487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,8 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyManager: {fileID: 1573025164}
   duelTimePowerUp: 0
-  duelTimer: {fileID: 1178105460}
-  duelTimerForeground: {fileID: 184062447}
+  duelTimer: {fileID: 1178105462}
 --- !u!1 &121667573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,14 +1932,14 @@ RectTransform:
   m_GameObject: {fileID: 249157166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.380435, y: 2.360686, z: 2.360686}
+  m_LocalScale: {x: 4.7505336, y: 1.1207379, z: 1.3381785}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1501067812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 230}
+  m_AnchoredPosition: {x: 0, y: 88}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &249157168
@@ -4811,13 +4812,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1178105461}
+  - component: {fileID: 1178105462}
+  - component: {fileID: 1178105463}
   m_Layer: 5
   m_Name: DuelTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1178105461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4827,7 +4830,7 @@ RectTransform:
   m_GameObject: {fileID: 1178105460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5593073, y: 0.5593073, z: 0.5593073}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1499762547}
@@ -4836,9 +4839,45 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 402}
+  m_AnchoredPosition: {x: 0, y: 189}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1178105462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178105460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ccacb91715f9641bb10af85d27163e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerAnimator: {fileID: 1178105463}
+  timerParent: {fileID: 1178105460}
+  timer: {fileID: 184062449}
+--- !u!95 &1178105463
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178105460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3194f08a6dca9b94c8e8803d67dc8076, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1271536249
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,7 +5743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -5768,7 +5807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1573025163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5802,11 +5841,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duelKeyPrefab: {fileID: 1795926218671950278, guid: f33f7fbc2b73aab4491dcdf918f0052b, type: 3}
   keyPosAnchors:
-  - {x: -300, y: 231}
-  - {x: -150, y: 231}
-  - {x: 0, y: 231}
-  - {x: 150, y: 231}
-  - {x: 300, y: 231}
+  - {x: -180, y: 85}
+  - {x: -90, y: 85}
+  - {x: 0, y: 85}
+  - {x: 90, y: 85}
+  - {x: 180, y: 85}
   centerKeyIndex: 2
   keys: []
 --- !u!1 &1596754784
@@ -7335,14 +7374,14 @@ RectTransform:
   m_GameObject: {fileID: 2142660237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1242, y: 2.1242, z: 2.1242}
+  m_LocalScale: {x: 0.6032516, y: 0.6032516, z: 0.6032516}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1501067812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 396}
+  m_AnchoredPosition: {x: -338.9, y: 210.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142660239

@@ -8,9 +8,7 @@ public class Duel : MonoBehaviour
 {
     public DuelKeyManager keyManager;
     public float duelTimePowerUp;
-
-    public GameObject duelTimer;
-    public GameObject duelTimerForeground;
+    public DuelTimer duelTimer;
 
     private string[] duelKeys;
     private List<string> currentDuel;
@@ -45,32 +43,42 @@ public class Duel : MonoBehaviour
         if (duel)
         { //If there is a duel, update duel
             updateDuel();
+            duelTimer.SetCurrentTime(duelTime);
         }
-
-        float scale = duelTime / maxDuelTime;
-        duelTimerForeground.transform.localScale = new Vector3(scale, scale, scale);
     }
 
     //Starts a duel by making a list of inputs
     void startDuel(int length, float time)
     {
+        // Activate key manager
         keyManager.gameObject.SetActive(true);
+        
+        // Clear existing or remaining duel values
         currentDuel.Clear();
+
+        // Set the time
         maxDuelTime = length;
+
         for(int i = 0; i < length; i++)
         { //Fills list of inputs, WASD, L-Click, R-Click
             currentDuel.Add(duelKeys[Random.Range(0, duelKeys.Length)]);
         }
+
         foreach (string s in currentDuel)
         {
             keyManager.AddKey(s);
         }
+
+        // Set internal variables
         duelTime = time; //How long the user has for the duel
         duel = true;
         keyManager.SetStartingPositions();
+
         PrintDuel(); //Prints full inputs
 
-        duelTimer.SetActive(true);
+        // Set duel timer variables
+        duelTimer.StartTimer();
+        duelTimer.SetMaxTime(maxDuelTime);
     }
 
     //Updates the duel by checking for correct input, lowering duel timer, checks for win or lose
@@ -152,7 +160,7 @@ public class Duel : MonoBehaviour
         if (duelTime<0)
         { //If enough time has passed, duel failed
             duel = false;
-            duelTimer.SetActive(false);
+            duelTimer.StopTimer();
             Debug.Log("DUEL FAIL");
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
@@ -164,13 +172,17 @@ public class Duel : MonoBehaviour
     {
         currentDuel.RemoveAt(0); //Removes the first input in the list
         keyManager.IncrementKeys();
+
+        // Register the hit on the duel timer
+        duelTimer.HitKey();
+
         if (currentDuel.Count == 0)
         { //If there is 0 inputs left, the player wins and the duel ends
             duel = false;
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
-            duelTimer.SetActive(false);
+            duelTimer.StopTimer();
         }
         else
         { //If there are more inputs, print the remaining inputs
@@ -182,6 +194,9 @@ public class Duel : MonoBehaviour
     void IncorrectDuelKey()
     {
         duelTime -= 1;
+
+        // Register incorrect key in timer
+        duelTimer.MissedKey();
     }
 
     //Prints all the inputs in the duel
