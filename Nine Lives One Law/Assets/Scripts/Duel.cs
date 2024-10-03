@@ -15,8 +15,8 @@ public class Duel : MonoBehaviour
     private string[] duelKeys;
     private List<string> currentDuel;
     private bool duel;
-    private float duelTime;
-    private float maxDuelTime;
+    private float duelTime = 1;
+    private float maxDuelTime = 1;
 
 
     // Start is called before the first frame update
