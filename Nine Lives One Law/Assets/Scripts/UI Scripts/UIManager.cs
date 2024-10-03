@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     public GameObject OptionsMenu;
     private float previousTimeScale = 0f;
     private bool options; // Toggle for options, its not a state since it overlays other states
+    public Duel DuelInstance;
 
     public Fade fadeRef;
 
@@ -193,6 +194,11 @@ public class UIManager : MonoBehaviour
     private void OpenMenu(GameObject menu)
     {
         menu.SetActive(true);
+    }
+
+    private void Upgrade()
+    {
+        DuelInstance.duelTimePowerUp += 1;
     }
 
     private UIState IntToUIState(int i)

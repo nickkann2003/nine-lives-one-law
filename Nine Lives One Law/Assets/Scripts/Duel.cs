@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class Duel : MonoBehaviour
 {
     public DuelKeyManager keyManager;
+    public float duelTimePowerUp;
 
     private string[] duelKeys;
     private List<string> currentDuel;
@@ -22,6 +23,7 @@ public class Duel : MonoBehaviour
         currentDuel = new List<string>();
         duel = false;
         duelTime = 0;
+        duelTimePowerUp = 0;
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class Duel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M) && !duel)
         { //If M is pressed and there is no duel, start duel
-            startDuel(5,5);
+            startDuel(5,5 + duelTimePowerUp);
             GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
         }
 
