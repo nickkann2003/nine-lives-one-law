@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     //Attributes
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    //private SpriteRenderer sprite;
     [SerializeField]
     private Animator playerAnimator;
 
@@ -17,9 +18,11 @@ public class Player : MonoBehaviour
     private InputAction move;
     //private InputAction look;
     private InputAction fire;
+    private InputAction roll;
     private bool isActive; // If player is active
     private bool isShooting; // If player is shooting
     private float lastShotTime; // Last time player shot
+    private float lastRollTime; // Last time player rolled
 
     //Game Objects
     public GameObject bullet; // bullet prefab
@@ -28,6 +31,8 @@ public class Player : MonoBehaviour
     //Variables
     public float moveSpeed; // Player speed
     public float shootCooldown; // How often player can shoot
+    public float rollTime; // How long player roll
+    public float rollSpeed; // Speed multiplier during roll
 
     private void Awake()
     {
@@ -62,6 +67,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
+        //sprite = GetComponent<SpriteRenderer>();
+        //sprite.color = Color.blue;
     }
 
     // Update is called once per frame
@@ -100,6 +107,11 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
+    void StartRoll(InputAction.CallbackContext context)
+    {
+
+    }
+
     // Makes the player fire a bullet
     void Shoot()
     {
@@ -135,6 +147,10 @@ public class Player : MonoBehaviour
         fire.Enable();
         fire.performed += StartShooting;
         fire.canceled += StopShooting;
+
+        roll = playerControls.Player.Roll;
+        roll.Enable();
+        roll.performed += StartRoll;
 
         //look = playerControls.Player.Look;
         //look.Enable();
