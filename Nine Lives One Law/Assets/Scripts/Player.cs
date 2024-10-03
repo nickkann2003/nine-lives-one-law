@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     //Attributes
     private Rigidbody2D rb;
     private BoxCollider2D collider;
-    //private SpriteRenderer sprite;
+    private SpriteRenderer sprite;
     [SerializeField]
     private Animator playerAnimator;
 
@@ -20,7 +20,9 @@ public class Player : MonoBehaviour
     private InputAction fire;
     private InputAction roll;
     private bool isActive; // If player is active
-    private bool isShooting; // If player is shooting
+    private bool tryingToShoot; // If player is trying to shoot
+    private bool tryingToRoll; // If player is trying to roll
+    private bool isMidRoll; // If player object is mid-roll
     private float lastShotTime; // Last time player shot
     private float lastRollTime; // Last time player rolled
 
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
     //Variables
     public float moveSpeed; // Player speed
     public float shootCooldown; // How often player can shoot
+    public float rollCooldown; // How often player can roll
     public float rollTime; // How long player roll
     public float rollSpeed; // Speed multiplier during roll
 
@@ -39,8 +42,11 @@ public class Player : MonoBehaviour
         playerControls = new PlayerControls();
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
         isActive = false;
-        isShooting = false;
+        tryingToShoot = false;
+        tryingToRoll = false;
+        isMidRoll = false;
         lastShotTime = -shootCooldown;
+        lastRollTime = -rollCooldown;
     }
 
     private void OnDestroy()
@@ -67,8 +73,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
-        //sprite = GetComponent<SpriteRenderer>();
-        //sprite.color = Color.blue;
+        sprite = this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -79,6 +84,7 @@ public class Player : MonoBehaviour
             MovePlayer();
             FaceMouse();
             Shoot();
+            Roll();
         }
     }
 
@@ -107,34 +113,58 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
     }
 
-    void StartRoll(InputAction.CallbackContext context)
+    // Makes the player dodge roll
+    void Roll()
     {
-
+        if(tryingToRoll && Time.time - lastRollTime >= rollCooldown)
+        { // Makes player roll if trying to roll and cooldown is up
+            sprite.color = Color.cyan; //Color shifts for visual clarity, likely temp
+            moveSpeed *= rollSpeed; //Speeds up player movement during roll
+            isMidRoll = true;
+            lastRollTime = Time.time; // Update last roll time
+        }
+        if(isMidRoll && Time.time - lastRollTime >= rollTime)
+        { // Stops player roll once the roll time is up
+            sprite.color = Color.white; //Goes back to normal color
+            moveSpeed /= rollSpeed; //Slows player movement down to normal
+            isMidRoll = false;
+        }
     }
 
     // Makes the player fire a bullet
     void Shoot()
     {
-        if (isShooting && Time.time - lastShotTime >= shootCooldown)
-        { // Instantiate bullets at the object's position if shooting and enough time since last shot has passed
+        if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
+        { // Makes bullet if trying to shoot and not rolling and cooldown is up
             Vector3 bulletSpawn = transform.position;
             bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
             Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);
-            // Update last shot time
-            lastShotTime = Time.time;
+            lastShotTime = Time.time; // Update last shot time
         }
     }
 
     // Left click down, activate shooting
     void StartShooting(InputAction.CallbackContext context)
     {
-        isShooting = true;
+        tryingToShoot = true;
     }
 
     // Left click up, deactive shooting
     void StopShooting(InputAction.CallbackContext context)
     {
-        isShooting = false;
+        tryingToShoot = false;
+    }
+
+    // Right click down, activate rolling
+    void StartRolling(InputAction.CallbackContext context)
+    {
+        tryingToRoll = true;
+    }
+
+    // Right click up, deactive rolling
+    void StopRolling(InputAction.CallbackContext context)
+    {
+        tryingToRoll = false;
     }
 
     // Enables player controls
@@ -150,7 +180,8 @@ public class Player : MonoBehaviour
 
         roll = playerControls.Player.Roll;
         roll.Enable();
-        roll.performed += StartRoll;
+        roll.performed += StartRolling;
+        roll.canceled += StopRolling;
 
         //look = playerControls.Player.Look;
         //look.Enable();
