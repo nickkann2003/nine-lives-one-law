@@ -857,10 +857,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.00123474}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20.48, y: 27.324455}
+    newSize: {x: 20.48, y: 27.324455}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -901,6 +901,9 @@ MonoBehaviour:
   bulletList: {fileID: 574515085}
   moveSpeed: 2
   shootCooldown: 0.5
+  rollCooldown: 1
+  rollTime: 0.25
+  rollSpeed: 5
 --- !u!114 &120893487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5666,8 +5669,8 @@ RectTransform:
   m_Children:
   - {fileID: 2142660238}
   - {fileID: 249157167}
-  - {fileID: 1573025163}
   - {fileID: 1178105461}
+  - {fileID: 1573025163}
   m_Father: {fileID: 115293502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
