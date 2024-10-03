@@ -36,16 +36,16 @@ public class Enemy : MonoBehaviour
     {
         transform.up = player.transform.position - transform.position; //Look at player
         if (Vector3.Distance(transform.position, player.transform.position) > range)
-        {
+        { // If our of range, move forward
             rb.velocity = transform.up * moveSpeed;
             //playerAnimator.SetBool("Moving", true);
         }
         else
-        {
+        { // If in range, do not move
             rb.velocity = Vector2.zero;
             //playerAnimator.SetBool("Moving", false);
             if (Time.time - lastShotTime >= shootCooldown)
-            {
+            { // If shot cooldown is up, shoot
                 Vector3 bulletSpawn = transform.position;
                 bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
                 Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);

@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
         bornTime = Time.time;
 
-        rb.velocity = transform.up * moveSpeed;
+        rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
     }
 
     // Update is called once per frame
