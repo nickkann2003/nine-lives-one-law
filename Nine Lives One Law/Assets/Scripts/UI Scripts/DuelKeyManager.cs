@@ -29,10 +29,9 @@ public class DuelKeyManager : MonoBehaviour
         keys[currentIndex].hitKey();
         try
         {
-            keys[currentIndex - 3].setKeyPosition(keyPosAnchors[0], false, true);
+            keys[currentIndex - 2].setKeyPosition(keyPosAnchors[0], false, true);
         }
         catch { }
-
         try
         {
             keys[currentIndex + 3].displayKey();
@@ -44,13 +43,12 @@ public class DuelKeyManager : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             bool enter = (i == 4);
-            bool exit = (i == 0);
             try
             {
                 // Temp code, does not account for different amount of anchors, should be adjusted if anchors changes
                 int currentKey = currentIndex + i - 2;
                 keys[currentKey].displayKey();
-                keys[currentKey].setKeyPosition(keyPosAnchors[i], enter, exit);
+                keys[currentKey].setKeyPosition(keyPosAnchors[i], enter, false);
             } catch { }
         }
     }

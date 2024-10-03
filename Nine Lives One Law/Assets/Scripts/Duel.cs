@@ -31,7 +31,10 @@ public class Duel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M) && !duel)
         { //If M is pressed and there is no duel, start duel
-            startDuel(5,5 + duelTimePowerUp);
+            int x = Random.Range(5, 15);
+            startDuel(x, x + duelTimePowerUp);
+            
+            //startDuel(5, 5 + duelTimePowerUp);
             GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
         }
 
