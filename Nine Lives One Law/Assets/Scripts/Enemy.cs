@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHittableEntity
 {
     //Attributes
     private Rigidbody2D rb;
@@ -54,5 +54,14 @@ public class Enemy : MonoBehaviour
             }
         }
         
+    }
+
+    public void HandleBulletHit(Bullet b)
+    {
+        // Subtract health equal to bullet damage
+        // Activate immunity
+
+        // Return to bullet that it hit an entity
+        b.HandleEntityHit();
     }
 }

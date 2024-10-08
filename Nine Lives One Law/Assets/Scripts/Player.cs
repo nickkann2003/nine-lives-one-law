@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IHittableEntity
 {
 
     //Attributes
@@ -194,5 +194,15 @@ public class Player : MonoBehaviour
         move.Disable();
         fire.Disable();
         //look.Disable();
+    }
+
+
+    public void HandleBulletHit(Bullet b)
+    {
+        // Subtract health equal to bullet damage
+        // Activate immunity
+
+        // Return to bullet that it hit an entity
+        b.HandleEntityHit();
     }
 }
