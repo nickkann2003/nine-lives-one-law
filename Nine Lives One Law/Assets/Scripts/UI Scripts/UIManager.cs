@@ -60,7 +60,10 @@ public class UIManager : MonoBehaviour
     //Activate the main menu when the game manager state is set to menu
     private void GameManager_OnGameStateChanged(GameManager.GameState state)
     {
-        MainMenu.SetActive(state == GameManager.GameState.Menu);
+        if(state == GameManager.GameState.Menu)
+        {
+            StartCoroutine(OpenMenu(UIState.MainMenu));
+        }
     }
 
     // On start, enable Main Menu
