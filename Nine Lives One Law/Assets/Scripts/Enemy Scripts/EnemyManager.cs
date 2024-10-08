@@ -9,7 +9,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject player;
 
     public GameObject enemyPrefab;
-    public List<Enemy> enemies;
+    public GameObject dynamiteEnemyPrefab;
+    public List<EnemyBase> enemies;
 
     // On awake, set singletone
     private void Awake()
@@ -27,12 +28,18 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
-        { //If M is pressed and there is no duel, start duel
+        { 
             GameObject enemyGO = Instantiate(enemyPrefab, this.transform);
-            Enemy enemy = enemyGO.GetComponent<Enemy>();
+            EnemyBase enemy = enemyGO.GetComponent<EnemyBase>();
             enemies.Add(enemy);
         }
-        foreach (Enemy e in enemies)
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameObject enemyGO = Instantiate(dynamiteEnemyPrefab, this.transform);
+            EnemyBase enemy = enemyGO.GetComponent<EnemyBase>();
+            enemies.Add(enemy);
+        }
+        foreach (EnemyBase e in enemies)
         {
             e.targetEntityPosition = player.transform.position;
         }

@@ -4156,6 +4156,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   player: {fileID: 120893481}
   enemyPrefab: {fileID: 5724055875518008803, guid: 5acd346d727bb92488464fffd232b142, type: 3}
+  dynamiteEnemyPrefab: {fileID: 222898287263055127, guid: 1a5d0c8359d4c70439b03790c66ab8e9, type: 3}
   enemies: []
 --- !u!4 &1036140341
 Transform:
