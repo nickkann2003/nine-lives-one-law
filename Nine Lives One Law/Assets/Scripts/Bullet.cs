@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     private float bornTime; // Time when bullet was initialized
     public float damage;
     public List<string> targetTags = new List<string>();
+    public List<string> obstacleTags = new List<string>();
 
     //Variables
     public float moveSpeed; // bullet speed
