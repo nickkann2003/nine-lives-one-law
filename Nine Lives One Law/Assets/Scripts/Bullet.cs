@@ -5,8 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IHittableEntity
 {
     //Attributes
-    private Rigidbody2D rb;
-    private BoxCollider2D collider;
+    public Rigidbody2D rb;
+    public BoxCollider2D collider;
     private float bornTime; // Time when bullet was initialized
     public float damage;
     public List<string> targetTags = new List<string>();
@@ -17,14 +17,16 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public float lifetime; // How long bullet should last
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         bornTime = Time.time;
-
         rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
     }
 
@@ -35,14 +37,27 @@ public class Bullet : MonoBehaviour, IHittableEntity
         if (Time.time - bornTime >= lifetime) Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void SetVelocity(Vector3 velocity)
     {
-     if(targetTags.Contains(collision.gameObject.tag))
+        moveSpeed = velocity.magnitude;
+        transform.up = velocity.normalized;
+        rb.velocity = transform.up * moveSpeed;
+    }
+
+    public void Shoot(Vector3 position, Vector3 velocity)
+    {
+        transform.position = position;
+        SetVelocity(velocity);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (targetTags.Contains(collision.gameObject.tag))
         {
             PerformHit(collision.gameObject);
-        }   
+        }
     }
-    
+
     private void PerformHit(GameObject hitGO)
     {
         IHittableEntity hit = hitGO.GetComponent<IHittableEntity>();

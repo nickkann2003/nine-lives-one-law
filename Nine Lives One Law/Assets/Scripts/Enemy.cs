@@ -52,9 +52,7 @@ public class Enemy : EnemyBase
             //playerAnimator.SetBool("Moving", false);
             if (Time.time - lastShotTime >= shootCooldown)
             { // If shot cooldown is up, shoot
-                Vector3 bulletSpawn = transform.position;
-                bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
-                Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);
+                BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 0.8f), (targetEntityPosition - transform.position).normalized * 5);
                 // Update last shot time
                 lastShotTime = Time.time;
             }
