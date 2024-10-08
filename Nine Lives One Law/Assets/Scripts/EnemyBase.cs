@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 {
     protected Rigidbody2D rb;
     protected BoxCollider2D collider;
@@ -50,5 +50,14 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetTargetPosition(Vector3 position)
     {
         targetEntityPosition = position;
+    }
+
+    public void HandleBulletHit(Bullet b)
+    {
+        // Subtract health equal to bullet damage
+        // Activate immunity
+
+        // Return to bullet that it hit an entity
+        b.HandleEntityHit();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : EnemyBase, IHittableEntity
+public class Enemy : EnemyBase
 {
 
     //[SerializeField]
@@ -30,15 +30,6 @@ public class Enemy : EnemyBase, IHittableEntity
     {
         base.Update();
         
-    }
-
-    public void HandleBulletHit(Bullet b)
-    {
-        // Subtract health equal to bullet damage
-        // Activate immunity
-
-        // Return to bullet that it hit an entity
-        b.HandleEntityHit();
     }
 
     public override void Wander()
