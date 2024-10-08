@@ -1,20 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IHittableEntity
+public class Enemy : EnemyBase, IHittableEntity
 {
-    //Attributes
-    private Rigidbody2D rb;
-    private BoxCollider2D collider;
+
     //[SerializeField]
     //private Animator playerAnimator;
     private float lastShotTime; // Last time enemy shot
 
     // Game Objects
-    public GameObject player;
     public GameObject bullet;
-    public GameObject bulletList;
 
     // Variables
     public float range;
@@ -22,20 +19,38 @@ public class Enemy : MonoBehaviour, IHittableEntity
     public float shootCooldown;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        player = GameObject.Find("Player");
-        bulletList = GameObject.Find("BulletList");
-        rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
+        base.Start();
         lastShotTime = -shootCooldown;
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
-        transform.up = player.transform.position - transform.position; //Look at player
-        if (Vector3.Distance(transform.position, player.transform.position) > range)
+        base.Update();
+        
+    }
+
+    public void HandleBulletHit(Bullet b)
+    {
+        // Subtract health equal to bullet damage
+        // Activate immunity
+
+        // Return to bullet that it hit an entity
+        b.HandleEntityHit();
+    }
+
+    public override void Wander()
+    {
+        // Base enemy never wanders, always hunting
+        attackingTarget = true;
+    }
+
+    public override void AttackTarget()
+    {
+        transform.up = targetEntityPosition - transform.position; //Look at player
+        if (Vector3.Distance(transform.position, targetEntityPosition) > range)
         { // If our of range, move forward
             rb.velocity = transform.up * moveSpeed;
             //playerAnimator.SetBool("Moving", true);
@@ -53,15 +68,5 @@ public class Enemy : MonoBehaviour, IHittableEntity
                 lastShotTime = Time.time;
             }
         }
-        
-    }
-
-    public void HandleBulletHit(Bullet b)
-    {
-        // Subtract health equal to bullet damage
-        // Activate immunity
-
-        // Return to bullet that it hit an entity
-        b.HandleEntityHit();
     }
 }

@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public EnemyManager instance;
 
-    public GameObject enemy;
+    public GameObject player;
+
+    public GameObject enemyPrefab;
+    public List<Enemy> enemies;
+
+    // On awake, set singletone
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +28,13 @@ public class EnemyManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         { //If M is pressed and there is no duel, start duel
-            Instantiate(enemy, this.transform);
+            GameObject enemyGO = Instantiate(enemyPrefab, this.transform);
+            Enemy enemy = enemyGO.GetComponent<Enemy>();
+            enemies.Add(enemy);
+        }
+        foreach (Enemy e in enemies)
+        {
+            e.targetEntityPosition = player.transform.position;
         }
     }
 }

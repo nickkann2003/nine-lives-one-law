@@ -57,6 +57,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
         // Handle specific interaction for when bullets collide with each other here
 
         // Bullet hits should not send a callback, since bullets will call this on each other
+        Destroy(gameObject);
     }
 
     /// <summary>
