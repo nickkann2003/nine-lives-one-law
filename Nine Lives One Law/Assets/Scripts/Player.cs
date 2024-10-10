@@ -136,9 +136,7 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
         { // Makes bullet if trying to shoot and not rolling and cooldown is up
-            Vector3 bulletSpawn = transform.position;
-            bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
-            Instantiate(bullet, bulletSpawn, transform.rotation, bulletList.transform);
+            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1, transform.position + (transform.up * 0.8f), transform.up * 7f);
             lastShotTime = Time.time; // Update last shot time
         }
     }
