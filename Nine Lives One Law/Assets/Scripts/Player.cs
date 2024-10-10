@@ -203,4 +203,10 @@ public class Player : MonoBehaviour, IHittableEntity
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
     }
+
+    public void HandleDamageHit(float damage)
+    {
+        // Subtract player health
+        // Activate immunity
+    }
 }

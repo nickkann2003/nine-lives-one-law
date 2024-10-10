@@ -22,13 +22,13 @@ public class BulletManager : MonoBehaviour
     private List<Bullet> inactiveBullets = new List<Bullet>();
 
     // Disgustingly gross literal declarations, I don't like doing this but I have to
-    private Dictionary<Bullets, List<string>> targetsDictionary = new Dictionary<Bullets, List<string>>
+    public static Dictionary<Bullets, List<string>> targetsDictionary = new Dictionary<Bullets, List<string>>
     {
         {Bullets.PlayerBullet, new List<string>(){"Enemy", "Bullet"}},
         {Bullets.EnemyBullet, new List<string>(){"Player", "Bullet"}}
     };    
 
-    private Dictionary<Bullets, List<string>> obstaclesDictionary = new Dictionary<Bullets, List<string>>
+    public static Dictionary<Bullets, List<string>> obstaclesDictionary = new Dictionary<Bullets, List<string>>
     {
         {Bullets.PlayerBullet, new List<string>(){ }},
         {Bullets.EnemyBullet, new List<string>(){ }}

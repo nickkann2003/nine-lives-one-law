@@ -91,6 +91,11 @@ public class Bullet : MonoBehaviour, IHittableEntity
         // If it pierces, handle piercing logic
     }
 
+    public void HandleDamageHit(float damage)
+    {
+
+    }
+
     public void DestroyBullet()
     {
         BulletManager.instance.DestroyBullet(this);

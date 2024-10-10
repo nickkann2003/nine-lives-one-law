@@ -60,4 +60,10 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
     }
+
+    public void HandleDamageHit(float damage)
+    {
+        // Subtract health
+        // Activate immunity
+    }
 }
