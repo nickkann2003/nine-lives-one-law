@@ -30,19 +30,18 @@ public class Boss1 : EnemyBase
     new void Update()
     {
         if (Input.GetKeyDown(KeyCode.M) && !duelScript.duel && isDuelReady())
-        { //If M is pressed and there is no duel, start duel
+        { //If M is pressed and there is no duel and boss is duel ready, start duel
             int x = Random.Range(5, 15);
             duelScript.startDuel(x, x);
             duelScript.boss = this.gameObject;
         }
         if (!duelScript.duel)
-        {
+        { //Only update if no duel
             base.Update();
         }
 
-
         if (Input.GetKeyDown(KeyCode.Y))
-        {
+        { //Increment health for testing
             health--;
             Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
         }
@@ -50,14 +49,11 @@ public class Boss1 : EnemyBase
 
     public override void Wander()
     {
-        // Base enemy never wanders, always hunting
-        if (maxHealth != health)
-        {
-            DuelFail();
-        }
+        // Like base enemy, boss 1 never wanders, always hunting
         attackingTarget = true;
     }
 
+    // Acts same as base enemy
     public override void AttackTarget()
     {
         transform.up = targetEntityPosition - transform.position; //Look at player
@@ -79,14 +75,10 @@ public class Boss1 : EnemyBase
         }
     }
 
+    // If boss is at 25% health or less, it is able to be dueled
     public bool isDuelReady()
     {
         return health <= maxHealth / 4;
     }
 
-    public void DuelFail()
-    {
-        health += maxHealth / 4;
-        Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
-    }
 }

@@ -15,7 +15,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     protected int health;
     public int maxHealth;
 
-    protected  void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
@@ -68,5 +68,15 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     {
         // Subtract health
         // Activate immunity
+    }
+
+    /// <summary>
+    /// Heals the enemy by a percent of its max health
+    /// </summary>
+    /// <param name="percent">Percent of HP healed</param>
+    public virtual void Heal(float percent)
+    {
+        health += maxHealth / (int)(100/percent);
+        Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
     }
 }

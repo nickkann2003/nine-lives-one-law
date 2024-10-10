@@ -9,13 +9,13 @@ public class Duel : MonoBehaviour
     public DuelKeyManager keyManager;
     public float duelTimePowerUp;
     public DuelTimer duelTimer;
-    public GameObject boss;
+    public GameObject boss; // Boss being fought
+    private string[] duelKeys; // Keys used for duels
 
-    private string[] duelKeys;
-    private List<string> currentDuel;
-    public bool duel;
-    private float duelTime = 1;
-    private float maxDuelTime = 1;
+    private List<string> currentDuel; //current Duel inputs
+    public bool duel; //If duel is happening
+    private float duelTime = 1; //Current time remaining in duel
+    private float maxDuelTime = 1; //Initial time given for the duel
 
 
     // Start is called before the first frame update
@@ -171,7 +171,7 @@ public class Duel : MonoBehaviour
             duel = false;
             duelTimer.StopTimer();
             Debug.Log("DUEL FAIL");
-            boss.GetComponent<EnemyBase>().Wander();
+            boss.GetComponent<EnemyBase>().Heal(25); //Boss heals on duel fail
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
         }
@@ -193,7 +193,7 @@ public class Duel : MonoBehaviour
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
             duelTimer.StopTimer();
-            Destroy(boss);
+            Destroy(boss); //Destroy boss on duel win, replace with damage once implemented
         }
         else
         { //If there are more inputs, print the remaining inputs
