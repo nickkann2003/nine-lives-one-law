@@ -949,6 +949,8 @@ MonoBehaviour:
   keyManager: {fileID: 1573025164}
   duelTimePowerUp: 0
   duelTimer: {fileID: 1178105462}
+  boss: {fileID: 0}
+  duel: 0
 --- !u!1 &121667573
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,6 +4174,7 @@ MonoBehaviour:
   player: {fileID: 120893481}
   enemyPrefab: {fileID: 5724055875518008803, guid: 5acd346d727bb92488464fffd232b142, type: 3}
   dynamiteEnemyPrefab: {fileID: 222898287263055127, guid: 1a5d0c8359d4c70439b03790c66ab8e9, type: 3}
+  boss1Prefab: {fileID: 7243839772094239420, guid: 8808ab355245e5b48903031e1cd541fb, type: 3}
   enemies: []
 --- !u!4 &1036140341
 Transform:
