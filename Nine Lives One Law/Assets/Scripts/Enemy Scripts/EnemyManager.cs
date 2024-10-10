@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject enemyPrefab;
     public GameObject dynamiteEnemyPrefab;
+    public GameObject boss1Prefab;
     public List<EnemyBase> enemies;
 
     // On awake, set singletone
@@ -36,6 +37,12 @@ public class EnemyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameObject enemyGO = Instantiate(dynamiteEnemyPrefab, this.transform);
+            EnemyBase enemy = enemyGO.GetComponent<EnemyBase>();
+            enemies.Add(enemy);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameObject enemyGO = Instantiate(boss1Prefab, this.transform);
             EnemyBase enemy = enemyGO.GetComponent<EnemyBase>();
             enemies.Add(enemy);
         }

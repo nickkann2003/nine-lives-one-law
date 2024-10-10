@@ -12,6 +12,9 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 
     public Transform bulletList;
 
+    protected int health;
+    public int maxHealth;
+
     protected  void Start()
     {
         rb = GetComponent<Rigidbody2D>();

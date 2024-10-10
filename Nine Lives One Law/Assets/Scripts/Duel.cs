@@ -9,10 +9,11 @@ public class Duel : MonoBehaviour
     public DuelKeyManager keyManager;
     public float duelTimePowerUp;
     public DuelTimer duelTimer;
+    public GameObject boss;
 
     private string[] duelKeys;
     private List<string> currentDuel;
-    private bool duel;
+    public bool duel;
     private float duelTime = 1;
     private float maxDuelTime = 1;
 
@@ -31,14 +32,16 @@ public class Duel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.M) && !duel)
         { //If M is pressed and there is no duel, start duel
             int x = Random.Range(5, 15);
-            startDuel(x, x + duelTimePowerUp);
+            startDuel(x, x);
             
             //startDuel(5, 5 + duelTimePowerUp);
-            GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
+            //GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
         }
+        */
 
         if (duel)
         { //If there is a duel, update duel
@@ -48,16 +51,22 @@ public class Duel : MonoBehaviour
     }
 
     //Starts a duel by making a list of inputs
-    void startDuel(int length, float time)
+    public void startDuel(int length, float time)
     {
+        // Set GameState
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Duel);
+
         // Activate key manager
         keyManager.gameObject.SetActive(true);
         
         // Clear existing or remaining duel values
         currentDuel.Clear();
 
+        // Modify time
+        time += duelTimePowerUp;
+
         // Set the time
-        maxDuelTime = length;
+        maxDuelTime = time;
 
         for(int i = 0; i < length; i++)
         { //Fills list of inputs, WASD, L-Click, R-Click
@@ -162,6 +171,7 @@ public class Duel : MonoBehaviour
             duel = false;
             duelTimer.StopTimer();
             Debug.Log("DUEL FAIL");
+            boss.GetComponent<EnemyBase>().Wander();
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
         }
@@ -183,6 +193,7 @@ public class Duel : MonoBehaviour
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
             duelTimer.StopTimer();
+            Destroy(boss);
         }
         else
         { //If there are more inputs, print the remaining inputs
