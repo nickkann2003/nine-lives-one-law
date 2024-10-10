@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4389676847410371530}
   - component: {fileID: 5356591741678106208}
   - component: {fileID: 1440148698550355033}
+  - component: {fileID: 5519630392496093383}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -131,6 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5ec448f2f55f41820da03bb744737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  collider: {fileID: 0}
+  damage: 0
+  bulletAnimator: {fileID: 5519630392496093383}
+  targetTags: []
+  obstacleTags: []
   moveSpeed: 15
   lifetime: 2
 --- !u!61 &5356591741678106208
@@ -205,3 +212,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &5519630392496093383
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4456747074315144748}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 759aee07004baa84ea8adcdf154186b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

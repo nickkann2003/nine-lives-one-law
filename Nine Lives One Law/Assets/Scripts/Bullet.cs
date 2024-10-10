@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public BoxCollider2D collider;
     private float bornTime; // Time when bullet was initialized
     public float damage;
+    public Animator bulletAnimator;
     public List<string> targetTags = new List<string>();
     public List<string> obstacleTags = new List<string>();
 
@@ -34,7 +35,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     void Update()
     {
         //Destroy bullet after lifetime
-        if (Time.time - bornTime >= lifetime) Destroy(gameObject);
+        if (Time.time - bornTime >= lifetime) BulletManager.instance.DestroyBullet(this);
     }
 
     public void SetVelocity(Vector3 velocity)
@@ -48,6 +49,9 @@ public class Bullet : MonoBehaviour, IHittableEntity
     {
         transform.position = position;
         SetVelocity(velocity);
+        bornTime = Time.time;
+        bulletAnimator.SetTrigger("Shoot");
+        collider.isTrigger = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -71,9 +75,8 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public void HandleBulletHit(Bullet b)
     {
         // Handle specific interaction for when bullets collide with each other here
-
-        // Bullet hits should not send a callback, since bullets will call this on each other
-        Destroy(gameObject);
+        bulletAnimator.SetTrigger("Hit");
+        collider.isTrigger = true;
     }
 
     /// <summary>
@@ -81,8 +84,15 @@ public class Bullet : MonoBehaviour, IHittableEntity
     /// </summary>
     public void HandleEntityHit()
     {
+        bulletAnimator.SetTrigger("Hit");
+        collider.isTrigger = true;
         // Destroy bullet OR
         // If it bounces, bounce
         // If it pierces, handle piercing logic
+    }
+
+    public void DestroyBullet()
+    {
+        BulletManager.instance.DestroyBullet(this);
     }
 }

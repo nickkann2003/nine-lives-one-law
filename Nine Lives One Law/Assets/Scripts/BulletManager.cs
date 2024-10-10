@@ -24,8 +24,8 @@ public class BulletManager : MonoBehaviour
     // Disgustingly gross literal declarations, I don't like doing this but I have to
     private Dictionary<Bullets, List<string>> targetsDictionary = new Dictionary<Bullets, List<string>>
     {
-        {Bullets.PlayerBullet, new List<string>(){ }},
-        {Bullets.EnemyBullet, new List<string>(){ }}
+        {Bullets.PlayerBullet, new List<string>(){"Enemy", "Bullet"}},
+        {Bullets.EnemyBullet, new List<string>(){"Player", "Bullet"}}
     };    
 
     private Dictionary<Bullets, List<string>> obstaclesDictionary = new Dictionary<Bullets, List<string>>
@@ -85,8 +85,8 @@ private void Awake()
 
     public void DestroyBullet(Bullet bullet)
     {
-        bullet.gameObject.SetActive(false);
-        activeBullets.Remove(bullet);
         inactiveBullets.Add(bullet);
+        activeBullets.Remove(bullet);
+        bullet.gameObject.SetActive(false);
     }
 }
