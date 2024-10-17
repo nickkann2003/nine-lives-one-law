@@ -78,7 +78,8 @@ public class Boss1 : EnemyBase
     // If boss is at 25% health or less, it is able to be dueled
     public bool isDuelReady()
     {
-        return health <= maxHealth / 4;
+        return true;
+        //return health <= maxHealth / 4;
     }
 
 }
