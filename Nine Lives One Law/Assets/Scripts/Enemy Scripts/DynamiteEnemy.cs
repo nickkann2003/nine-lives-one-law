@@ -30,15 +30,6 @@ public class DynamiteEnemy : EnemyBase, IHittableEntity
         base.Update();
     }
 
-    public void HandleBulletHit(Bullet b)
-    {
-        // Subtract health equal to bullet damage
-        // Activate immunity
-
-        // Return to bullet that it hit an entity
-        b.HandleEntityHit();
-    }
-
     public override void Wander()
     {
         // Need to get in range of Dynamite Enemy before attacking

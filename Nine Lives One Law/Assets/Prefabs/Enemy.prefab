@@ -203,9 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f1d003df6db984dba46aa7866a6d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
+  targetEntityPosition: {x: 0, y: 0, z: 0}
   bulletList: {fileID: 0}
+  maxHealth: 5
+  bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
   range: 5
   moveSpeed: 1
   shootCooldown: 2

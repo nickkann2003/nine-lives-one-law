@@ -136,7 +136,7 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
         { // Makes bullet if trying to shoot and not rolling and cooldown is up
-            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1, transform.position + (transform.up * 0.8f), transform.up * 7f);
+            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1.0f, transform.position + (transform.up * 0.8f), transform.up * 7f);
             lastShotTime = Time.time; // Update last shot time
         }
     }

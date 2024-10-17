@@ -12,14 +12,18 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 
     public Transform bulletList;
 
-    protected int health;
+    protected float health;
     public int maxHealth;
+
+    protected float invTime;
+    public float maxInvTime;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         bulletList = GameObject.Find("BulletList").transform;
+        health = maxHealth;
     }
 
     protected void Update()
@@ -57,8 +61,13 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 
     public void HandleBulletHit(Bullet b)
     {
-        // Subtract health equal to bullet damage
+        // Subtract health
+        health -= b.damage;
         // Activate immunity
+        if (health < 0)
+        {
+            Destroy(this.gameObject);
+        }
 
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
@@ -67,7 +76,12 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     public void HandleDamageHit(float damage)
     {
         // Subtract health
+        health -= damage;
         // Activate immunity
+        if(health < 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     /// <summary>

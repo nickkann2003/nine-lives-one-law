@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetEntityPosition: {x: 0, y: 0, z: 0}
   bulletList: {fileID: 0}
+  maxHealth: 8
   dynamite: {fileID: 4895177222561055881, guid: 744a1e4b0a27e174992be54816e0a8e4, type: 3}
   range: 4
   moveSpeed: 0.5
