@@ -60,11 +60,13 @@ public class Player : MonoBehaviour, IHittableEntity
         {
             isActive = true;
             OnEnable();
+            rb.isKinematic = false;
         }
         else
         {
             isActive = false;
             OnDisable();
+            rb.isKinematic = true;
         }
     }
 
@@ -107,10 +109,13 @@ public class Player : MonoBehaviour, IHittableEntity
     // Makes the player rotation face the mouse
     void FaceMouse()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float AngleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
-        float AngleDeg = (180 / Mathf.PI) * AngleRad - 90;
-        this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
+        if (isActive)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float AngleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
+            float AngleDeg = (180 / Mathf.PI) * AngleRad - 90;
+            this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
+        }
     }
 
     // Makes the player dodge roll

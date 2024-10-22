@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public Animator bulletAnimator;
     public List<string> targetTags = new List<string>();
     public List<string> obstacleTags = new List<string>();
+    private Vector3 pauseVelocity;
 
     //Variables
     public float moveSpeed; // bullet speed
@@ -22,6 +23,24 @@ public class Bullet : MonoBehaviour, IHittableEntity
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Gameplay)
+        {
+            unPause();
+        }
+        else
+        {
+            pause();
+        }
     }
 
     // Start is called before the first frame update
@@ -38,11 +57,23 @@ public class Bullet : MonoBehaviour, IHittableEntity
         if (Time.time - bornTime >= lifetime) BulletManager.instance.DestroyBullet(this);
     }
 
+    public void pause()
+    {
+        moveSpeed = 0f;
+        
+    }
+
+    public void unPause()
+    {
+        moveSpeed = pauseVelocity.magnitude;
+    }
+
     public void SetVelocity(Vector3 velocity)
     {
         moveSpeed = velocity.magnitude;
         transform.up = velocity.normalized;
         rb.velocity = transform.up * moveSpeed;
+        pauseVelocity = velocity;
     }
 
     public void Shoot(Vector3 position, Vector3 velocity)
