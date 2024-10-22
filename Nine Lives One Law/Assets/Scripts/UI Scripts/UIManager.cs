@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> StartRunObjects = new List<GameObject>();
     public List<GameObject> MainMenuObjects = new List<GameObject>();
     public List<GameObject> InGameObjects = new List<GameObject>();
+    public MenuPlayerSpriteController playerMenuSprite;
 
 
     public GameObject OptionsMenu;
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
     public Duel DuelInstance;
 
     public Fade fadeRef;
+    private bool fading = false;
 
     [Header("Options")]
     public float transitionTime = 1f;
@@ -101,10 +103,12 @@ public class UIManager : MonoBehaviour
 
         // Start the fade
         fadeRef.StartFade(transitionTime);
+        fading = true;
 
         yield return new WaitForSeconds(transitionTime / 2f);
 
-
+        fading = false;
+        playerMenuSprite.ResetPosition();
 
         // Close previous menu
         switch (currentState)
