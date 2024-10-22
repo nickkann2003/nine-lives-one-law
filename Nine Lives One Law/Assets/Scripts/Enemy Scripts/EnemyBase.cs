@@ -18,21 +18,50 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     protected float invTime;
     public float maxInvTime;
 
+    protected bool isActive = true;
+    protected Vector2 pauseVelocity;
+
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         bulletList = GameObject.Find("BulletList").transform;
         health = maxHealth;
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    protected void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Gameplay)
+        {
+            isActive = true;
+            rb.velocity = pauseVelocity;
+            rb.isKinematic = false;
+        }
+
+
+        else
+        {
+            isActive = false;
+            pauseVelocity = rb.velocity;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+        
+    }
+
+    protected void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
     }
 
     protected void Update()
     {
-        if (attackingTarget)
+        if (attackingTarget && isActive)
         {
             AttackTarget();
         }
-        else
+        else if(isActive)
         {
             Wander();
         }
