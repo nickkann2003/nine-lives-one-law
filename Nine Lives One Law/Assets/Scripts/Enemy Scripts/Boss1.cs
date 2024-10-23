@@ -45,6 +45,15 @@ public class Boss1 : EnemyBase
             health--;
             Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
         }
+
+        if (isDuelReady())
+        {
+            healthBar.setSliderColor(Color.green);
+        }
+        else
+        {
+            healthBar.setSliderColor(Color.red);
+        }
     }
 
     public override void Wander()
@@ -81,8 +90,7 @@ public class Boss1 : EnemyBase
     // If boss is at 25% health or less, it is able to be dueled
     public bool isDuelReady()
     {
-        return true;
-        //return health <= maxHealth / 4;
+        //return true;
+        return health <= maxHealth / 4;
     }
-
 }

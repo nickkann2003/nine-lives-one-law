@@ -6,6 +6,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 {
     protected Rigidbody2D rb;
     protected BoxCollider2D collider;
+    protected FloatingHealthBar healthBar;
 
     public Vector3 targetEntityPosition;
     protected bool attackingTarget;
@@ -28,6 +29,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         bulletList = GameObject.Find("BulletList").transform;
         health = maxHealth;
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     protected void GameManager_OnGameStateChanged(GameManager.GameState state)
@@ -92,6 +95,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     {
         // Subtract health
         health -= b.damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
         // Activate immunity
         if (health < 0)
         {
@@ -106,8 +110,9 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     {
         // Subtract health
         health -= damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
         // Activate immunity
-        if(health < 0)
+        if (health < 0)
         {
             Destroy(this.gameObject);
         }
@@ -117,9 +122,10 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     /// Heals the enemy by a percent of its max health
     /// </summary>
     /// <param name="percent">Percent of HP healed</param>
-    public virtual void Heal(float percent)
+    public void Heal(float percent)
     {
         health += maxHealth / (int)(100/percent);
+        healthBar.UpdateHealthBar(health, maxHealth);
         Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
     }
 }
