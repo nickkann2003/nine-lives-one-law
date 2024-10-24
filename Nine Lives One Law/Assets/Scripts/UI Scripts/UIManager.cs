@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     public Duel DuelInstance;
 
     public Fade fadeRef;
-    private bool fading = false;
+    public bool fading = false;
 
     [Header("Options")]
     public float transitionTime = 1f;
@@ -135,6 +135,16 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
+        if(currentState == UIState.GameMenu && newState == UIState.MainMenu)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+        }
+
+        if(currentState == UIState.StartRunMenu &&  newState == UIState.GameMenu)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
+        }
+
 
         // Set current state
         currentState = newState;
@@ -157,6 +167,7 @@ public class UIManager : MonoBehaviour
             case UIState.MainMenu:
                 OpenMenu(MainMenu);                
                 activateAll(MainMenuObjects);
+                
                 break;
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
@@ -167,14 +178,12 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu(int i)
     {
-        StartCoroutine(OpenMenu(IntToUIState(i)));
-        if (i == 4)
+        if(currentState != IntToUIState(i))
         {
-            GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
-        }
-        else if (i == 3)
-        {
-            GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+            if (!fading)
+            {
+                StartCoroutine(OpenMenu(IntToUIState(i)));
+            }
         }
     }
 

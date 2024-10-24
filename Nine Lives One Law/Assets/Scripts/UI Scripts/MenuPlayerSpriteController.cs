@@ -44,23 +44,33 @@ public class MenuPlayerSpriteController : MonoBehaviour
 
     public void MoveLeft()
     {
-        disableAllSprites();
-        leftSprite.SetActive(true);
-        velocity.x = -speed;
+        if (!UIManager.instance.fading)
+        {
+            disableAllSprites();
+            leftSprite.SetActive(true);
+            velocity.x = -speed;
+        }
     }
 
     public void MoveRight()
     {
-        disableAllSprites();
-        rightSprite.SetActive(true);
-        velocity.x = speed;
+        if (!UIManager.instance.fading)
+        {
+            disableAllSprites();
+            rightSprite.SetActive(true);
+            velocity.x = speed;
+        }
+        
     }
 
     public void MoveStop()
     {
-        disableAllSprites();
-        stopSprite.SetActive(true);
-        velocity.x = 0;
+        if (!UIManager.instance.fading)
+        {
+            disableAllSprites();
+            stopSprite.SetActive(true);
+            velocity.x = 0;
+        }   
     }
 
     private void disableAllSprites()

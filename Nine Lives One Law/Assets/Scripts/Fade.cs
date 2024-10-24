@@ -7,8 +7,9 @@ using static System.TimeZoneInfo;
 public class Fade : MonoBehaviour
 {
     private bool fadingIn;
-    private float fadeProgress = 0f;
+    public float fadeProgress = 0f;
     private float fadeRate;
+    private float fadeOutRate;
 
     public bool sleep;
     public Image fadeImage;
@@ -45,7 +46,7 @@ public class Fade : MonoBehaviour
             }
             else //  if fading out, decrease progress
             {
-                fadeProgress -= fadeRate * Time.deltaTime;
+                fadeProgress -= fadeOutRate * Time.deltaTime;
 
             }
 
@@ -71,7 +72,8 @@ public class Fade : MonoBehaviour
         }
         else
         {
-            this.fadeRate = 1f / iFadeTime;
+            this.fadeRate = (1f-fadeProgress) / iFadeTime;
+            this.fadeOutRate = (1f / iFadeTime) * 1.5f;
         }
 
         sleep = false;

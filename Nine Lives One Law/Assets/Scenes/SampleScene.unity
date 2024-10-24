@@ -782,18 +782,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveLeft
@@ -804,6 +792,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ExitLeft
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 97
@@ -850,6 +850,7 @@ MonoBehaviour:
   OptionsMenu: {fileID: 1704403707}
   DuelInstance: {fileID: 0}
   fadeRef: {fileID: 233335818}
+  fading: 0
   transitionTime: 2
 --- !u!4 &115293502
 Transform:
@@ -3023,18 +3024,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveRight
@@ -3045,6 +3034,18 @@ MonoBehaviour:
           m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: ExitRight
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 100
@@ -3671,18 +3672,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveStop
@@ -3693,6 +3682,18 @@ MonoBehaviour:
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: ExitDown
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 115
@@ -3747,18 +3748,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveRight
@@ -3769,6 +3758,18 @@ MonoBehaviour:
           m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: ExitRight
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 100
@@ -5825,18 +5826,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveStop
@@ -5847,6 +5836,18 @@ MonoBehaviour:
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: ExitUp
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 119
@@ -6721,18 +6722,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveLeft
@@ -6743,6 +6732,18 @@ MonoBehaviour:
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: ExitLeft
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 97
@@ -7204,7 +7205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2022284038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7555,18 +7556,6 @@ MonoBehaviour:
   onPressEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115293501}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenMenu
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786180127}
         m_TargetAssemblyTypeName: MenuPlayerSpriteController, Assembly-CSharp
         m_MethodName: MoveRight
@@ -7577,6 +7566,18 @@ MonoBehaviour:
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: ExitRight
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 115293501}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   key: 100
