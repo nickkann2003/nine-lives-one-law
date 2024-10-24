@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     //This lets you grab it from anywhere
     public static GameManager Instance;
-    public GameState state;
+    public GameState state = GameState.Menu;
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateGameState(GameState.Menu);
+
     }
 
     // Update is called once per frame

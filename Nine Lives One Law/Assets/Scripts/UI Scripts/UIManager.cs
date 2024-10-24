@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         currentState = UIState.MainMenu;
-        //MainMenu.SetActive(true);
+        MainMenu.SetActive(true);
     }
 
     private void Update()

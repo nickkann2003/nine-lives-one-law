@@ -69,7 +69,9 @@ public class Dynamite : MonoBehaviour
     private void StopMoving()
     {
         Debug.Log("stop");
-        rb.velocity = Vector2.zero;
+        //rb.velocity = Vector2.zero;
+        rb.drag = 2.5f;
+        rb.angularDrag = 2f;
         state = State.Stay;
     }
 
@@ -80,6 +82,9 @@ public class Dynamite : MonoBehaviour
 
         dynamiteAnimator.SetTrigger("Explode");
         dynamiteAnimator.SetTrigger("Launch");
+        rb.velocity = Vector2.zero;
+        rb.freezeRotation = true;
+        rb.simulated = false;
     }
 
     private void DestroyDynamite()
