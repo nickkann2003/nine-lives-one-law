@@ -91,8 +91,9 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         targetEntityPosition = position;
     }
 
-    public void HandleBulletHit(Bullet b)
+    public virtual void HandleBulletHit(Bullet b)
     {
+        Debug.Log("base handlebullethit");
         // Subtract health
         health -= b.damage;
         healthBar.UpdateHealthBar(health, maxHealth);

@@ -1001,11 +1001,11 @@ MonoBehaviour:
   playerAnimator: {fileID: 218176493}
   bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
   bulletList: {fileID: 574515085}
-  moveSpeed: 2
+  moveSpeed: 3
   shootCooldown: 0.5
   rollCooldown: 1
-  rollTime: 0.25
-  rollSpeed: 5
+  rollTime: 0.2
+  rollSpeed: 6
 --- !u!114 &120893487
 MonoBehaviour:
   m_ObjectHideFlags: 0

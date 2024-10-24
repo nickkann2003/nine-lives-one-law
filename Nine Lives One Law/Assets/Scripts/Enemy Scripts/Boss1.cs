@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss1 : EnemyBase
@@ -21,7 +22,7 @@ public class Boss1 : EnemyBase
     new void Start()
     {
         base.Start();
-        lastShotTime = -shootCooldown;
+        lastShotTime = Time.time;
         health = maxHealth;
         duelScript = GameObject.Find("Player").GetComponent<Duel>();
     }
@@ -92,5 +93,21 @@ public class Boss1 : EnemyBase
     {
         //return true;
         return health <= maxHealth / 4;
+    }
+
+    public override void HandleBulletHit(Bullet b)
+    {
+        Debug.Log("boss handlebullethit");
+        // Subtract health
+        health -= b.damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
+        // Activate immunity
+        if (health < 0)
+        {
+            health = 1; // Boss cannot die 
+        }
+
+        // Return to bullet that it hit an entity
+        b.HandleEntityHit();
     }
 }

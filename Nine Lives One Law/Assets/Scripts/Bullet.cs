@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     private Vector3 pauseVelocity;
 
     //Variables
-    public float moveSpeed; // bullet speed
+    public float moveSpeed; // bullet speed, overriden by createbullet function
     public float lifetime; // How long bullet should last
 
 

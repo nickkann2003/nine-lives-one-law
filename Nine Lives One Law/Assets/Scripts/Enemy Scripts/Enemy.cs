@@ -22,7 +22,7 @@ public class Enemy : EnemyBase
     new void Start()
     {
         base.Start();
-        lastShotTime = -shootCooldown;
+        lastShotTime = Time.time;
     }
 
     // Update is called once per frame

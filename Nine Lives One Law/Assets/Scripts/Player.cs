@@ -95,6 +95,10 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         Vector2 moveDirection = move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        if(rb.velocity.magnitude == 0 && isMidRoll)
+        {
+            rb.velocity = (Vector2)transform.up * moveSpeed;
+        }
 
         if (rb.velocity.magnitude > 0)
         {
@@ -141,7 +145,7 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
         { // Makes bullet if trying to shoot and not rolling and cooldown is up
-            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1.0f, transform.position + (transform.up * 0.8f), transform.up * 7f);
+            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1.0f, transform.position + (transform.up * 0.8f), transform.up * 12f);
             lastShotTime = Time.time; // Update last shot time
         }
     }
