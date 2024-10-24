@@ -6,7 +6,8 @@ using static BulletManager;
 public enum Bullets
 {
     PlayerBullet,
-    EnemyBullet
+    EnemyBullet,
+    All
 }
 
 public class BulletManager : MonoBehaviour
@@ -25,13 +26,15 @@ public class BulletManager : MonoBehaviour
     public static Dictionary<Bullets, List<string>> targetsDictionary = new Dictionary<Bullets, List<string>>
     {
         {Bullets.PlayerBullet, new List<string>(){"Enemy", "Bullet"}},
-        {Bullets.EnemyBullet, new List<string>(){"Player", "Bullet"}}
+        {Bullets.EnemyBullet, new List<string>(){"Player", "Bullet"}},
+        {Bullets.All, new List<string>(){"Enemy", "Bullet", "Player"}}
     };    
 
     public static Dictionary<Bullets, List<string>> obstaclesDictionary = new Dictionary<Bullets, List<string>>
     {
         {Bullets.PlayerBullet, new List<string>(){ }},
-        {Bullets.EnemyBullet, new List<string>(){ }}
+        {Bullets.EnemyBullet, new List<string>(){ }},
+        {Bullets.All, new List<string>(){ }}
     };
 
 private void Awake()

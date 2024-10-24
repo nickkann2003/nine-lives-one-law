@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class Dynamite : MonoBehaviour
     private float bornTime; // Time when bullet was initialized
     private List<string> targetTags;
 
-    private List<IHittableEntity> hits;
+    private List<IHittableEntity> hits = new List<IHittableEntity>();
 
     //Variables
     public float damage;
@@ -36,8 +37,8 @@ public class Dynamite : MonoBehaviour
         sprites = new SpriteRenderer[] { this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>(), this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>()};
         state = State.Move;
         bornTime = Time.time;
-
-        targetTags = BulletManager.targetsDictionary[Bullets.EnemyBullet];
+        if(targetTags.Count == 0)
+            targetTags = BulletManager.targetsDictionary[Bullets.All];
 
         rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
 
@@ -66,6 +67,12 @@ public class Dynamite : MonoBehaviour
         }
     }
 
+    public void Set(List<string> tags, float damage)
+    {
+        targetTags = tags;
+        this.damage = damage;
+    }
+
     private void StopMoving()
     {
         Debug.Log("stop");
@@ -84,7 +91,7 @@ public class Dynamite : MonoBehaviour
         dynamiteAnimator.SetTrigger("Launch");
         rb.velocity = Vector2.zero;
         rb.freezeRotation = true;
-        rb.simulated = false;
+        //rb.simulated = false;
     }
 
     private void DestroyDynamite()
@@ -93,7 +100,7 @@ public class Dynamite : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (targetTags.Contains(other.gameObject.tag))
         {

@@ -15,6 +15,7 @@ public class DynamiteEnemy : EnemyBase, IHittableEntity
     public float range;
     public float moveSpeed;
     public float shootCooldown;
+    public float damage = 3f;
 
     // Start is called before the first frame update
     new void Start()
@@ -59,7 +60,10 @@ public class DynamiteEnemy : EnemyBase, IHittableEntity
             { // If shot cooldown is up, shoot
                 Vector3 bulletSpawn = transform.position;
                 bulletSpawn += transform.up * 0.8f; // bullet offset so it spawns on the gun
-                Instantiate(dynamite, bulletSpawn, transform.rotation, bulletList.transform);
+                GameObject dyn = Instantiate(dynamite, bulletSpawn, transform.rotation, bulletList.transform);
+                Dynamite d = dyn.GetComponent<Dynamite>();
+                d.Set(BulletManager.targetsDictionary[Bullets.All], damage);
+
                 // Update last shot time
                 lastShotTime = Time.time;
             }
