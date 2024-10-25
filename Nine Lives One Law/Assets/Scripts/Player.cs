@@ -36,6 +36,7 @@ public class Player : MonoBehaviour, IHittableEntity
     public float rollCooldown; // How often player can roll
     public float rollTime; // How long player roll
     public float rollSpeed; // Speed multiplier during roll
+    public Vector2 pauseMovement; //Movement stored while paused
 
     private void Awake()
     {
@@ -60,13 +61,17 @@ public class Player : MonoBehaviour, IHittableEntity
         {
             isActive = true;
             OnEnable();
-            rb.isKinematic = false;
+            rb.velocity = pauseMovement;
+            rb.constraints = RigidbodyConstraints2D.None;
+
         }
         else
         {
             isActive = false;
             OnDisable();
-            rb.isKinematic = true;
+            pauseMovement = rb.velocity;
+            rb.velocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -93,6 +98,7 @@ public class Player : MonoBehaviour, IHittableEntity
     // Moves the player depending on move speed variable, tells animator if moving
     void MovePlayer()
     {
+
         Vector2 moveDirection = move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         if(rb.velocity.magnitude == 0 && isMidRoll)

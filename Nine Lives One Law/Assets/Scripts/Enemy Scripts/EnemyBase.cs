@@ -37,18 +37,27 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     {
         if (state == GameManager.GameState.Gameplay)
         {
-            isActive = true;
-            rb.velocity = pauseVelocity;
-            rb.isKinematic = false;
+            if (!isActive)
+            {
+                isActive = true;
+                rb.velocity = pauseVelocity;
+                rb.isKinematic = false;
+                rb.constraints = RigidbodyConstraints2D.None;
+            }
         }
 
 
         else
         {
-            isActive = false;
-            pauseVelocity = rb.velocity;
-            rb.velocity = Vector3.zero;
-            rb.isKinematic = true;
+            if (isActive)
+            {
+                isActive = false;
+                pauseVelocity = rb.velocity;
+                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+            
         }
         
     }
