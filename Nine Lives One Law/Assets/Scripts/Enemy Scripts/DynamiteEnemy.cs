@@ -47,7 +47,7 @@ public class DynamiteEnemy : EnemyBase, IHittableEntity
         {
             //transform.up = targetEntityPosition - transform.position; //Look at player
             if (Vector3.Distance(transform.position, targetEntityPosition) > range)
-            { // If our of range, move forward
+            { // If out of range, move forward
                 rb.velocity = transform.up * moveSpeed;
                 //playerAnimator.SetBool("Moving", true);
             }

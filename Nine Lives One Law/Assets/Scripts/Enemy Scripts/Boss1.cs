@@ -8,6 +8,8 @@ public class Boss1 : EnemyBase
     //[SerializeField]
     //private Animator playerAnimator;
     private float lastShotTime; // Last time enemy shot
+    private int ammo;
+    private float dualWieldOffset;
 
     // Game Objects
     public GameObject bullet;
@@ -17,6 +19,7 @@ public class Boss1 : EnemyBase
     public float range;
     public float moveSpeed;
     public float shootCooldown;
+    
 
     // Start is called before the first frame update
     new void Start()
@@ -25,6 +28,8 @@ public class Boss1 : EnemyBase
         lastShotTime = Time.time;
         health = maxHealth;
         duelScript = GameObject.Find("Player").GetComponent<Duel>();
+        ammo = 0;
+        dualWieldOffset = 0.6f;
     }
 
     // Update is called once per frame
@@ -41,18 +46,20 @@ public class Boss1 : EnemyBase
             base.Update();
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Y))
         { //Increment health for testing
             health--;
             Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
         }
+        */
 
         if (isDuelReady())
-        {
+        { //If duel ready, make health bar green
             healthBar.setSliderColor(Color.green);
         }
         else
-        {
+        { //If not duel ready, make health bar red
             healthBar.setSliderColor(Color.red);
         }
     }
@@ -68,23 +75,39 @@ public class Boss1 : EnemyBase
     {
         if (isActive)
         {
+            rb.velocity = Vector2.zero;
             transform.up = targetEntityPosition - transform.position; //Look at player
-            if (Vector3.Distance(transform.position, targetEntityPosition) > range)
-            { // If our of range, move forward
-                rb.velocity = transform.up * moveSpeed;
-                //playerAnimator.SetBool("Moving", true);
+            if (ammo == 0)
+            {
+                if (Time.time - lastShotTime >= (shootCooldown * 15))
+                { //If no ammo, there is a long shot cooldown to reload
+                    ammo = 12; //Reloads
+                }
             }
             else
-            { // If in range, do not move
-                rb.velocity = Vector2.zero;
-                //playerAnimator.SetBool("Moving", false);
+            {
+                //transform.up = targetEntityPosition - transform.position; //Look at player
+                if (Vector3.Distance(transform.position, targetEntityPosition) > range)
+                { // If our of range, move forward
+                    rb.velocity = transform.up * moveSpeed;
+                    //playerAnimator.SetBool("Moving", true);
+                }
+                //else
+                //{ // If in range, do not move
+                //    rb.velocity = Vector2.zero;
+                //    //playerAnimator.SetBool("Moving", false);
+                //}
                 if (Time.time - lastShotTime >= shootCooldown)
-                { // If shot cooldown is up, shoot
-                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 0.8f), (targetEntityPosition - transform.position).normalized * 5);
-                    // Update last shot time
+                { // If reloaded, shoot fast
+                    ammo--;
+                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 0.9f) + (transform.right * dualWieldOffset), (targetEntityPosition - transform.position).normalized * 7);
+                    dualWieldOffset *= -1; //Alternates where gun is
                     lastShotTime = Time.time;
                 }
             }
+            
+            
+            
         }
     }
 
