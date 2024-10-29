@@ -29,7 +29,7 @@ public class Boss1 : EnemyBase
         health = maxHealth;
         duelScript = GameObject.Find("Player").GetComponent<Duel>();
         ammo = 0;
-        dualWieldOffset = 0.6f;
+        dualWieldOffset = 0.3f;
     }
 
     // Update is called once per frame
@@ -100,7 +100,7 @@ public class Boss1 : EnemyBase
                 if (Time.time - lastShotTime >= shootCooldown)
                 { // If reloaded, shoot fast
                     ammo--;
-                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 0.9f) + (transform.right * dualWieldOffset), (targetEntityPosition - transform.position).normalized * 7);
+                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 1.4f) + (transform.right * dualWieldOffset), (targetEntityPosition - transform.position).normalized * 7);
                     dualWieldOffset *= -1; //Alternates where gun is
                     lastShotTime = Time.time;
                 }
