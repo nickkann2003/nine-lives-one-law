@@ -22,6 +22,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     protected bool isActive = true;
     protected Vector2 pauseVelocity;
 
+    protected float money = 1;
+
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -109,7 +111,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Activate immunity
         if (health < 0)
         {
-            Destroy(this.gameObject);
+            Die();
         }
 
         // Return to bullet that it hit an entity
@@ -124,7 +126,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Activate immunity
         if (health < 0)
         {
-            Destroy(this.gameObject);
+            Die();
         }
     }
 
@@ -137,5 +139,11 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         health += maxHealth / (int)(100/percent);
         healthBar.UpdateHealthBar(health, maxHealth);
         Debug.Log("health: " + health + ", maxHealth: " + maxHealth);
+    }
+
+    public virtual void Die()
+    {
+        StatsManager.instance.AddMoney(money);
+        Destroy(this.gameObject);
     }
 }

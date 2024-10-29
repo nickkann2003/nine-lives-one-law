@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,7 +11,8 @@ using UnityEngine.UI;
 public class UpgradesShop : MonoBehaviour
 {
     // TODO: Replace this with however Upgrades work
-    public List<string> upgrades = new List<string>();
+    public GameObject upgradesHolder;
+    private UpgradeBase[] upgrades;
     public List<Vector2> shopPositions = new List<Vector2>();
 
     // Prefabs
@@ -19,6 +21,9 @@ public class UpgradesShop : MonoBehaviour
     // References
     public GameObject upgradeLargeDisplay;
     public TextMeshProUGUI largeItemName;
+    public TextMeshProUGUI largeItemDescription;
+    public TextMeshProUGUI largeItemPrice;
+    public Image largeItemImage;
 
     private int pages;
     private int currentPage = 0;
@@ -26,9 +31,10 @@ public class UpgradesShop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pages = (upgrades.Count / shopPositions.Count) + 1;
+        upgrades = upgradesHolder.GetComponentsInChildren<UpgradeBase>();
+        pages = ((upgrades.Length-1) / shopPositions.Count) + 1;
 
-        for (int i = 0; i < upgrades.Count; i++)
+        for (int i = 0; i < (upgrades.Length); i++)
         {
             if (i > shopPositions.Count)
             {
@@ -37,13 +43,15 @@ public class UpgradesShop : MonoBehaviour
 
             // A for positional calculations, sets position of items on other pages
             int a = i - (currentPage * shopPositions.Count);
+            int index = i;
 
             // Create and initialize object
             GameObject up = Instantiate(upgradePrefab, transform);
             up.transform.localPosition = shopPositions[a];
+            UpgradesShopDisplay uDisplay = up.GetComponent<UpgradesShopDisplay>();
+            uDisplay.SetUpgrade(upgrades[index]);
 
             Button b = up.GetComponentInChildren<Button>();
-            int index = i;
             b.onClick.AddListener(() => { SetLargeDisplay(upgrades[index]); });
 
             // If its not page 1, disable it
@@ -54,10 +62,14 @@ public class UpgradesShop : MonoBehaviour
         HideLargeDisplay();
     }
 
-    private void SetLargeDisplay(string text)
+    private void SetLargeDisplay(UpgradeBase u)
     {
         upgradeLargeDisplay.SetActive(true);
-        largeItemName.text = text;
+        largeItemName.text = u.itemName;
+        largeItemDescription.text = u.itemDescription;
+        largeItemPrice.text = u.itemShopPrice.ToString();
+        if(u.itemSprite != null)
+            largeItemImage.sprite = u.itemSprite;
     }
 
     private void HideLargeDisplay()
