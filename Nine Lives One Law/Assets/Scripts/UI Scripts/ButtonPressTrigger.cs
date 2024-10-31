@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,12 +9,15 @@ public class ButtonPressTrigger : MonoBehaviour
     public UnityEvent onButtonPress;
     public KeyCode key;
 
+    private float waitTime = 1f;
+    private float cWaitTime;
+
     private bool inTrigger;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cWaitTime = waitTime;
     }
 
     // Update is called once per frame
@@ -23,9 +27,11 @@ public class ButtonPressTrigger : MonoBehaviour
         {
             if (Input.GetKeyDown(key))
             {
-                onButtonPress.Invoke();
+                if(cWaitTime <= 0)
+                    onButtonPress.Invoke();
             }
         }
+        cWaitTime -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,5 +42,11 @@ public class ButtonPressTrigger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         inTrigger = false;
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("ENABLED!");
+        cWaitTime = waitTime;
     }
 }
