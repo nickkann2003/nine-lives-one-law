@@ -79,28 +79,28 @@ public class ProcGen : MonoBehaviour
     {
         if (map[x--, y] != null)
         { //Tile to left
-            if (tile.GetComponent<TileBase>().leftOpen && !map[x--,y].GetComponent<TileBase>().rightOpen)
+            if (tile.GetComponent<TileBase>().leftOpen != !map[x--,y].GetComponent<TileBase>().rightOpen)
             {
                 return false;
             }
         }
         if (map[x++, y] != null)
         { //Tile to right
-            if (tile.GetComponent<TileBase>().rightOpen && !map[x++, y].GetComponent<TileBase>().leftOpen)
+            if (tile.GetComponent<TileBase>().rightOpen != !map[x++, y].GetComponent<TileBase>().leftOpen)
             {
                 return false;
             }
         }
         if (map[x, y--] != null)
         { //Tile above
-            if (tile.GetComponent<TileBase>().upOpen && !map[x, y--].GetComponent<TileBase>().downOpen)
+            if (tile.GetComponent<TileBase>().upOpen != !map[x, y--].GetComponent<TileBase>().downOpen)
             {
                 return false;
             }
         }
         if (map[x, y++] != null)
         { //Tile below
-            if (tile.GetComponent<TileBase>().downOpen && !map[x, y--].GetComponent<TileBase>().upOpen)
+            if (tile.GetComponent<TileBase>().downOpen != !map[x, y--].GetComponent<TileBase>().upOpen)
             {
                 return false;
             }
