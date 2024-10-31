@@ -20,8 +20,8 @@ public class MenuPlayerSpriteController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MoveStop();
         startingPosition = spriteParentTransform.position;
+        MoveStop();
     }
 
     private void Update()
@@ -86,5 +86,11 @@ public class MenuPlayerSpriteController : MonoBehaviour
     {
         spriteParentTransform.position = startingPosition - velocity * 1f;
         stopping = true;
+    }
+
+    private void OnDisable()
+    {
+        MoveStop();
+        ResetPosition();
     }
 }
