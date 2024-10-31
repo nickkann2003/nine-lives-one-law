@@ -67,7 +67,12 @@ public class Boss1 : EnemyBase
     public override void Wander()
     {
         // Like base enemy, boss 1 never wanders, always hunting
-        attackingTarget = true;
+        //attackingTarget = true;
+
+        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 3)
+        {
+            attackingTarget = true;
+        }
     }
 
     // Acts same as base enemy

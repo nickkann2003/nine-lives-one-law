@@ -35,7 +35,12 @@ public class Enemy : EnemyBase
     public override void Wander()
     {
         // Base enemy never wanders, always hunting
-        attackingTarget = true;
+        //attackingTarget = true;
+
+        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 1.75)
+        {
+            attackingTarget = true;
+        }
     }
 
     public override void AttackTarget()
