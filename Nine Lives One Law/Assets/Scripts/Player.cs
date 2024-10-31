@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IHittableEntity
     //Attributes
     private Rigidbody2D rb;
     private BoxCollider2D collider;
+    protected FloatingHealthBar healthBar;
     private SpriteRenderer sprite;
     [SerializeField]
     private Animator playerAnimator;
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour, IHittableEntity
     public float rollTime; // How long player roll
     public float rollSpeed; // Speed multiplier during roll
     public Vector2 pauseMovement; //Movement stored while paused
+    private float health;
+    public int maxHealth;
 
     private void Awake()
     {
@@ -81,6 +84,9 @@ public class Player : MonoBehaviour, IHittableEntity
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         sprite = this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
+        health = maxHealth;
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -217,11 +223,13 @@ public class Player : MonoBehaviour, IHittableEntity
 
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     public void HandleDamageHit(float damage)
     {
         // Subtract player health
         // Activate immunity
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 }
