@@ -22,7 +22,11 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        EnemyBase[] children = gameObject.GetComponentsInChildren<EnemyBase>();
+        foreach (EnemyBase child in children)
+        {
+            enemies.Add(child);
+        }
     }
 
     // Update is called once per frame
