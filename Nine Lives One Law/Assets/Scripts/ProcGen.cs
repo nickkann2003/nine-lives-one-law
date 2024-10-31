@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class ProcGen : MonoBehaviour
 {
-    private TileBase[,] map;
-    public TileBase[] startTiles;
-    public TileBase[] bossTiles;
-    public TileBase emptyTile;
-    public TileBase[] UDTiles; //Up down tiles
+    private GameObject tileList;
+    private GameObject[,] map;
+    public GameObject[] genTiles;
+    public GameObject[] startTiles;
+    public GameObject[] bossTiles;
+    public GameObject emptyTile;
+    public GameObject[] UDTiles; //Up down tiles
+    private float length;
 
     // Start is called before the first frame update
     void Start()
     {
-        map = new TileBase[7, 7];
+        map = new GameObject[7, 7];
+        length = emptyTile.GetComponent<TileBase>().length;
+        tileList = GameObject.Find("TileList");
     }
 
     // Update is called once per frame
@@ -24,7 +29,7 @@ public class ProcGen : MonoBehaviour
 
     void CreateMap()
     {
-        map = new TileBase[7, 7];
+        map = new GameObject[7, 7];
         for (int i=0; i < 7; i++)
         {
             map[0, i] = emptyTile;
@@ -39,24 +44,67 @@ public class ProcGen : MonoBehaviour
         map[3, 5] = startTiles[Random.Range(0, startTiles.Length)];
         for(int i = 5; i > 0; i--)
         {
-            map[2, i] = emptyTile;
-            map[1, i] = emptyTile;
+            GameObject newTile;
+            do
+            {
+                newTile = genTiles[Random.Range(0, genTiles.Length)];
+            } while (Compatible(2,i,newTile));
+            do
+            {
+                newTile = genTiles[Random.Range(0, genTiles.Length)];
+            } while (Compatible(1, i, newTile));
+            do
+            {
+                newTile = genTiles[Random.Range(0, genTiles.Length)];
+            } while (Compatible(4, i, newTile));
+            do
+            {
+                newTile = genTiles[Random.Range(0, genTiles.Length)];
+            } while (Compatible(5, i, newTile));
         }
     }
 
     void Generate()
     {
-
-    }
-
-    void Compatible(int x, int y, TileBase tile)
-    {
-        if (map[x--, y] != null)
+        for(int i = -3; i <= 3; i++)
         {
-            if (tile.leftOpen)
+            for (int j = -3; j <= 3; j++)
             {
-
+                Instantiate(map[i, j], new Vector3(i * length, j * length, 0), transform.rotation, tileList.transform);
             }
         }
+    }
+
+    bool Compatible(int x, int y, GameObject tile)
+    {
+        if (map[x--, y] != null)
+        { //Tile to left
+            if (tile.GetComponent<TileBase>().leftOpen && !map[x--,y].GetComponent<TileBase>().rightOpen)
+            {
+                return false;
+            }
+        }
+        if (map[x++, y] != null)
+        { //Tile to right
+            if (tile.GetComponent<TileBase>().rightOpen && !map[x++, y].GetComponent<TileBase>().leftOpen)
+            {
+                return false;
+            }
+        }
+        if (map[x, y--] != null)
+        { //Tile above
+            if (tile.GetComponent<TileBase>().upOpen && !map[x, y--].GetComponent<TileBase>().downOpen)
+            {
+                return false;
+            }
+        }
+        if (map[x, y++] != null)
+        { //Tile below
+            if (tile.GetComponent<TileBase>().downOpen && !map[x, y--].GetComponent<TileBase>().upOpen)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
