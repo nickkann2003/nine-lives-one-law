@@ -526,6 +526,7 @@ MonoBehaviour:
   bulletList: {fileID: 0}
   maxHealth: 20
   maxInvTime: 0
+  money: 200
   bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
   duelScript: {fileID: 0}
   range: 3

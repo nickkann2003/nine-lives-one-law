@@ -24,6 +24,8 @@ public class UpgradesShop : MonoBehaviour
     public TextMeshProUGUI largeItemDescription;
     public TextMeshProUGUI largeItemPrice;
     public Image largeItemImage;
+    public Button purchaseButton;
+    private UpgradeBase selectedUpgrade;
 
     private int pages;
     private int currentPage = 0;
@@ -52,7 +54,9 @@ public class UpgradesShop : MonoBehaviour
             uDisplay.SetUpgrade(upgrades[index]);
 
             Button b = up.GetComponentInChildren<Button>();
-            b.onClick.AddListener(() => { SetLargeDisplay(upgrades[index]); });
+            b.onClick.AddListener(() => { 
+                SetLargeDisplay(upgrades[index]);
+            });
 
             // If its not page 1, disable it
             if(currentPage > 0)
@@ -68,6 +72,8 @@ public class UpgradesShop : MonoBehaviour
         largeItemName.text = u.itemName;
         largeItemDescription.text = u.itemDescription;
         largeItemPrice.text = u.itemShopPrice.ToString();
+        selectedUpgrade = u;
+        
         if(u.itemSprite != null)
             largeItemImage.sprite = u.itemSprite;
     }
@@ -75,6 +81,15 @@ public class UpgradesShop : MonoBehaviour
     private void HideLargeDisplay()
     {
         upgradeLargeDisplay.SetActive(false);
+    }
+
+    public void PurchaseItem()
+    {
+        if (StatsManager.instance.CheckBalanceHasEnough(selectedUpgrade.itemShopPrice) && selectedUpgrade != null)
+        {
+            StatsManager.instance.SubtractMoney(selectedUpgrade.itemShopPrice);
+            selectedUpgrade.PerformUpgrade();
+        }
     }
 
 #if UNITY_EDITOR

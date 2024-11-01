@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject dynamiteEnemyPrefab;
     public GameObject boss1Prefab;
     public List<EnemyBase> enemies;
+    public GameObject level1Prefab;
 
     // On awake, set singletone
     private void Awake()
@@ -22,11 +23,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyBase[] children = gameObject.GetComponentsInChildren<EnemyBase>();
-        foreach (EnemyBase child in children)
-        {
-            enemies.Add(child);
-        }
+        
     }
 
     // Update is called once per frame
@@ -53,6 +50,21 @@ public class EnemyManager : MonoBehaviour
         foreach (EnemyBase e in enemies)
         {
             e.targetEntityPosition = player.transform.position;
+        }
+    }
+
+    public void LoadLevel()
+    {
+        Destroy(transform.GetChild(0).gameObject);
+
+        // Only one level, so load level 1
+        Instantiate(level1Prefab, this.transform);
+
+        // Add to list
+        EnemyBase[] children = gameObject.GetComponentsInChildren<EnemyBase>();
+        foreach (EnemyBase child in children)
+        {
+            enemies.Add(child);
         }
     }
 }

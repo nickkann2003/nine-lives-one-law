@@ -22,6 +22,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     protected bool isActive = true;
     protected Vector2 pauseVelocity;
 
+    [SerializeField]
     protected float money = 1;
 
     protected void Start()

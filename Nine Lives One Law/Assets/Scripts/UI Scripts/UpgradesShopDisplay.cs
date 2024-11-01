@@ -35,15 +35,6 @@ public class UpgradesShopDisplay : MonoBehaviour
         SetDisplayValues();
     }
 
-    public void PurchaseItem()
-    {
-        if (StatsManager.instance.CheckBalanceHasEnough(itemPrice) && upgrade != null)
-        {
-            StatsManager.instance.SubtractMoney(itemPrice);
-            upgrade.PerformUpgrade();
-        }
-    }
-
     /// <summary>
     /// Private function that sets visual values based on internal state
     /// </summary>

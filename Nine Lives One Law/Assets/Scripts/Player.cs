@@ -38,8 +38,14 @@ public class Player : MonoBehaviour, IHittableEntity
     public float rollTime; // How long player roll
     public float rollSpeed; // Speed multiplier during roll
     public Vector2 pauseMovement; //Movement stored while paused
+
     private float health;
     public int maxHealth;
+    private float immunityTime = 0.5f;
+    private float iTimeLeft = 0f;
+    private bool immune = false;
+
+    private Vector3 startingPos = Vector3.zero;
 
     private void Awake()
     {
@@ -87,6 +93,7 @@ public class Player : MonoBehaviour, IHittableEntity
         health = maxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         healthBar.UpdateHealthBar(health, maxHealth);
+        startingPos = transform.position;
     }
 
     // Update is called once per frame
@@ -98,6 +105,15 @@ public class Player : MonoBehaviour, IHittableEntity
             FaceMouse();
             Shoot();
             Roll();
+            if (immune)
+            {
+                iTimeLeft -= Time.deltaTime;
+                if(iTimeLeft <= 0)
+                {
+                    immune = false;
+                    sprite.color = Color.white;
+                }
+            }
         }
     }
 
@@ -142,6 +158,7 @@ public class Player : MonoBehaviour, IHittableEntity
             sprite.color = Color.cyan; //Color shifts for visual clarity, likely temp
             moveSpeed *= rollSpeed; //Speeds up player movement during roll
             isMidRoll = true;
+            immunityTime = rollTime;
             lastRollTime = Time.time; // Update last roll time
         }
         if(isMidRoll && Time.time - lastRollTime >= rollTime)
@@ -218,8 +235,16 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void HandleBulletHit(Bullet b)
     {
-        // Subtract health equal to bullet damage
-        // Activate immunity
+        if(iTimeLeft <= 0)
+        {
+            // Subtract health equal to bullet damage
+            health -= b.damage;
+            // Activate immunity
+            iTimeLeft = immunityTime;
+            immune = true;
+            sprite.color = Color.grey;
+            CheckDead();
+        }
 
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
@@ -228,8 +253,33 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void HandleDamageHit(float damage)
     {
-        // Subtract player health
-        // Activate immunity
+        if (iTimeLeft <= 0)
+        {
+            // Subtract health equal to bullet damage
+            health -= damage;
+            // Activate immunity
+            iTimeLeft = immunityTime;
+            immune = true;
+            sprite.color = Color.grey;
+            CheckDead();
+        }
+
         healthBar.UpdateHealthBar(health, maxHealth);
+    }
+
+    private void CheckDead()
+    {
+        if(health <= 0)
+        {
+            // Perform death logic here
+
+            //TEMP
+            health = maxHealth;
+        }
+    }
+
+    public void SetPosition()
+    {
+        transform.position = startingPos;
     }
 }
