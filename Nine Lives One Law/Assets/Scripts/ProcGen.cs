@@ -12,6 +12,8 @@ public class ProcGen : MonoBehaviour
     public GameObject emptyTile;
     public GameObject[] UDTiles; //Up down tiles
     private float length;
+    private int lastIndex;
+    private List<GameObject> genTilesMod;
 
     // Start is called before the first frame update
     void Start()
@@ -44,11 +46,26 @@ public class ProcGen : MonoBehaviour
         map[3, 5] = startTiles[Random.Range(0, startTiles.Length)];
         for(int i = 5; i > 0; i--)
         {
+            //vv
             GameObject newTile;
+            int index = Random.Range(0, genTilesMod.Count);
+            lastIndex = -1;
+            makeMod();
             do
             {
-                newTile = genTiles[Random.Range(0, genTiles.Length)];
+                if (lastIndex >= 0)
+                {
+                    genTilesMod.RemoveAt(lastIndex);
+                    index = Random.Range(0, genTilesMod.Count);
+                }
+                newTile = genTilesMod[index];
+                lastIndex = index;
             } while (Compatible(2,i,newTile));
+            map[2, i] = newTile;
+            index = Random.Range(0, genTilesMod.Count);
+            lastIndex = -1;
+            makeMod();
+            //^^
             do
             {
                 newTile = genTiles[Random.Range(0, genTiles.Length)];
@@ -106,5 +123,14 @@ public class ProcGen : MonoBehaviour
             }
         }
         return true;
+    }
+
+    void makeMod()
+    {
+        genTilesMod.Clear();
+        for(int i=0; i < genTiles.Length; i++)
+        {
+            genTilesMod.Add(genTiles[i]);
+        }
     }
 }
