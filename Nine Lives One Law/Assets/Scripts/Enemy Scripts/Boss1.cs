@@ -35,7 +35,7 @@ public class Boss1 : EnemyBase
     // Update is called once per frame
     new void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !duelScript.duel && isDuelReady())
+        if (Input.GetKeyDown(KeyCode.Space) && !duelScript.duel && isDuelReady())
         { //If M is pressed and there is no duel and boss is duel ready, start duel
             int x = Random.Range(5, 15);
             duelScript.startDuel(x, x);

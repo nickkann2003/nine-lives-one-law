@@ -158,7 +158,7 @@ public class Player : MonoBehaviour, IHittableEntity
             sprite.color = Color.cyan; //Color shifts for visual clarity, likely temp
             moveSpeed *= rollSpeed; //Speeds up player movement during roll
             isMidRoll = true;
-            immunityTime = rollTime;
+            //immunityTime = rollTime;
             lastRollTime = Time.time; // Update last roll time
         }
         if(isMidRoll && Time.time - lastRollTime >= rollTime)
@@ -235,7 +235,7 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void HandleBulletHit(Bullet b)
     {
-        if(iTimeLeft <= 0)
+        if(iTimeLeft <= 0 && !isMidRoll)
         {
             // Subtract health equal to bullet damage
             health -= b.damage;
@@ -253,7 +253,7 @@ public class Player : MonoBehaviour, IHittableEntity
 
     public void HandleDamageHit(float damage)
     {
-        if (iTimeLeft <= 0)
+        if (iTimeLeft <= 0 && !isMidRoll)
         {
             // Subtract health equal to bullet damage
             health -= damage;
