@@ -18,14 +18,19 @@ public class ProcGen : MonoBehaviour
     void Start()
     {
         map = new GameObject[7, 7];
-        length = wallTile.GetComponent<TileBase>().length;
+        length = 15f;
         tileList = GameObject.Find("TileList");
+        genTilesMod = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            CreateMap();
+            Generate();
+        }
     }
 
     //Creates internal map
@@ -57,6 +62,7 @@ public class ProcGen : MonoBehaviour
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
+                Debug.Log("2, " + i + " " + newTile.name);
             } while (!Compatible(2, i, newTile));
             map[2, i] = newTile;
             index = -1;
@@ -69,6 +75,7 @@ public class ProcGen : MonoBehaviour
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
+                Debug.Log("1, " + i + " " + newTile.name);
             } while (!Compatible(1, i, newTile));
             map[1, i] = newTile;
             index = -1;
@@ -81,6 +88,7 @@ public class ProcGen : MonoBehaviour
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
+                Debug.Log("4, " + i + " " + newTile.name);
             } while (!Compatible(4, i, newTile));
             map[4, i] = newTile;
             index = -1;
@@ -93,6 +101,7 @@ public class ProcGen : MonoBehaviour
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
+                Debug.Log("5, " + i + " " + newTile.name);
             } while (!Compatible(5, i, newTile));
             map[5, i] = newTile;
         }
@@ -115,32 +124,33 @@ public class ProcGen : MonoBehaviour
     {
         if (map[x--, y] != null)
         { //Tile to left
-            if (tile.GetComponent<TileBase>().leftOpen != !map[x--,y].GetComponent<TileBase>().rightOpen)
+            if (tile.GetComponent<LevelTile>().leftExit != !map[x--,y].GetComponent<LevelTile>().rightExit)
             {
                 return false;
             }
         }
         if (map[x++, y] != null)
         { //Tile to right
-            if (tile.GetComponent<TileBase>().rightOpen != !map[x++, y].GetComponent<TileBase>().leftOpen)
+            if (tile.GetComponent<LevelTile>().rightExit != !map[x++, y].GetComponent<LevelTile>().leftExit)
             {
                 return false;
             }
         }
         if (map[x, y--] != null)
         { //Tile above
-            if (tile.GetComponent<TileBase>().upOpen != !map[x, y--].GetComponent<TileBase>().downOpen)
+            if (tile.GetComponent<LevelTile>().upExit != !map[x, y--].GetComponent<LevelTile>().downExit)
             {
                 return false;
             }
         }
         if (map[x, y++] != null)
         { //Tile below
-            if (tile.GetComponent<TileBase>().downOpen != !map[x, y--].GetComponent<TileBase>().upOpen)
+            if (tile.GetComponent<LevelTile>().downExit != !map[x, y--].GetComponent<LevelTile>().upExit)
             {
                 return false;
             }
         }
+        Debug.Log("Compatible");
         return true;
     }
 
