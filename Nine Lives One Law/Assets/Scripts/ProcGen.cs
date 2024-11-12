@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class ProcGen : MonoBehaviour
 {
-    private GameObject tileList;
-    private GameObject[,] map;
-    public GameObject[] genTiles;
-    public GameObject[] startTiles;
-    public GameObject[] bossTiles;
-    public GameObject emptyTile;
+    private GameObject tileList; //GameObject that holds tiles
+    private GameObject[,] map; //Internal view of map
+    public GameObject[] genTiles; //Tiles for procgen
+    public GameObject[] startTiles; //Tiles sherrif start on
+    public GameObject[] bossTiles; //Tiles to fight boss on
+    public GameObject wallTile; //Map borders
     public GameObject[] UDTiles; //Up down tiles
-    private float length;
-    private int lastIndex;
-    private List<GameObject> genTilesMod;
+    private float length; //How long a tile is
+    private List<GameObject> genTilesMod; //A list of the procgen tiles
 
     // Start is called before the first frame update
     void Start()
     {
         map = new GameObject[7, 7];
-        length = emptyTile.GetComponent<TileBase>().length;
+        length = wallTile.GetComponent<TileBase>().length;
         tileList = GameObject.Find("TileList");
     }
 
@@ -29,58 +28,77 @@ public class ProcGen : MonoBehaviour
         
     }
 
+    //Creates internal map
     void CreateMap()
     {
         map = new GameObject[7, 7];
         for (int i=0; i < 7; i++)
-        {
-            map[0, i] = emptyTile;
-            map[6, i] = emptyTile;
-            map[i, 0] = emptyTile;
-            map[i, 6] = emptyTile;
+        { //Makes wall tiles on map borders
+            map[0, i] = wallTile;
+            map[6, i] = wallTile;
+            map[i, 0] = wallTile;
+            map[i, 6] = wallTile;
         }
-        map[3, 1] = bossTiles[Random.Range(0, bossTiles.Length)];
-        map[3, 2] = UDTiles[Random.Range(0, UDTiles.Length)];
-        map[3, 3] = UDTiles[Random.Range(0, UDTiles.Length)];
-        map[3, 4] = UDTiles[Random.Range(0, UDTiles.Length)];
-        map[3, 5] = startTiles[Random.Range(0, startTiles.Length)];
+        map[3, 1] = bossTiles[Random.Range(0, bossTiles.Length)]; //Top middle is boss tile
+        map[3, 2] = UDTiles[Random.Range(0, UDTiles.Length)]; //In between is tiles that let you walk up and down
+        map[3, 3] = UDTiles[Random.Range(0, UDTiles.Length)]; //In between is tiles that let you walk up and down
+        map[3, 4] = UDTiles[Random.Range(0, UDTiles.Length)]; //In between is tiles that let you walk up and down
+        map[3, 5] = startTiles[Random.Range(0, startTiles.Length)]; //Bottom middle is start tile
         for(int i = 5; i > 0; i--)
-        {
-            //vv
-            GameObject newTile;
-            int index = Random.Range(0, genTilesMod.Count);
-            lastIndex = -1;
+        { //Makes all other tiles on map
+            GameObject newTile; //Tile to put on map
+            int index = -1;
             makeMod();
             do
-            {
-                if (lastIndex >= 0)
+            { //Get a random genTile, if it's not compatible remove it from the list and try again
+                if (index >= 0)
                 {
-                    genTilesMod.RemoveAt(lastIndex);
-                    index = Random.Range(0, genTilesMod.Count);
+                    genTilesMod.RemoveAt(index);
                 }
+                index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
-                lastIndex = index;
-            } while (Compatible(2,i,newTile));
+            } while (!Compatible(2, i, newTile));
             map[2, i] = newTile;
-            index = Random.Range(0, genTilesMod.Count);
-            lastIndex = -1;
+            index = -1;
             makeMod();
-            //^^
             do
             {
-                newTile = genTiles[Random.Range(0, genTiles.Length)];
-            } while (Compatible(1, i, newTile));
+                if (index >= 0)
+                {
+                    genTilesMod.RemoveAt(index);
+                }
+                index = Random.Range(0, genTilesMod.Count);
+                newTile = genTilesMod[index];
+            } while (!Compatible(1, i, newTile));
+            map[1, i] = newTile;
+            index = -1;
+            makeMod();
             do
             {
-                newTile = genTiles[Random.Range(0, genTiles.Length)];
-            } while (Compatible(4, i, newTile));
+                if (index >= 0)
+                {
+                    genTilesMod.RemoveAt(index);
+                }
+                index = Random.Range(0, genTilesMod.Count);
+                newTile = genTilesMod[index];
+            } while (!Compatible(4, i, newTile));
+            map[4, i] = newTile;
+            index = -1;
+            makeMod();
             do
             {
-                newTile = genTiles[Random.Range(0, genTiles.Length)];
-            } while (Compatible(5, i, newTile));
+                if (index >= 0)
+                {
+                    genTilesMod.RemoveAt(index);
+                }
+                index = Random.Range(0, genTilesMod.Count);
+                newTile = genTilesMod[index];
+            } while (!Compatible(5, i, newTile));
+            map[5, i] = newTile;
         }
     }
 
+    //Creates the map in game
     void Generate()
     {
         for(int i = -3; i <= 3; i++)
@@ -92,6 +110,7 @@ public class ProcGen : MonoBehaviour
         }
     }
 
+    //Checks if a tile is compatible with those around it using the open variables
     bool Compatible(int x, int y, GameObject tile)
     {
         if (map[x--, y] != null)
@@ -125,6 +144,7 @@ public class ProcGen : MonoBehaviour
         return true;
     }
 
+    //Creates the genTiles list using the array
     void makeMod()
     {
         genTilesMod.Clear();
