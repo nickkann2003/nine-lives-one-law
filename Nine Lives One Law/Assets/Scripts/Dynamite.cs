@@ -26,14 +26,44 @@ public class Dynamite : MonoBehaviour
     public float stickLifetime; // How long stick should last
     public float explosionLifeTime; // How long explosion should last
 
+    private Vector3 pauseVelocity;
+    private Boolean paused;
+
     public Animator dynamiteAnimator;
 
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CircleCollider2D>();
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Gameplay)
+        {
+            paused = false;
+            rb.velocity = pauseVelocity;
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
+        else
+        {
+            paused = true;
+            rb.velocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<CircleCollider2D>();
+       
         sprites = new SpriteRenderer[] { this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>(), this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>()};
         state = State.Move;
         bornTime = Time.time;
@@ -41,7 +71,7 @@ public class Dynamite : MonoBehaviour
             targetTags = BulletManager.targetsDictionary[Bullets.All];
 
         rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
-
+        pauseVelocity = rb.velocity;
         dynamiteAnimator.SetTrigger("Launch");
     }
 
@@ -51,12 +81,20 @@ public class Dynamite : MonoBehaviour
         switch (state)
         {
             case State.Move:
+                if (paused)
+                {
+                    bornTime += 1;
+                }
                 if (Time.time - bornTime >= moveTime)
                 {
                     StopMoving();
                 }
                 break;
             case State.Stay:
+                if (paused)
+                {
+                    stickLifetime += 1;
+                }
                 if (Time.time - bornTime >= stickLifetime)
                 {
                     Explode();
