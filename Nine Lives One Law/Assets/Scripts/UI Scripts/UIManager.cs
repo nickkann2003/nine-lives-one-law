@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject StartRunMenu;
     public GameObject MainMenu;
     public GameObject GameMenu;
+    public Texture2D customCursor;
 
     [Header("UI Objects")]
     public List<GameObject> StatsObjects = new List<GameObject>();
@@ -73,6 +74,7 @@ public class UIManager : MonoBehaviour
     {
         currentState = UIState.MainMenu;
         MainMenu.SetActive(true);
+        Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
@@ -163,15 +165,16 @@ public class UIManager : MonoBehaviour
             case UIState.StartRunMenu:
                 OpenMenu(StartRunMenu);                
                 activateAll(StartRunObjects);
+                Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
                 break;
             case UIState.MainMenu:
                 OpenMenu(MainMenu);                
                 activateAll(MainMenuObjects);
-                
                 break;
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
                 activateAll(InGameObjects);
+                Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
                 break;
         }
     }
