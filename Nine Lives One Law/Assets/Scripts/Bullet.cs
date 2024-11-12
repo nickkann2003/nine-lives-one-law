@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public List<string> targetTags = new List<string>();
     public List<string> obstacleTags = new List<string>();
     private Vector3 pauseVelocity;
+    private Boolean paused;
 
     //Variables
     public float moveSpeed; // bullet speed, overriden by createbullet function
@@ -24,6 +26,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+        paused = false;
     }
 
     private void OnDestroy()
@@ -35,11 +38,15 @@ public class Bullet : MonoBehaviour, IHittableEntity
     {
         if (state == GameManager.GameState.Gameplay)
         {
-            unPause();
+            paused = false;
+            rb.velocity = pauseVelocity;
+            rb.constraints = RigidbodyConstraints2D.None;
         }
         else
         {
-            pause();
+            paused = true;
+            rb.velocity = Vector2.zero;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -54,18 +61,10 @@ public class Bullet : MonoBehaviour, IHittableEntity
     void Update()
     {
         //Destroy bullet after lifetime
-        if (Time.time - bornTime >= lifetime) BulletManager.instance.DestroyBullet(this);
-    }
-
-    public void pause()
-    {
-        moveSpeed = 0f;
+        if (paused)
+            bornTime += 1;
         
-    }
-
-    public void unPause()
-    {
-        moveSpeed = pauseVelocity.magnitude;
+        if (Time.time - bornTime >= lifetime) BulletManager.instance.DestroyBullet(this);
     }
 
     public void SetVelocity(Vector3 velocity)
