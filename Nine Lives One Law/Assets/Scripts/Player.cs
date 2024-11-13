@@ -27,6 +27,8 @@ public class Player : MonoBehaviour, IHittableEntity
     private float lastShotTime; // Last time player shot
     private float lastRollTime; // Last time player rolled
 
+    public float damage = 1.0f;
+
     //Game Objects
     public GameObject bullet; // bullet prefab
     public GameObject bulletList; // object that holds bullets
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour, IHittableEntity
     public Vector2 pauseMovement; //Movement stored while paused
 
     private float health;
+    private float maxHealthFloat;
     public int maxHealth;
     private float immunityTime = 0.5f;
     private float iTimeLeft = 0f;
@@ -57,6 +60,7 @@ public class Player : MonoBehaviour, IHittableEntity
         isMidRoll = false;
         lastShotTime = -shootCooldown;
         lastRollTime = -rollCooldown;
+        maxHealthFloat = maxHealth;
     }
 
     private void OnDestroy()
@@ -102,7 +106,10 @@ public class Player : MonoBehaviour, IHittableEntity
         if (isActive)
         {
             MovePlayer();
-            FaceMouse();
+            if(!isMidRoll)
+                FaceMouse();
+            if (isMidRoll)
+                FaceMovementDirection();
             Shoot();
             Roll();
             if (immune)
@@ -150,22 +157,35 @@ public class Player : MonoBehaviour, IHittableEntity
         }
     }
 
+    void FaceMovementDirection()
+    {
+        if (isActive)
+        {
+            Vector3 dirPos = new Vector3(transform.position.x + rb.velocity.x, transform.position.y + rb.velocity.y, transform.position.z);
+            float AngleRad = Mathf.Atan2(dirPos.y - transform.position.y, dirPos.x - transform.position.x);
+            float AngleDeg = (180 / Mathf.PI) * AngleRad - 90;
+            this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
+        }
+    }
+
     // Makes the player dodge roll
     void Roll()
     {
-        if(tryingToRoll && Time.time - lastRollTime >= rollCooldown)
+        if(tryingToRoll && Time.time - lastRollTime >= rollCooldown && !isMidRoll)
         { // Makes player roll if trying to roll and cooldown is up
-            sprite.color = Color.cyan; //Color shifts for visual clarity, likely temp
+            sprite.color = new Color(0.9f, 0.9f, 0.9f); //Color shifts for visual clarity, likely temp
             moveSpeed *= rollSpeed; //Speeds up player movement during roll
             isMidRoll = true;
             //immunityTime = rollTime;
             lastRollTime = Time.time; // Update last roll time
+            playerAnimator.SetBool("Rolling", true);
         }
-        if(isMidRoll && Time.time - lastRollTime >= rollTime)
+        if (isMidRoll && Time.time - lastRollTime >= rollTime)
         { // Stops player roll once the roll time is up
             sprite.color = Color.white; //Goes back to normal color
             moveSpeed /= rollSpeed; //Slows player movement down to normal
             isMidRoll = false;
+            playerAnimator.SetBool("Rolling", false);
         }
     }
 
@@ -174,7 +194,7 @@ public class Player : MonoBehaviour, IHittableEntity
     {
         if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
         { // Makes bullet if trying to shoot and not rolling and cooldown is up
-            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, 1.0f, transform.position + (transform.up * 0.8f), transform.up * 12f);
+            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f);
             lastShotTime = Time.time; // Update last shot time
         }
     }
@@ -281,5 +301,44 @@ public class Player : MonoBehaviour, IHittableEntity
     public void SetPosition()
     {
         transform.position = startingPos;
+    }
+
+    // Upgrades
+    public void UpgradeMaxHealth(float val)
+    {
+        float healthPercent = (float)health / (float)maxHealth;
+        maxHealthFloat += val;
+        maxHealth = (int)maxHealthFloat;
+        health = (int)(healthPercent * (float)maxHealth);
+    }
+
+    public void UpgradeSpeed(float val)
+    {
+        moveSpeed = moveSpeed * val;
+    }
+
+    public void UpgradeDamage(float val)
+    {
+        damage += val;
+    }
+
+    public void UpgradeFireRate(float val)
+    {
+        shootCooldown = shootCooldown * (1f / val);
+    }
+
+    public void UpgradeRollCooldown(float val)
+    {
+        rollCooldown = rollCooldown * (1f / val);
+    }
+
+    public void UpgradeRollSpeed(float val) 
+    {
+        rollSpeed = rollSpeed * (val);
+    }
+
+    public void UpgradeRollDuration(float val)
+    {
+        rollTime = rollTime * val;
     }
 }

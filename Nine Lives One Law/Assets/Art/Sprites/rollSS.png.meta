@@ -1,0 +1,413 @@
+fileFormatVersion: 2
+guid: 93b7bdbdaf540e14eab0a92f4b8e3c79
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rollSS_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2061
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.491372, y: 0.6760274}
+      border: {x: 0, y: 0, z: 9, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8325e59859d190c4cb0b3120657a5b46
+      internalID: -1809502969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_1
+      rect:
+        serializedVersion: 2
+        x: 2134
+        y: 0
+        width: 1913
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.49070466, y: 0.6898335}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faa652f9540e704449332254248ecf75
+      internalID: 1474853232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_2
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 0
+        width: 1804
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.4852146, y: 0.6898335}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e2066226050264cbe1796aabe11394
+      internalID: 1040316841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_3
+      rect:
+        serializedVersion: 2
+        x: 6299
+        y: 0
+        width: 1795
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.4801872, y: 0.6622214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6ba54390d619948b7eee352346188c
+      internalID: 2100582783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_4
+      rect:
+        serializedVersion: 2
+        x: 8286
+        y: 0
+        width: 1996
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.46881947, y: 0.56212735}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d97cabf068b924b9054a8ccaaddb6a
+      internalID: -1480636502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_5
+      rect:
+        serializedVersion: 2
+        x: 10438
+        y: 0
+        width: 1821
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.48535317, y: 0.6069971}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3105585896a8b6547b9542defec9401e
+      internalID: -668309742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_6
+      rect:
+        serializedVersion: 2
+        x: 12388
+        y: 0
+        width: 1757
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.54048425, y: 0.6311577}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208c6ef1f38d0b542a05e9412ec0991b
+      internalID: 791831173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_7
+      rect:
+        serializedVersion: 2
+        x: 14429
+        y: 0
+        width: 1895
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.500001, y: 0.6346092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c40a92fa2711804f8b184e845efb2c8
+      internalID: 29075275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_8
+      rect:
+        serializedVersion: 2
+        x: 16452
+        y: 0
+        width: 2005
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.5044352, y: 0.5793849}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9b36cd278776894d9cf0584d4aa675e
+      internalID: -1969400078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_9
+      rect:
+        serializedVersion: 2
+        x: 18494
+        y: 0
+        width: 2014
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.50441635, y: 0.61044854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 482bb64224a9c57469db106d3e246cfe
+      internalID: -1627932373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_10
+      rect:
+        serializedVersion: 2
+        x: 20590
+        y: 0
+        width: 2033
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.41690716, y: 0.62425464}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07bae0a435a2369439b822e62dd908f7
+      internalID: 1944857430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_11
+      rect:
+        serializedVersion: 2
+        x: 22687
+        y: 0
+        width: 1794
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.49008957, y: 0.7208972}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 488deb5f2ca74414383677977f774b9c
+      internalID: 2100101934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rollSS_12
+      rect:
+        serializedVersion: 2
+        x: 24646
+        y: 0
+        width: 1959
+        height: 2576
+      alignment: 9
+      pivot: {x: 0.5090787, y: 0.70018804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf041fd37a50f6429805d3d0140f657
+      internalID: 1835820126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      rollSS_0: -1809502969
+      rollSS_1: 1474853232
+      rollSS_10: 1944857430
+      rollSS_11: 2100101934
+      rollSS_12: 1835820126
+      rollSS_2: 1040316841
+      rollSS_3: 2100582783
+      rollSS_4: -1480636502
+      rollSS_5: -668309742
+      rollSS_6: 791831173
+      rollSS_7: 29075275
+      rollSS_8: -1969400078
+      rollSS_9: -1627932373
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

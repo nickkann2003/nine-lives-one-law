@@ -109,6 +109,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Subtract health
         health -= b.damage;
         healthBar.UpdateHealthBar(health, maxHealth);
+        attackingTarget = true;
         // Activate immunity
         if (health < 0)
         {
@@ -124,6 +125,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Subtract health
         health -= damage;
         healthBar.UpdateHealthBar(health, maxHealth);
+        attackingTarget = true;
         // Activate immunity
         if (health < 0)
         {

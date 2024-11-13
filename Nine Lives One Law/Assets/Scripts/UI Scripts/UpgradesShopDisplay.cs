@@ -13,6 +13,7 @@ public class UpgradesShopDisplay : MonoBehaviour
     public Sprite itemImage;
     public string itemDescription;
     public float itemPrice;
+    public GameObject soldOut;
 
     private UpgradeBase upgrade;
 
@@ -20,6 +21,7 @@ public class UpgradesShopDisplay : MonoBehaviour
     void Start()
     {
         SetDisplayValues();
+        soldOut.SetActive(false);
     }
 
     /// <summary>
@@ -43,5 +45,10 @@ public class UpgradesShopDisplay : MonoBehaviour
         nameDisplay.text = itemName;
         if (itemImage != null)
             itemDisplay.sprite = itemImage;
+    }
+
+    public void PurchaseUpgrade()
+    {
+        soldOut.SetActive(true);
     }
 }

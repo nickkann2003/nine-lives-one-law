@@ -15,6 +15,7 @@ public class StatsManager : MonoBehaviour
     public float totalMoney = 0;
     public GameObject moneyUIDisplay;
     public TextMeshProUGUI cMoneyDisplay;
+    public Player player;
 
     public static StatsManager instance;
 

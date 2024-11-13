@@ -25,8 +25,11 @@ public class UpgradesShop : MonoBehaviour
     public TextMeshProUGUI largeItemPrice;
     public Image largeItemImage;
     public Button purchaseButton;
+    public GameObject soldOut;
     private UpgradeBase selectedUpgrade;
+    private UpgradesShopDisplay selectedUpgradeDisplay;
 
+    private List<UpgradesShopDisplay> displays = new List<UpgradesShopDisplay>();
     private int pages;
     private int currentPage = 0;
 
@@ -51,11 +54,12 @@ public class UpgradesShop : MonoBehaviour
             GameObject up = Instantiate(upgradePrefab, transform);
             up.transform.localPosition = shopPositions[a];
             UpgradesShopDisplay uDisplay = up.GetComponent<UpgradesShopDisplay>();
+            displays.Add(uDisplay);
             uDisplay.SetUpgrade(upgrades[index]);
 
             Button b = up.GetComponentInChildren<Button>();
             b.onClick.AddListener(() => { 
-                SetLargeDisplay(upgrades[index]);
+                SetLargeDisplay(upgrades[index], displays[index]);
             });
 
             // If its not page 1, disable it
@@ -66,13 +70,16 @@ public class UpgradesShop : MonoBehaviour
         HideLargeDisplay();
     }
 
-    private void SetLargeDisplay(UpgradeBase u)
+    private void SetLargeDisplay(UpgradeBase u, UpgradesShopDisplay uDisplay)
     {
         upgradeLargeDisplay.SetActive(true);
         largeItemName.text = u.itemName;
         largeItemDescription.text = u.itemDescription;
         largeItemPrice.text = u.itemShopPrice.ToString();
         selectedUpgrade = u;
+        selectedUpgradeDisplay = uDisplay;
+        soldOut.SetActive(!selectedUpgradeDisplay.soldOut);
+
         
         if(u.itemSprite != null)
             largeItemImage.sprite = u.itemSprite;
@@ -88,6 +95,7 @@ public class UpgradesShop : MonoBehaviour
         if (StatsManager.instance.CheckBalanceHasEnough(selectedUpgrade.itemShopPrice) && selectedUpgrade != null)
         {
             StatsManager.instance.SubtractMoney(selectedUpgrade.itemShopPrice);
+            selectedUpgradeDisplay.PurchaseUpgrade();
             selectedUpgrade.PerformUpgrade();
         }
     }
