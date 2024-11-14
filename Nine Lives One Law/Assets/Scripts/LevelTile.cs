@@ -18,11 +18,32 @@ public class LevelTile : MonoBehaviour
     public bool downExit;
     public bool leftExit;
 
+    [Header("Generation")]
+    public bool makeEnemies;
+    public int makeBoss;
+
+    public GameObject boss1;
+    public GameObject[] enemies;
+    public GameObject enemyList;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyList = GameObject.Find("EnemyList");
         //transform.position = new Vector3(xPos * tileSize, yPos * tileSize, transform.position.z);
+        if (makeEnemies)
+        {
+            for(int i=0;i<Random.Range(0, 4); i++)
+            {
+                Instantiate(enemies[Random.Range(0,enemies.Length)],transform.position + new Vector3(Random.Range(-7, 8), Random.Range(-7, 8),1),transform.rotation,enemyList.transform);
+                //enemyList.GetComponent<EnemyManager>().enemies.Add();
+            }
+        }
+        if (makeBoss > 0)
+        { //Only one boss right now so this code works, will need to update if we have multiple bosses
+            Instantiate(boss1,transform.position,transform.rotation,enemyList.transform);
+            //enemyList.GetComponent<EnemyManager>().enemies.Add();
+        }
     }
 
     // Update is called once per frame
@@ -33,7 +54,7 @@ public class LevelTile : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        transform.position = new Vector3(xPos * tileSize, yPos * tileSize, transform.position.z);
+        //transform.position = new Vector3(xPos * tileSize, yPos * tileSize, transform.position.z);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(transform.position, new Vector3(tileSize, tileSize, 1));
         if (upExit)

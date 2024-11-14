@@ -139,7 +139,7 @@ public class Dynamite : MonoBehaviour
 
     private void Explode()
     {
-        Debug.Log("boom");
+        //Debug.Log("boom");
         state = State.Explode;
 
         dynamiteAnimator.SetTrigger("Explode");

@@ -48,6 +48,13 @@ public class Player : MonoBehaviour, IHittableEntity
     private float iTimeLeft = 0f;
     private bool immune = false;
 
+    private int maxBullets = 6;
+    private int currentBullets = 6;
+    private float reloadTime = 1f;
+    private float currentReloadTime = 1f;
+    private bool reloading = false;
+    public Animator ammoAnimator;
+
     private Vector3 startingPos = Vector3.zero;
 
     private void Awake()
@@ -192,10 +199,32 @@ public class Player : MonoBehaviour, IHittableEntity
     // Makes the player fire a bullet
     void Shoot()
     {
-        if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
-        { // Makes bullet if trying to shoot and not rolling and cooldown is up
-            BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f);
-            lastShotTime = Time.time; // Update last shot time
+        if (!reloading)
+        {
+            if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
+            { // Makes bullet if trying to shoot and not rolling and cooldown is up
+                BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f);
+                lastShotTime = Time.time; // Update last shot time
+                currentBullets -= 1;
+                ammoAnimator.SetTrigger("shoot");
+                ammoAnimator.SetInteger("ammo", currentBullets);
+                if (currentBullets <= 0)
+                {
+                    reloading = true;
+                    currentReloadTime = reloadTime;
+                    ammoAnimator.SetTrigger("reload");
+                }
+            }
+        }
+        else
+        {
+            currentReloadTime -= Time.deltaTime;
+            if (currentReloadTime <= 0)
+            {
+                reloading = false;
+                currentBullets = maxBullets;
+                ammoAnimator.SetInteger("ammo", currentBullets);
+            }
         }
     }
 

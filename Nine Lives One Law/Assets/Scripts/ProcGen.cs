@@ -26,12 +26,12 @@ public class ProcGen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            CreateMap();
-            Generate();
-            printArr();
-        }
+    }
+
+    public void StartLevel()
+    {
+        CreateMap();
+        Generate();
     }
 
     //Creates internal map
@@ -63,46 +63,42 @@ public class ProcGen : MonoBehaviour
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
-                Debug.Log("2, " + i + " " + newTile.name);
             } while (!Compatible(2, i, newTile));
             map[2, i] = newTile;
             index = -1;
             makeMod();
             do
-            {
+            { //Get a random genTile, if it's not compatible remove it from the list and try again
                 if (index >= 0)
                 {
                     genTilesMod.RemoveAt(index);
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
-                Debug.Log("1, " + i + " " + newTile.name);
             } while (!Compatible(1, i, newTile));
             map[1, i] = newTile;
             index = -1;
             makeMod();
             do
-            {
+            { //Get a random genTile, if it's not compatible remove it from the list and try again
                 if (index >= 0)
                 {
                     genTilesMod.RemoveAt(index);
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
-                Debug.Log("4, " + i + " " + newTile.name);
             } while (!Compatible(4, i, newTile));
             map[4, i] = newTile;
             index = -1;
             makeMod();
             do
-            {
+            { //Get a random genTile, if it's not compatible remove it from the list and try again
                 if (index >= 0)
                 {
                     genTilesMod.RemoveAt(index);
                 }
                 index = Random.Range(0, genTilesMod.Count);
                 newTile = genTilesMod[index];
-                Debug.Log("5, " + i + " " + newTile.name);
             } while (!Compatible(5, i, newTile));
             map[5, i] = newTile;
         }
@@ -111,82 +107,48 @@ public class ProcGen : MonoBehaviour
     //Creates the map in game
     void Generate()
     {
-        //Vector3 pos = new Vector3(-3 * length, -3 * length, 0);
         for (int y = -3; y <= 3; y++)
         {
             for (int x = -3; x <= 3; x++)
             {
-                Instantiate(map[x+3, y+3], new Vector3(x * length, -y * length, 0), transform.rotation, tileList.transform);
-                //Instantiate(map[i+3, j+3], tileList.transform);
-                //tileList.transform.GetChild(tileList.transform.childCount - 1).transform.position = new Vector3(i * length, j * length, 0);
-                //pos.y += length;
+                Instantiate(map[x+3, y+3], new Vector3(x * length, y * -length, -1), transform.rotation, tileList.transform);
             }
-            //pos.x += length;
-            //pos.y -= length * 7;
         }
-        Debug.Log("Generated");
+        Debug.Log("Map Generated");
         printMap();
     }
 
     //Checks if a tile is compatible with those around it using the open variables
     bool Compatible(int x, int y, GameObject tile)
     {
-        //Instantiate(tile, tileList.transform);
-        //tile = tileList.transform.GetChild(0).gameObject;
-        Debug.Log("Compatible - x: " + x + " y: " + y + " tile:" + tile.name);
-        printMap();
         if (map[x-1, y] != null)
         { //Tile to left
-            Debug.Log("Left Go:" + map[x - 1, y].name);
-            //Debug.Log("This tile left exit:"+ tile.GetComponent<LevelTile>().leftExit+ " Left tile right exit: ");
-            //Instantiate(map[x - 1, y], tileList.transform);
-            //GameObject compTile = tileList.transform.GetChild(1).gameObject;
             if (tile.GetComponent<LevelTile>().leftExit != map[x-1,y].GetComponent<LevelTile>().rightExit)
             {
-                Debug.Log("Left Incompatible");
-                //Destroy(tileList.transform.GetChild(1).gameObject);
-                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
-            //Destroy(tileList.transform.GetChild(1).gameObject);
-
-            Debug.Log("Left Compatible");
         }
         if (map[x+1, y] != null)
         { //Tile to right
-            Debug.Log("Right Go:" + map[x + 1, y].name);
             if (tile.GetComponent<LevelTile>().rightExit != map[x+1, y].GetComponent<LevelTile>().leftExit)
             {
-                Debug.Log("Right Incompatible");
-                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
-            Debug.Log("Right Compatible");
         }
         if (map[x, y-1] != null)
         { //Tile above
-            Debug.Log("Above Go:" + map[x, y-1].name);
             if (tile.GetComponent<LevelTile>().upExit != map[x, y-1].GetComponent<LevelTile>().downExit)
             {
-                Debug.Log("Above Incompatible");
-                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
-            Debug.Log("Above Compatible");
         }
         if (map[x, y+1] != null)
         { //Tile below
-            Debug.Log("Below Go:" + map[x, y+1].name);
             if (tile.GetComponent<LevelTile>().downExit != map[x, y+1].GetComponent<LevelTile>().upExit)
             {
-                Debug.Log("Below Incompatible");
-                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
-            Debug.Log("Below Compatible");
         }
-        Debug.Log("Compatible");
-        //Destroy(tileList.transform.GetChild(0).gameObject);
         return true;
     }
 
@@ -200,6 +162,7 @@ public class ProcGen : MonoBehaviour
         }
     }
 
+    //Prints the current map out in text form for bug testing
     void printMap()
     {
         Debug.Log("print map start");
@@ -216,21 +179,6 @@ public class ProcGen : MonoBehaviour
                 {
                     print += map[x, y].name+",";
                 }
-            }
-            print += "\n";
-        }
-        Debug.Log(print);
-    }
-
-    void printArr()
-    {
-        Debug.Log("print arr start");
-        string print = "";
-        for (int y = 0; y < map.GetLength(0); y++)
-        {
-            for (int x = 0; x < map.GetLength(1); x++)
-            {
-                print += "[" + x + "," + y + "]";
             }
             print += "\n";
         }
