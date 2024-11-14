@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
     {
         currentState = UIState.MainMenu;
         MainMenu.SetActive(true);
-        Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(customCursor, new Vector2(64f, 64f), CursorMode.Auto);
     }
 
     private void Update()
@@ -165,7 +165,6 @@ public class UIManager : MonoBehaviour
             case UIState.StartRunMenu:
                 OpenMenu(StartRunMenu);                
                 activateAll(StartRunObjects);
-                Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
                 break;
             case UIState.MainMenu:
                 OpenMenu(MainMenu);                
@@ -174,7 +173,6 @@ public class UIManager : MonoBehaviour
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
                 activateAll(InGameObjects);
-                Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
                 break;
         }
     }
