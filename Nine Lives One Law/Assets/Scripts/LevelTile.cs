@@ -22,7 +22,7 @@ public class LevelTile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(xPos * tileSize, yPos * tileSize, transform.position.z);
+        //transform.position = new Vector3(xPos * tileSize, yPos * tileSize, transform.position.z);
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProcGen : MonoBehaviour
 {
-    private GameObject tileList; //GameObject that holds tiles
+    public GameObject tileList; //GameObject that holds tiles
     private GameObject[,] map; //Internal view of map
     public GameObject[] genTiles; //Tiles for procgen
     public GameObject[] startTiles; //Tiles sherrif start on
@@ -19,7 +19,7 @@ public class ProcGen : MonoBehaviour
     {
         map = new GameObject[7, 7];
         length = 15f;
-        tileList = GameObject.Find("TileList");
+        //tileList = GameObject.Find("ProcGenTileList");
         genTilesMod = new List<GameObject>();
     }
 
@@ -30,6 +30,7 @@ public class ProcGen : MonoBehaviour
         {
             CreateMap();
             Generate();
+            printArr();
         }
     }
 
@@ -110,47 +111,82 @@ public class ProcGen : MonoBehaviour
     //Creates the map in game
     void Generate()
     {
-        for(int i = -3; i <= 3; i++)
+        //Vector3 pos = new Vector3(-3 * length, -3 * length, 0);
+        for (int y = -3; y <= 3; y++)
         {
-            for (int j = -3; j <= 3; j++)
+            for (int x = -3; x <= 3; x++)
             {
-                Instantiate(map[i, j], new Vector3(i * length, j * length, 0), transform.rotation, tileList.transform);
+                Instantiate(map[x+3, y+3], new Vector3(x * length, -y * length, 0), transform.rotation, tileList.transform);
+                //Instantiate(map[i+3, j+3], tileList.transform);
+                //tileList.transform.GetChild(tileList.transform.childCount - 1).transform.position = new Vector3(i * length, j * length, 0);
+                //pos.y += length;
             }
+            //pos.x += length;
+            //pos.y -= length * 7;
         }
+        Debug.Log("Generated");
+        printMap();
     }
 
     //Checks if a tile is compatible with those around it using the open variables
     bool Compatible(int x, int y, GameObject tile)
     {
-        if (map[x--, y] != null)
+        //Instantiate(tile, tileList.transform);
+        //tile = tileList.transform.GetChild(0).gameObject;
+        Debug.Log("Compatible - x: " + x + " y: " + y + " tile:" + tile.name);
+        printMap();
+        if (map[x-1, y] != null)
         { //Tile to left
-            if (tile.GetComponent<LevelTile>().leftExit != !map[x--,y].GetComponent<LevelTile>().rightExit)
+            Debug.Log("Left Go:" + map[x - 1, y].name);
+            //Debug.Log("This tile left exit:"+ tile.GetComponent<LevelTile>().leftExit+ " Left tile right exit: ");
+            //Instantiate(map[x - 1, y], tileList.transform);
+            //GameObject compTile = tileList.transform.GetChild(1).gameObject;
+            if (tile.GetComponent<LevelTile>().leftExit != map[x-1,y].GetComponent<LevelTile>().rightExit)
             {
+                Debug.Log("Left Incompatible");
+                //Destroy(tileList.transform.GetChild(1).gameObject);
+                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
+            //Destroy(tileList.transform.GetChild(1).gameObject);
+
+            Debug.Log("Left Compatible");
         }
-        if (map[x++, y] != null)
+        if (map[x+1, y] != null)
         { //Tile to right
-            if (tile.GetComponent<LevelTile>().rightExit != !map[x++, y].GetComponent<LevelTile>().leftExit)
+            Debug.Log("Right Go:" + map[x + 1, y].name);
+            if (tile.GetComponent<LevelTile>().rightExit != map[x+1, y].GetComponent<LevelTile>().leftExit)
             {
+                Debug.Log("Right Incompatible");
+                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
+            Debug.Log("Right Compatible");
         }
-        if (map[x, y--] != null)
+        if (map[x, y-1] != null)
         { //Tile above
-            if (tile.GetComponent<LevelTile>().upExit != !map[x, y--].GetComponent<LevelTile>().downExit)
+            Debug.Log("Above Go:" + map[x, y-1].name);
+            if (tile.GetComponent<LevelTile>().upExit != map[x, y-1].GetComponent<LevelTile>().downExit)
             {
+                Debug.Log("Above Incompatible");
+                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
+            Debug.Log("Above Compatible");
         }
-        if (map[x, y++] != null)
+        if (map[x, y+1] != null)
         { //Tile below
-            if (tile.GetComponent<LevelTile>().downExit != !map[x, y--].GetComponent<LevelTile>().upExit)
+            Debug.Log("Below Go:" + map[x, y+1].name);
+            if (tile.GetComponent<LevelTile>().downExit != map[x, y+1].GetComponent<LevelTile>().upExit)
             {
+                Debug.Log("Below Incompatible");
+                //Destroy(tileList.transform.GetChild(0).gameObject);
                 return false;
             }
+            Debug.Log("Below Compatible");
         }
         Debug.Log("Compatible");
+        //Destroy(tileList.transform.GetChild(0).gameObject);
         return true;
     }
 
@@ -162,5 +198,42 @@ public class ProcGen : MonoBehaviour
         {
             genTilesMod.Add(genTiles[i]);
         }
+    }
+
+    void printMap()
+    {
+        Debug.Log("print map start");
+        string print = "";
+        for (int y = 0; y < map.GetLength(0); y++)
+        {
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                if (map[x, y] == null)
+                {
+                    print += "null,";
+                }
+                else
+                {
+                    print += map[x, y].name+",";
+                }
+            }
+            print += "\n";
+        }
+        Debug.Log(print);
+    }
+
+    void printArr()
+    {
+        Debug.Log("print arr start");
+        string print = "";
+        for (int y = 0; y < map.GetLength(0); y++)
+        {
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                print += "[" + x + "," + y + "]";
+            }
+            print += "\n";
+        }
+        Debug.Log(print);
     }
 }
