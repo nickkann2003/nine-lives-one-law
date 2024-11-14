@@ -73,7 +73,22 @@ public class Dynamite : MonoBehaviour
         rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
         pauseVelocity = rb.velocity;
         dynamiteAnimator.SetTrigger("Launch");
+        Debug.Log(stickLifetime);
     }
+
+
+    //HOW TO FIX::::
+    // you add +1 second every frame so it gets to like 2000 seconds 
+    //So store the time it started freezing at and do math to find
+    //out the total time left and change borntime to be that
+    //far away from regular time.
+
+
+
+
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -93,7 +108,7 @@ public class Dynamite : MonoBehaviour
             case State.Stay:
                 if (paused)
                 {
-                    stickLifetime += 1;
+                    bornTime += 1;
                 }
                 if (Time.time - bornTime >= stickLifetime)
                 {
@@ -103,6 +118,8 @@ public class Dynamite : MonoBehaviour
             case State.Explode:
                 break;
         }
+        
+        Debug.Log("bornTime: " + bornTime + ". time: " + Time.time + ". stick lifetime: " + stickLifetime);
     }
 
     public void Set(List<string> tags, float damage)
@@ -113,7 +130,7 @@ public class Dynamite : MonoBehaviour
 
     private void StopMoving()
     {
-        Debug.Log("stop");
+        //Debug.Log("stop");
         //rb.velocity = Vector2.zero;
         rb.drag = 2.5f;
         rb.angularDrag = 2f;
@@ -134,7 +151,7 @@ public class Dynamite : MonoBehaviour
 
     private void DestroyDynamite()
     {
-        Debug.Log("destroy");
+        //Debug.Log("destroy");
         Destroy(gameObject);
     }
 
