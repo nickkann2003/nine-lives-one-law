@@ -13,6 +13,7 @@ public class ProcGen : MonoBehaviour
     public GameObject[] UDTiles; //Up down tiles
     private float length; //How long a tile is
     private List<GameObject> genTilesMod; //A list of the procgen tiles
+    public GameObject enemyList;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class ProcGen : MonoBehaviour
     {
         CreateMap();
         Generate();
+        enemyList.GetComponent<EnemyManager>().AddChildren();
     }
 
     //Creates internal map
@@ -115,7 +117,7 @@ public class ProcGen : MonoBehaviour
             }
         }
         Debug.Log("Map Generated");
-        printMap();
+        //printMap();
     }
 
     //Checks if a tile is compatible with those around it using the open variables

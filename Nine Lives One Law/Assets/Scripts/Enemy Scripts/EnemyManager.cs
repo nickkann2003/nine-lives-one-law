@@ -61,6 +61,11 @@ public class EnemyManager : MonoBehaviour
         Instantiate(level1Prefab, this.transform);
 
         // Add to list
+        AddChildren();
+    }
+
+    public void AddChildren()
+    {
         EnemyBase[] children = gameObject.GetComponentsInChildren<EnemyBase>();
         foreach (EnemyBase child in children)
         {
