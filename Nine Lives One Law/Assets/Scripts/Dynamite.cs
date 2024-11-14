@@ -113,7 +113,7 @@ public class Dynamite : MonoBehaviour
 
     private void StopMoving()
     {
-        Debug.Log("stop");
+        //Debug.Log("stop");
         //rb.velocity = Vector2.zero;
         rb.drag = 2.5f;
         rb.angularDrag = 2f;
@@ -122,7 +122,7 @@ public class Dynamite : MonoBehaviour
 
     private void Explode()
     {
-        Debug.Log("boom");
+        //Debug.Log("boom");
         state = State.Explode;
 
         dynamiteAnimator.SetTrigger("Explode");
@@ -134,7 +134,7 @@ public class Dynamite : MonoBehaviour
 
     private void DestroyDynamite()
     {
-        Debug.Log("destroy");
+        //Debug.Log("destroy");
         Destroy(gameObject);
     }
 

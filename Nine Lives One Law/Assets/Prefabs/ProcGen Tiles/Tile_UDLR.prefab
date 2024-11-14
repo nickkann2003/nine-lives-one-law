@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 45b917981a9047349baf90c55511bd06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,3 +103,10 @@ MonoBehaviour:
   rightExit: 1
   downExit: 1
   leftExit: 1
+  makeEnemies: 1
+  makeBoss: 0
+  boss1: {fileID: 0}
+  enemies:
+  - {fileID: 5724055875518008803, guid: 5acd346d727bb92488464fffd232b142, type: 3}
+  - {fileID: 222898287263055127, guid: 1a5d0c8359d4c70439b03790c66ab8e9, type: 3}
+  enemyList: {fileID: 0}

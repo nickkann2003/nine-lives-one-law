@@ -105,7 +105,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 
     public virtual void HandleBulletHit(Bullet b)
     {
-        Debug.Log("base handlebullethit");
+        //Debug.Log("base handlebullethit");
         // Subtract health
         health -= b.damage;
         healthBar.UpdateHealthBar(health, maxHealth);
