@@ -14,10 +14,13 @@ public class ProcGen : MonoBehaviour
     private float length; //How long a tile is
     private List<GameObject> genTilesMod; //A list of the procgen tiles
     public GameObject enemyList;
+    private float generateTime;
+    private bool generated;
 
     // Start is called before the first frame update
     void Start()
     {
+        generated = false;
         map = new GameObject[7, 7];
         length = 15f;
         //tileList = GameObject.Find("ProcGenTileList");
@@ -27,13 +30,21 @@ public class ProcGen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (generated)
+        {
+            if (Time.time - generateTime >= 2f)
+            {
+                enemyList.GetComponent<EnemyManager>().AddChildren();
+                generated = false;
+            }
+        }
     }
 
     public void StartLevel()
     {
         CreateMap();
         Generate();
-        enemyList.GetComponent<EnemyManager>().AddChildren();
+        //enemyList.GetComponent<EnemyManager>().AddChildren();
     }
 
     //Creates internal map
@@ -117,6 +128,8 @@ public class ProcGen : MonoBehaviour
             }
         }
         Debug.Log("Map Generated");
+        generated = true;
+        generateTime = Time.time;
         //printMap();
     }
 
