@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -88,8 +89,23 @@ private void Awake()
 
     public void DestroyBullet(Bullet bullet)
     {
-        inactiveBullets.Add(bullet);
-        activeBullets.Remove(bullet);
+        try
+        {
+            inactiveBullets.Add(bullet);
+            activeBullets.Remove(bullet);
+        }
+        catch
+        {
+            Debug.Log("Issue disabling bullet, not found in list or not able to add - Ignoring");
+        }
         bullet.gameObject.SetActive(false);
+    }
+
+    public void ClearBulletList()
+    {
+        foreach(Bullet b in transform.GetComponentsInChildren<Bullet>()) 
+        {
+            DestroyBullet(b);
+        }
     }
 }
