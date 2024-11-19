@@ -17,6 +17,15 @@ public class StatsManager : MonoBehaviour
     public TextMeshProUGUI cMoneyDisplay;
     public Player player;
 
+    // Other stats
+    public float bossesDefeated = 0;
+    public float bulletsFired = 0;
+    public float enemiesDefeated = 0;
+    public float dynamiteExploded = 0;
+    public float dynamiteTeamKills = 0;
+    public float dodgeRollCount = 0;
+    public float deathCount = 0;
+
     public static StatsManager instance;
 
     private void Awake()

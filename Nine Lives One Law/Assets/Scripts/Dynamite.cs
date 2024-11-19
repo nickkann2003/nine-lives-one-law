@@ -141,7 +141,7 @@ public class Dynamite : MonoBehaviour
     {
         //Debug.Log("boom");
         state = State.Explode;
-
+        StatsManager.instance.dynamiteExploded++;
         dynamiteAnimator.SetTrigger("Explode");
         dynamiteAnimator.SetTrigger("Launch");
         rb.velocity = Vector2.zero;

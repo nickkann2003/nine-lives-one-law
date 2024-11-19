@@ -191,7 +191,8 @@ public class Duel : MonoBehaviour
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             duelTimer.StopTimer();
-            boss.GetComponent<EnemyBase>().Die(); //Destroy boss on duel win, replace with damage once implemented
+            StatsManager.instance.bossesDefeated++;
+            boss.GetComponent<EnemyBase>().Die();
         }
         else
         { //If there are more inputs, print the remaining inputs
