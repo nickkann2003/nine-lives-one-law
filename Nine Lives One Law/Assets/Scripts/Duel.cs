@@ -193,6 +193,7 @@ public class Duel : MonoBehaviour
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
             Debug.Log("WIN!");
             duelTimer.StopTimer();
+            StatsManager.instance.bossesDefeated++;
             Destroy(boss); //Destroy boss on duel win, replace with damage once implemented
         }
         else

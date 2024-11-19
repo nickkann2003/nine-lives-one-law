@@ -186,6 +186,7 @@ public class Player : MonoBehaviour, IHittableEntity
             //immunityTime = rollTime;
             lastRollTime = Time.time; // Update last roll time
             playerAnimator.SetBool("Rolling", true);
+            StatsManager.instance.dodgeRollCount++;
         }
         if (isMidRoll && Time.time - lastRollTime >= rollTime)
         { // Stops player roll once the roll time is up
@@ -206,6 +207,7 @@ public class Player : MonoBehaviour, IHittableEntity
                 BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f);
                 lastShotTime = Time.time; // Update last shot time
                 currentBullets -= 1;
+                StatsManager.instance.bulletsFired++;
                 ammoAnimator.SetTrigger("shoot");
                 ammoAnimator.SetInteger("ammo", currentBullets);
                 if (currentBullets <= 0)
@@ -321,7 +323,7 @@ public class Player : MonoBehaviour, IHittableEntity
         if(health <= 0)
         {
             // Perform death logic here
-
+            StatsManager.instance.deathCount++;
             //TEMP
             health = maxHealth;
         }

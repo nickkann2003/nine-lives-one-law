@@ -129,6 +129,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         // Activate immunity
         if (health < 0)
         {
+            StatsManager.instance.dynamiteTeamKills++;
             Die();
         }
     }
@@ -147,6 +148,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     public virtual void Die()
     {
         StatsManager.instance.AddMoney(money);
+        StatsManager.instance.enemiesDefeated++;
         Destroy(this.gameObject);
     }
 }

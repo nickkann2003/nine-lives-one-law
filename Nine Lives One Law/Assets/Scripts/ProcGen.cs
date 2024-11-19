@@ -124,7 +124,7 @@ public class ProcGen : MonoBehaviour
         {
             for (int x = -3; x <= 3; x++)
             {
-                Instantiate(map[x+3, y+3], new Vector3(x * length, y * -length, -1), transform.rotation, tileList.transform);
+                Instantiate(map[x+3, y+3], new Vector3(x * length, y * -length, -1), map[x+3,y+3].transform.rotation, tileList.transform);
             }
         }
         Debug.Log("Map Generated");
