@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Boss1 : EnemyBase
 {
@@ -19,6 +20,12 @@ public class Boss1 : EnemyBase
     public float range;
     public float moveSpeed;
     public float shootCooldown;
+
+    [SerializeField]
+    private List<GameObject> drops;
+
+    [SerializeField]
+    private UnityEvent onDeathEvents;
     
 
     // Start is called before the first frame update
@@ -114,6 +121,19 @@ public class Boss1 : EnemyBase
             
             
         }
+    }
+
+    public override void Die()
+    {
+        onDeathEvents.Invoke();
+        foreach (GameObject obj in drops)
+        {
+            // Set the pickups parent to this things parent
+            obj.gameObject.SetActive(true);
+            obj.transform.SetParent(transform.parent);
+            Debug.Log("Dropped bounty");
+        }
+        base.Die();
     }
 
     // If boss is at 25% health or less, it is able to be dueled

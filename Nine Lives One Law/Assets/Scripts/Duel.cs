@@ -83,7 +83,7 @@ public class Duel : MonoBehaviour
         duel = true;
         keyManager.SetStartingPositions();
 
-        PrintDuel(); //Prints full inputs
+        //PrintDuel(); //Prints full inputs
 
         // Set duel timer variables
         duelTimer.StartTimer();
@@ -170,7 +170,6 @@ public class Duel : MonoBehaviour
         { //If enough time has passed, duel failed
             duel = false;
             duelTimer.StopTimer();
-            Debug.Log("DUEL FAIL");
             boss.GetComponent<EnemyBase>().Heal(25); //Boss heals on duel fail
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
@@ -191,13 +190,12 @@ public class Duel : MonoBehaviour
             duel = false;
             keyManager.EndDuel();
             GameManager.Instance.UpdateGameState(GameManager.GameState.Gameplay);
-            Debug.Log("WIN!");
             duelTimer.StopTimer();
-            Destroy(boss); //Destroy boss on duel win, replace with damage once implemented
+            boss.GetComponent<EnemyBase>().Die(); //Destroy boss on duel win, replace with damage once implemented
         }
         else
         { //If there are more inputs, print the remaining inputs
-            PrintDuel();
+            //PrintDuel();
         }
     }
 
