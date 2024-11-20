@@ -29,6 +29,7 @@ public class Dynamite : MonoBehaviour
     private Vector3 pauseVelocity;
     private Boolean paused;
 
+
     public Animator dynamiteAnimator;
 
 
@@ -46,6 +47,7 @@ public class Dynamite : MonoBehaviour
             paused = false;
             rb.velocity = pauseVelocity;
             rb.constraints = RigidbodyConstraints2D.None;
+            bornTime = Time.deltaTime;
         }
         else
         {
@@ -84,33 +86,19 @@ public class Dynamite : MonoBehaviour
     //far away from regular time.
 
 
-
-
-
-
-
-
     // Update is called once per frame
     void Update()
     {
         switch (state)
         {
             case State.Move:
-                if (paused)
-                {
-                    bornTime += 1;
-                }
-                if (Time.time - bornTime >= moveTime)
+                if (Time.time - bornTime >= moveTime && !paused)
                 {
                     StopMoving();
                 }
                 break;
             case State.Stay:
-                if (paused)
-                {
-                    bornTime += 1;
-                }
-                if (Time.time - bornTime >= stickLifetime)
+                if (Time.time - bornTime >= stickLifetime && !paused)
                 {
                     Explode();
                 }

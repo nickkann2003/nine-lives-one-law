@@ -134,6 +134,7 @@ public class Boss1 : EnemyBase
             Debug.Log("Dropped bounty");
         }
         base.Die();
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
     }
 
     // If boss is at 25% health or less, it is able to be dueled
