@@ -23,7 +23,6 @@ public class ProcGen : MonoBehaviour
         generated = false;
         map = new GameObject[7, 7];
         length = 15f;
-        //tileList = GameObject.Find("ProcGenTileList");
         genTilesMod = new List<GameObject>();
     }
 
@@ -42,9 +41,9 @@ public class ProcGen : MonoBehaviour
 
     public void StartLevel()
     {
+        ResetMap();
         CreateMap();
         Generate();
-        //enemyList.GetComponent<EnemyManager>().AddChildren();
     }
 
     //Creates internal map
@@ -174,6 +173,18 @@ public class ProcGen : MonoBehaviour
         for(int i=0; i < genTiles.Length; i++)
         {
             genTilesMod.Add(genTiles[i]);
+        }
+    }
+
+    void ResetMap()
+    {
+        foreach (Transform child in tileList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in enemyList.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
