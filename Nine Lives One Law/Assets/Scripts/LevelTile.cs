@@ -41,7 +41,7 @@ public class LevelTile : MonoBehaviour
         }
         if (makeBoss > 0)
         { //Only one boss right now so this code works, will need to update if we have multiple bosses
-            Instantiate(boss1,transform.position,transform.rotation,enemyList.transform);
+            Instantiate(boss1,transform.position + new Vector3(0,0,1),transform.rotation,enemyList.transform);
             //enemyList.GetComponent<EnemyManager>().enemies.Add();
         }
     }

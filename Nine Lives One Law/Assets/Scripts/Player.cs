@@ -334,6 +334,7 @@ public class Player : MonoBehaviour, IHittableEntity
     public void SetPosition()
     {
         transform.position = startingPos;
+        health = maxHealth;
     }
 
     // Upgrades
