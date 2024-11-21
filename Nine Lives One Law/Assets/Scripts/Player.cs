@@ -326,6 +326,8 @@ public class Player : MonoBehaviour, IHittableEntity
             StatsManager.instance.deathCount++;
             //TEMP
             health = maxHealth;
+            transform.position = startingPos;
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
         }
     }
 

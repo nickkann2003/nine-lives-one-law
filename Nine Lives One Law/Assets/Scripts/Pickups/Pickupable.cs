@@ -18,6 +18,9 @@ public class Pickupable : MonoBehaviour
     {
         onPickupEvents.Invoke();
 
+        StatsManager.instance.AddMoney(100);
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+
         if(deleteOnPickup)
         {
             Destroy(gameObject);
