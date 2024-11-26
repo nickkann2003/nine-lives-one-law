@@ -28,6 +28,7 @@ public class Dynamite : MonoBehaviour
 
     private Vector3 pauseVelocity;
     private Boolean paused;
+    private float timePassed;
 
 
     public Animator dynamiteAnimator;
@@ -47,13 +48,20 @@ public class Dynamite : MonoBehaviour
             paused = false;
             rb.velocity = pauseVelocity;
             rb.constraints = RigidbodyConstraints2D.None;
-            bornTime = Time.deltaTime;
+            rb.isKinematic = false;
+            bornTime = Time.time - timePassed;
+            dynamiteAnimator.speed = 1;
+            
         }
         else
         {
             paused = true;
+            pauseVelocity = rb.velocity;
             rb.velocity = Vector2.zero;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.isKinematic = true;
+            timePassed = Time.time - bornTime;
+            dynamiteAnimator.speed = 0;
         }
     }
 
@@ -73,17 +81,11 @@ public class Dynamite : MonoBehaviour
             targetTags = BulletManager.targetsDictionary[Bullets.All];
 
         rb.velocity = transform.up * moveSpeed; //Move bullet forward constantly
-        pauseVelocity = rb.velocity;
+
         dynamiteAnimator.SetTrigger("Launch");
         Debug.Log(stickLifetime);
     }
 
-
-    //HOW TO FIX::::
-    // you add +1 second every frame so it gets to like 2000 seconds 
-    //So store the time it started freezing at and do math to find
-    //out the total time left and change borntime to be that
-    //far away from regular time.
 
 
     // Update is called once per frame

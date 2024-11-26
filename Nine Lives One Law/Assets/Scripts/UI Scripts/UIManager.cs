@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
     {
         if(state == GameManager.GameState.Menu)
         {
-            StartCoroutine(OpenMenu(UIState.MainMenu));
+            OpenMenu(3);
         }
     }
 
@@ -108,6 +108,8 @@ public class UIManager : MonoBehaviour
         fading = true;
 
         yield return new WaitForSeconds(transitionTime / 2f);
+
+        playerMenuSprite.gameObject.SetActive(true);
 
         fading = false;
         playerMenuSprite.ResetPosition();
@@ -174,6 +176,7 @@ public class UIManager : MonoBehaviour
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
                 activateAll(InGameObjects);
+                playerMenuSprite.gameObject.SetActive(false);
                 break;
         }
     }

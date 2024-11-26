@@ -22,6 +22,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     protected bool isActive = true;
     protected Vector2 pauseVelocity;
 
+    public GameObject poofPrefab;
+
     [SerializeField]
     protected float money = 1;
 
@@ -147,6 +149,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
 
     public virtual void Die()
     {
+        GameObject p = Instantiate(poofPrefab);
+        p.transform.position = transform.position;
         StatsManager.instance.AddMoney(money);
         StatsManager.instance.enemiesDefeated++;
         Destroy(this.gameObject);
