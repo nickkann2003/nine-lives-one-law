@@ -199,6 +199,7 @@ MonoBehaviour:
   bulletList: {fileID: 0}
   maxHealth: 8
   maxInvTime: 0
+  poofPrefab: {fileID: 2861780301580306000, guid: 867fa85f5d577794a920921f593c1011, type: 3}
   money: 50
   dynamite: {fileID: 4895177222561055881, guid: 744a1e4b0a27e174992be54816e0a8e4, type: 3}
   range: 4
