@@ -87,12 +87,6 @@ public class Dynamite : MonoBehaviour
     }
 
 
-    //HOW TO FIX::::
-    // you add +1 second every frame so it gets to like 2000 seconds 
-    //So store the time it started freezing at and do math to find
-    //out the total time left and change borntime to be that
-    //far away from regular time.
-
 
     // Update is called once per frame
     void Update()
