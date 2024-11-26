@@ -7,6 +7,7 @@ public class Pickupable : MonoBehaviour
 {
     public bool pickupOnCollide = true;
     public bool deleteOnPickup = true;
+    public bool boss;
 
     [SerializeField]
     private UnityEvent onPickupEvents;
@@ -18,8 +19,13 @@ public class Pickupable : MonoBehaviour
     {
         onPickupEvents.Invoke();
 
-        StatsManager.instance.AddMoney(100);
-        GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+        StatsManager.instance.AddMoney(50);
+        if (boss)
+        {
+            StatsManager.instance.AddMoney(50);
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Menu);
+        }
+        
 
         if(deleteOnPickup)
         {

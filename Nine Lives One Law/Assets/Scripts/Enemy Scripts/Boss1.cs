@@ -76,7 +76,7 @@ public class Boss1 : EnemyBase
         // Like base enemy, boss 1 never wanders, always hunting
         //attackingTarget = true;
 
-        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 3)
+        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 3.25)
         {
             attackingTarget = true;
         }
@@ -153,10 +153,23 @@ public class Boss1 : EnemyBase
         // Activate immunity
         if (health < 0)
         {
-            health = 1; // Boss cannot die 
+            health = 1; // Boss cannot die without duel
         }
 
         // Return to bullet that it hit an entity
         b.HandleEntityHit();
+    }
+
+    public override void HandleDamageHit(float damage)
+    {
+        // Subtract health
+        health -= damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
+        attackingTarget = true;
+        // Activate immunity
+        if (health < 0)
+        {
+            health = 1; // Boss cannot die without duel
+        }
     }
 }

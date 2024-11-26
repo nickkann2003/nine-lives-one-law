@@ -120,7 +120,7 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         b.HandleEntityHit();
     }
 
-    public void HandleDamageHit(float damage)
+    public virtual void HandleDamageHit(float damage)
     {
         // Subtract health
         health -= damage;

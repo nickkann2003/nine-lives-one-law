@@ -21,10 +21,12 @@ public class LevelTile : MonoBehaviour
     [Header("Generation")]
     public bool makeEnemies;
     public int makeBoss;
+    public bool makeMoneyBag;
 
     public GameObject boss1;
     public GameObject[] enemies;
     public GameObject enemyList;
+    public GameObject moneyBag;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,10 @@ public class LevelTile : MonoBehaviour
         { //Only one boss right now so this code works, will need to update if we have multiple bosses
             Instantiate(boss1,transform.position + new Vector3(0,0,1),transform.rotation,enemyList.transform);
             //enemyList.GetComponent<EnemyManager>().enemies.Add();
+        }
+        if (makeMoneyBag)
+        {
+            Instantiate(moneyBag, transform.position + new Vector3(0, 0, 1), transform.rotation, enemyList.transform);
         }
     }
 

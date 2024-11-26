@@ -35,7 +35,7 @@ public class DynamiteEnemy : EnemyBase, IHittableEntity
     {
         // Need to get in range of Dynamite Enemy before attacking
         
-        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 1.75)
+        if (Vector3.Distance(transform.position, targetEntityPosition) < range * 2.5)
         {
             attackingTarget = true;
         }

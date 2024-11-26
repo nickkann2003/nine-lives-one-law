@@ -157,6 +157,7 @@ public class UIManager : MonoBehaviour
             case UIState.StatsMenu:
                 OpenMenu(StatsMenu); 
                 activateAll(StatsObjects);
+                StatsManager.instance.UpdateStatsPage();
                 break;
             case UIState.UpgradesMenu:
                 OpenMenu(UpgradesMenu);                

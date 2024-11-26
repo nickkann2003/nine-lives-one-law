@@ -426,7 +426,7 @@ MonoBehaviour:
   maxInvTime: 0
   money: 20
   bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
-  range: 5
+  range: 7
   moveSpeed: 1
   shootCooldown: 2
 --- !u!1 &7083091262261450375

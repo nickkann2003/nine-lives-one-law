@@ -83,6 +83,7 @@ public class Player : MonoBehaviour, IHittableEntity
             OnEnable();
             rb.velocity = pauseMovement;
             rb.constraints = RigidbodyConstraints2D.None;
+            healthBar.UpdateHealthBar(health, maxHealth);
 
         }
         else

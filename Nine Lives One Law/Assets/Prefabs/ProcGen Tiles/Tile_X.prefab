@@ -239,11 +239,13 @@ MonoBehaviour:
   leftExit: 0
   makeEnemies: 0
   makeBoss: 0
+  makeMoneyBag: 0
   boss1: {fileID: 0}
   enemies:
   - {fileID: 5724055875518008803, guid: 5acd346d727bb92488464fffd232b142, type: 3}
   - {fileID: 222898287263055127, guid: 1a5d0c8359d4c70439b03790c66ab8e9, type: 3}
   enemyList: {fileID: 0}
+  moneyBag: {fileID: 152705851004820053, guid: 92d5dd6f730eaa640ae3e39f72fe8b98, type: 3}
 --- !u!1 &7854872031905218878
 GameObject:
   m_ObjectHideFlags: 0

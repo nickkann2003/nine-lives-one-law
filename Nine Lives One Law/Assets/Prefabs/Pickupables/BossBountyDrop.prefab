@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupOnCollide: 1
+  deleteOnPickup: 1
+  boss: 1
   onPickupEvents:
     m_PersistentCalls:
       m_Calls: []

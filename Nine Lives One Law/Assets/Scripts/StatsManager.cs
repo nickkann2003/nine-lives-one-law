@@ -26,11 +26,20 @@ public class StatsManager : MonoBehaviour
     public float dodgeRollCount = 0;
     public float deathCount = 0;
 
+    // TMPro Other Stats
+    public TextMeshProUGUI totalMoneyText;
+    public TextMeshProUGUI enemiesDefeatedText;
+    public TextMeshProUGUI bossesDefeatedText;
+    public TextMeshProUGUI bulletsFiredText;
+    public TextMeshProUGUI dodgeCountText;
+    public TextMeshProUGUI deathCountText;
+
     public static StatsManager instance;
 
     private void Awake()
     {
         instance = this;
+        Time.timeScale = 1.15f; //	(•_•)
     }
 
     // ------------------ Functions ------------------
@@ -80,5 +89,15 @@ public class StatsManager : MonoBehaviour
     public void UpdateMoneyValue()
     {
         cMoneyDisplay.text = currentMoney.ToString();
+    }
+
+    public void UpdateStatsPage()
+    {
+        totalMoneyText.text = totalMoney.ToString();
+        enemiesDefeatedText.text = enemiesDefeated.ToString();
+        bossesDefeatedText.text = bossesDefeated.ToString();
+        bulletsFiredText.text = bulletsFired.ToString();
+        dodgeCountText.text = dodgeRollCount.ToString();
+        deathCountText.text = deathCount.ToString();
     }
 }
