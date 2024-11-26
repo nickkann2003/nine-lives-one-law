@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour, IHittableEntity
     public List<string> obstacleTags = new List<string>();
     private Vector3 pauseVelocity;
     private Boolean paused;
+    private float timePassed;
 
     //Variables
     public float moveSpeed; // bullet speed, overriden by createbullet function
@@ -41,11 +42,13 @@ public class Bullet : MonoBehaviour, IHittableEntity
             paused = false;
             rb.velocity = pauseVelocity;
             rb.constraints = RigidbodyConstraints2D.None;
+            bornTime = Time.time - timePassed;
         }
         else
         {
             paused = true;
             rb.velocity = Vector2.zero;
+            timePassed = Time.time - bornTime;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
