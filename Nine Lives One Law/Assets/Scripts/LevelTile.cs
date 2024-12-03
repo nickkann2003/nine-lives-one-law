@@ -48,7 +48,7 @@ public class LevelTile : MonoBehaviour
         }
         if (makeMoneyBag)
         {
-            Instantiate(moneyBag, transform.position + new Vector3(0, 0, 1), transform.rotation, enemyList.transform);
+            Instantiate(moneyBag, transform.position + new Vector3(0, 0, 1), Quaternion.identity, enemyList.transform);
         }
     }
 
