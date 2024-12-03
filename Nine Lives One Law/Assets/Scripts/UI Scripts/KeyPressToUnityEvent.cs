@@ -21,6 +21,7 @@ public class KeyPressToUnityEvent : MonoBehaviour
             {
                 keyPressed = true;
                 onPressEvent.Invoke();
+                AudioManager.instance.PlaySound("door-squeek");
             }
         }
         cWaitTime -= Time.deltaTime;

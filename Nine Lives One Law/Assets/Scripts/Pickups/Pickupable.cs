@@ -20,6 +20,9 @@ public class Pickupable : MonoBehaviour
         onPickupEvents.Invoke();
 
         StatsManager.instance.AddMoney(50);
+
+        AudioManager.instance.PlaySound("coin");
+
         if (boss)
         {
             StatsManager.instance.AddMoney(50);

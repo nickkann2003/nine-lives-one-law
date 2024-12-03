@@ -20,8 +20,10 @@ public class Player : MonoBehaviour, IHittableEntity
     //private InputAction look;
     private InputAction fire;
     private InputAction roll;
+    private InputAction reload;
     private bool isActive; // If player is active
     private bool tryingToShoot; // If player is trying to shoot
+    private bool tryingToReload; // Trying to reload
     private bool tryingToRoll; // If player is trying to roll
     private bool isMidRoll; // If player object is mid-roll
     private float lastShotTime; // Last time player shot
@@ -129,6 +131,14 @@ public class Player : MonoBehaviour, IHittableEntity
                     sprite.color = Color.white;
                 }
             }
+
+            if (tryingToReload)
+            {
+                if (currentBullets != maxBullets)
+                {
+                    Reload();
+                }
+            }
         }
     }
 
@@ -211,11 +221,10 @@ public class Player : MonoBehaviour, IHittableEntity
                 StatsManager.instance.bulletsFired++;
                 ammoAnimator.SetTrigger("shoot");
                 ammoAnimator.SetInteger("ammo", currentBullets);
+                AudioManager.instance.PlaySound("gunshot");
                 if (currentBullets <= 0)
                 {
-                    reloading = true;
-                    currentReloadTime = reloadTime;
-                    ammoAnimator.SetTrigger("reload");
+                    Reload();
                 }
             }
         }
@@ -231,16 +240,40 @@ public class Player : MonoBehaviour, IHittableEntity
         }
     }
 
+    /// <summary>
+    /// Public to allow force reloading
+    /// </summary>
+    public void Reload()
+    {
+        reloading = true;
+        currentReloadTime = reloadTime;
+        ammoAnimator.SetTrigger("reload");
+        AudioManager.instance.PlaySound("reload");
+    }
+
     // Left click down, activate shooting
     void StartShooting(InputAction.CallbackContext context)
     {
         tryingToShoot = true;
     }
 
+
     // Left click up, deactive shooting
     void StopShooting(InputAction.CallbackContext context)
     {
         tryingToShoot = false;
+    }
+
+    // R down, reload
+    void StartReloading(InputAction.CallbackContext context)
+    {
+        tryingToReload = true;
+    }
+
+    // R down, reload
+    void StopReloading(InputAction.CallbackContext context)
+    {
+        tryingToReload = false;
     }
 
     // Right click down, activate rolling
@@ -265,6 +298,11 @@ public class Player : MonoBehaviour, IHittableEntity
         fire.Enable();
         fire.performed += StartShooting;
         fire.canceled += StopShooting;
+
+        reload = playerControls.Player.Reload;
+        reload.Enable();
+        reload.performed += StartReloading;
+        reload.canceled += StopReloading;
 
         roll = playerControls.Player.Roll;
         roll.Enable();
