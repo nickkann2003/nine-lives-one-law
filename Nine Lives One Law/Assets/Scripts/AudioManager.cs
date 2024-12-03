@@ -33,16 +33,20 @@ public class AudioManager : MonoBehaviour
         {
             sortedSounds.Add(s.name, s);
         }
+        foreach(MusicClip m in music)
+        {
+            sortedMusic.Add(m.name, m);
+        }
     }
 
     private void Update()
     {
         if (mChanged)
         {
-            audioSource.Stop();
+            audioSource.Pause();
+            audioSource.clip = selectedMusic;
             if(selectedMusic != null)
             {
-                audioSource.clip = selectedMusic;
                 audioSource.Play();
             }
             mChanged = false;

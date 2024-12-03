@@ -59,6 +59,7 @@ public class Enemy : EnemyBase
                 //playerAnimator.SetBool("Moving", false);
                 if (Time.time - lastShotTime >= shootCooldown)
                 { // If shot cooldown is up, shoot
+                    AudioManager.instance.PlaySound("menu-gunshot2");
                     BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 0.8f), (targetEntityPosition - transform.position).normalized * 7f);
                     // Update last shot time
                     lastShotTime = Time.time;
