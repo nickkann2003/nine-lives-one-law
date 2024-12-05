@@ -426,7 +426,7 @@ MonoBehaviour:
   maxInvTime: 0
   poofPrefab: {fileID: 2861780301580306000, guid: 867fa85f5d577794a920921f593c1011, type: 3}
   money: 20
-  bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
+  bullet: {fileID: 4456747074315144748, guid: 11ff4566bf989f148a800c61f2008dbf, type: 3}
   range: 7
   moveSpeed: 1
   shootCooldown: 2

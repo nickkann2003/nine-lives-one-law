@@ -113,7 +113,7 @@ public class Boss1 : EnemyBase
                 { // If reloaded, shoot fast
                     ammo--;
                     AudioManager.instance.PlaySound("gunshot");
-                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 1.4f) + (transform.right * dualWieldOffset), (targetEntityPosition - transform.position).normalized * 7);
+                    BulletManager.instance.CreateBullet(Bullets.EnemyBullet, 1, transform.position + (transform.up * 1.4f) + (transform.right * dualWieldOffset), (targetEntityPosition - transform.position).normalized * 7, bullet);
                     dualWieldOffset *= -1; //Alternates where gun is
                     lastShotTime = Time.time;
                 }
