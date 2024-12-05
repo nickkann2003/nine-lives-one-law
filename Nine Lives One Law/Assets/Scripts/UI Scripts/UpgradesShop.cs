@@ -97,6 +97,7 @@ public class UpgradesShop : MonoBehaviour
             StatsManager.instance.SubtractMoney(selectedUpgrade.itemShopPrice);
             selectedUpgradeDisplay.PurchaseUpgrade();
             selectedUpgrade.PerformUpgrade();
+            soldOut.SetActive(true);
         }
     }
 
