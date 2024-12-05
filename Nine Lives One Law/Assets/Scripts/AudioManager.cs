@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource;
     public float volume = 1f;
 
+    int sourceIndex = 0;
+    public List<AudioSource> sources = new List<AudioSource>();
+
     [SerializeField]
     private List<SoundEffect> soundEffects;
 
@@ -28,7 +31,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource.volume = volume;
         foreach(SoundEffect s in soundEffects)
         {
             sortedSounds.Add(s.name, s);
@@ -37,6 +39,13 @@ public class AudioManager : MonoBehaviour
         {
             sortedMusic.Add(m.name, m);
         }
+        for(int i = 0; i < 10; i++)
+        {
+            sources.Add(gameObject.AddComponent<AudioSource>());
+            sources[i].volume = volume;
+        }
+        audioSource.volume = volume;
+        audioSource.loop = true;
     }
 
     private void Update()
@@ -59,7 +68,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="i"></param>
     public void PlaySound(int i)
     {
-        soundEffects[i].PlaySound(audioSource);
+        soundEffects[i].PlaySound(sources[sourceIndex], volume);
+        sourceIndex = (sourceIndex + 1)%10;
     }
 
     /// <summary>
@@ -70,7 +80,20 @@ public class AudioManager : MonoBehaviour
     {
         if (sortedSounds.ContainsKey(name))
         {
-            sortedSounds[name].PlaySound(audioSource);
+            sortedSounds[name].PlaySound(sources[sourceIndex], volume);
+            sourceIndex = (sourceIndex + 1) % 10;
+        }
+    }
+
+    /// <summary>
+    /// Searches through sound effects and plays the first one with a matching name
+    /// </summary>
+    /// <param name="name">Name of the sound to be played</param>
+    public void PlaySound(String name, AudioSource source)
+    {
+        if (sortedSounds.ContainsKey(name))
+        {
+            sortedSounds[name].PlaySound(source, volume);
         }
     }
 
@@ -101,9 +124,14 @@ public class SoundEffect
     public AudioClip clip;
     public float volume = 1f;
 
-    public void PlaySound(AudioSource source)
+    public float maxPitch = 1.0f;
+    public float minPitch = 1.0f;
+
+    public void PlaySound(AudioSource source, float sourceVolume)
     {
-        source.PlayOneShot(clip, volume);
+        source.volume = sourceVolume;
+        source.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        source.PlayOneShot(clip, volume); 
     }
 }
 

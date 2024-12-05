@@ -11,6 +11,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
     public Vector3 targetEntityPosition;
     protected bool attackingTarget;
 
+    protected AudioSource source;
+
     public Transform bulletList;
 
     protected float health;
@@ -36,6 +38,8 @@ public abstract class EnemyBase : MonoBehaviour, IHittableEntity
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         healthBar.UpdateHealthBar(health, maxHealth);
+        source = gameObject.AddComponent<AudioSource>();
+        source.spatialBlend = 0.5f;
     }
 
     protected void GameManager_OnGameStateChanged(GameManager.GameState state)

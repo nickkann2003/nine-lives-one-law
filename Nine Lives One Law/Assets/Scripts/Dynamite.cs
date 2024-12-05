@@ -19,6 +19,8 @@ public class Dynamite : MonoBehaviour
 
     private List<IHittableEntity> hits = new List<IHittableEntity>();
 
+    private AudioSource source;
+
     //Variables
     public float damage;
     public float moveSpeed; // bullet speed
@@ -84,6 +86,8 @@ public class Dynamite : MonoBehaviour
 
         dynamiteAnimator.SetTrigger("Launch");
         Debug.Log(stickLifetime);
+        source = gameObject.AddComponent<AudioSource>();
+        source.spatialBlend = 0.5f;
     }
 
 
@@ -132,7 +136,7 @@ public class Dynamite : MonoBehaviour
         //Debug.Log("boom");
         state = State.Explode;
         StatsManager.instance.dynamiteExploded++;
-        AudioManager.instance.PlaySound("explosion");
+        AudioManager.instance.PlaySound("explosion", source);
         dynamiteAnimator.SetTrigger("Explode");
         dynamiteAnimator.SetTrigger("Launch");
         rb.velocity = Vector2.zero;
