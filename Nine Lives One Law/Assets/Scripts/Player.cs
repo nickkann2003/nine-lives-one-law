@@ -215,13 +215,13 @@ public class Player : MonoBehaviour, IHittableEntity
         {
             if (tryingToShoot && !isMidRoll && Time.time - lastShotTime >= shootCooldown)
             { // Makes bullet if trying to shoot and not rolling and cooldown is up
-                BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f);
+                BulletManager.instance.CreateBullet(Bullets.PlayerBullet, damage, transform.position + (transform.up * 0.8f), transform.up * 12f, bullet);
                 lastShotTime = Time.time; // Update last shot time
                 currentBullets -= 1;
                 StatsManager.instance.bulletsFired++;
                 ammoAnimator.SetTrigger("shoot");
                 ammoAnimator.SetInteger("ammo", currentBullets);
-                AudioManager.instance.PlaySound("gunshot");
+                AudioManager.instance.PlaySound("menu-gunshot2");
                 if (currentBullets <= 0)
                 {
                     Reload();

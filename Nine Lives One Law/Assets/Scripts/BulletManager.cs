@@ -82,9 +82,37 @@ private void Awake()
         activeBullets.Add(bullet);
     }
 
+    public void CreateBullet(List<string> targets, List<string> obstacles, float damage, Vector3 shootingPosition, Vector3 velocity, GameObject prefab)
+    {
+        GameObject bulletGO;
+        Bullet bullet;
+        //if (inactiveBullets.Count <= 0)
+        if(true)
+        {
+            bulletGO = Instantiate(prefab, bulletList);
+            bullet = bulletGO.GetComponent<Bullet>();
+        }
+        else
+        {
+            bullet = inactiveBullets[0];
+            bullet.gameObject.SetActive(true);
+            inactiveBullets.RemoveAt(0);
+        }
+        bullet.targetTags = targets;
+        bullet.obstacleTags = obstacles;
+        bullet.damage = damage;
+        bullet.Shoot(shootingPosition, velocity);
+        activeBullets.Add(bullet);
+    }
+
     public void CreateBullet(Bullets bulletType, float damage, Vector3 shootingPosition, Vector3 velocity)
     {
         CreateBullet(targetsDictionary[bulletType], obstaclesDictionary[bulletType], damage, shootingPosition, velocity);
+    }
+
+    public void CreateBullet(Bullets bulletType, float damage, Vector3 shootingPosition, Vector3 velocity, GameObject prefab)
+    {
+        CreateBullet(targetsDictionary[bulletType], obstaclesDictionary[bulletType], damage, shootingPosition, velocity, prefab);
     }
 
     public void DestroyBullet(Bullet bullet)

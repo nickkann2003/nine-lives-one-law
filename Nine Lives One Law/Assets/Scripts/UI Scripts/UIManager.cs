@@ -159,24 +159,29 @@ public class UIManager : MonoBehaviour
             case UIState.StatsMenu:
                 OpenMenu(StatsMenu); 
                 activateAll(StatsObjects);
+                AudioManager.instance.SetMusic("church");
                 StatsManager.instance.UpdateStatsPage();
                 break;
             case UIState.UpgradesMenu:
-                OpenMenu(UpgradesMenu);                
+                OpenMenu(UpgradesMenu);
+                AudioManager.instance.SetMusic("saloon");
                 activateAll(UpgradesObjects);
                 break;
             case UIState.StartRunMenu:
                 OpenMenu(StartRunMenu);                
                 activateAll(StartRunObjects);
+                AudioManager.instance.SetMusic("menu");
                 break;
             case UIState.MainMenu:
                 OpenMenu(MainMenu);                
                 activateAll(MainMenuObjects);
+                AudioManager.instance.SetMusic("menu");
                 break;
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
                 activateAll(InGameObjects);
                 playerMenuSprite.gameObject.SetActive(false);
+                AudioManager.instance.SetMusic("gamemusic");
                 break;
         }
     }

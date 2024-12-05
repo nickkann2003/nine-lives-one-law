@@ -41,6 +41,7 @@ public class DuelKey : MonoBehaviour
         hit = true;
         keyHitOverlay.gameObject.SetActive(true);
         keyBackground.color = keyEndBackgroundColor;
+        AudioManager.instance.PlaySound("menu-gunshot");
     }
 
     public void missKey()
@@ -48,6 +49,7 @@ public class DuelKey : MonoBehaviour
         hit = true;
         keyMissOverlay.gameObject.SetActive(true);
         keyBackground.color = keyEndBackgroundColor;
+        AudioManager.instance.PlaySound("gunshot");
     }
 
     public void resetKey()

@@ -529,7 +529,7 @@ MonoBehaviour:
   maxInvTime: 0
   poofPrefab: {fileID: 2861780301580306000, guid: 867fa85f5d577794a920921f593c1011, type: 3}
   money: 200
-  bullet: {fileID: 4456747074315144748, guid: 24ea53e085e98314cb30b2b49bd972a0, type: 3}
+  bullet: {fileID: 4456747074315144748, guid: 8f8fca4d15772a3459c89422cf2ece3a, type: 3}
   duelScript: {fileID: 0}
   range: 3
   moveSpeed: 1
