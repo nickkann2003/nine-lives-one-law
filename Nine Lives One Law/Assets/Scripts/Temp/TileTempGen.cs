@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Profiling.Memory.Experimental;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 public class TileTempGen : MonoBehaviour
