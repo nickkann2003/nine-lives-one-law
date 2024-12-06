@@ -43,6 +43,8 @@ public class Player : MonoBehaviour, IHittableEntity
     public float rollSpeed; // Speed multiplier during roll
     public Vector2 pauseMovement; //Movement stored while paused
 
+    private float reloadCooldown = 0.0f;
+
     private float health;
     private float maxHealthFloat;
     public int maxHealth;
@@ -132,13 +134,14 @@ public class Player : MonoBehaviour, IHittableEntity
                 }
             }
 
-            if (tryingToReload)
+            if (tryingToReload && reloadCooldown <= 0)
             {
                 if (currentBullets != maxBullets)
                 {
                     Reload();
                 }
             }
+            reloadCooldown -= Time.deltaTime;
         }
     }
 

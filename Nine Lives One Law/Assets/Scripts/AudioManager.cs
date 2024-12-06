@@ -115,6 +115,11 @@ public class AudioManager : MonoBehaviour
         mChanged = true;
         selectedMusic = null;
     }
+
+    public void SetVolume(float vol)
+    {
+        this.volume = vol;
+    }
 }
 
 [Serializable]
