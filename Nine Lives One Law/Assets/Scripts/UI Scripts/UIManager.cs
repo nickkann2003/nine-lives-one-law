@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject MainMenu;
     public GameObject GameMenu;
     public Texture2D customCursor;
+    public GameObject menuPlayer;
 
     [Header("UI Objects")]
     public List<GameObject> StatsObjects = new List<GameObject>();
@@ -161,21 +162,25 @@ public class UIManager : MonoBehaviour
                 activateAll(StatsObjects);
                 AudioManager.instance.SetMusic("church");
                 StatsManager.instance.UpdateStatsPage();
+                menuPlayer.SetActive(false);
                 break;
             case UIState.UpgradesMenu:
                 OpenMenu(UpgradesMenu);
                 AudioManager.instance.SetMusic("saloon");
                 activateAll(UpgradesObjects);
+                menuPlayer.SetActive(false);
                 break;
             case UIState.StartRunMenu:
                 OpenMenu(StartRunMenu);                
                 activateAll(StartRunObjects);
                 AudioManager.instance.SetMusic("menu");
+                menuPlayer.SetActive(false);
                 break;
             case UIState.MainMenu:
                 OpenMenu(MainMenu);                
                 activateAll(MainMenuObjects);
                 AudioManager.instance.SetMusic("menu");
+                menuPlayer.SetActive(true);
                 break;
             case UIState.GameMenu:
                 OpenMenu(GameMenu);                
